@@ -46,10 +46,7 @@ button,input,select,textarea { font:inherit; }
   font-size:34px;
   color:#eafff4;
 }
-.brand p {
-  margin:5px 0 0;
-  color:#aebbd0;
-}
+.brand p { margin:5px 0 0; color:#aebbd0; }
 .pill {
   border:1px solid #34415a;
   border-radius:24px;
@@ -94,10 +91,7 @@ main {
   padding:9px;
   background:white;
 }
-.section-title {
-  font-size:24px;
-  margin:22px 0 17px;
-}
+.section-title { font-size:24px; margin:22px 0 17px; }
 .grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -129,10 +123,7 @@ main {
   flex-direction:column;
   flex:1;
 }
-.product h3 {
-  font-size:17px;
-  margin:0 0 5px;
-}
+.product h3 { font-size:17px; margin:0 0 5px; }
 .price {
   font-size:18px;
   font-weight:bold;
@@ -145,20 +136,9 @@ main {
   margin:0 0 12px;
   min-height:40px;
 }
-.eco {
-  font-size:12px;
-  color:#26956c;
-  margin:0 0 10px;
-}
-.product label {
-  font-size:12px;
-  color:#536073;
-  margin-bottom:5px;
-}
-.product select {
-  width:100%;
-  margin-bottom:11px;
-}
+.eco { font-size:12px; color:#26956c; margin:0 0 10px; }
+.product label { font-size:12px; color:#536073; margin-bottom:5px; }
+.product select { width:100%; margin-bottom:11px; }
 .add,.primary {
   border:0;
   background:var(--green);
@@ -186,11 +166,7 @@ main {
   margin-top:34px;
 }
 .info-section h2 { margin-top:0; }
-.contact-links {
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px 22px;
-}
+.contact-links { display:flex; flex-wrap:wrap; gap:12px 22px; }
 a { color:#138b62; }
 footer {
   background:var(--navy);
@@ -240,22 +216,9 @@ footer a { color:#8ce9bc; }
   padding:10px 0;
   border-bottom:1px solid var(--line);
 }
-.cart-row small {
-  display:block;
-  color:var(--muted);
-}
-.remove {
-  border:0;
-  background:none;
-  color:#d23b50;
-  cursor:pointer;
-}
-.total {
-  font-weight:bold;
-  text-align:right;
-  padding:15px 0;
-  font-size:18px;
-}
+.cart-row small { display:block; color:var(--muted); }
+.remove { border:0; background:none; color:#d23b50; cursor:pointer; }
+.total { font-weight:bold; text-align:right; padding:15px 0; font-size:18px; }
 .form-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -267,20 +230,11 @@ footer a { color:#8ce9bc; }
   border:1px solid var(--line);
   border-radius:8px;
 }
-.form-grid textarea {
-  grid-column:1/-1;
-  min-height:75px;
-}
+.form-grid textarea { grid-column:1/-1; min-height:75px; }
 .primary { width:100%; }
-.note {
-  font-size:12px;
-  color:var(--muted);
-}
+.note { font-size:12px; color:var(--muted); }
 @media(max-width:760px) {
-  .header {
-    align-items:flex-start;
-    flex-direction:column;
-  }
+  .header { align-items:flex-start; flex-direction:column; }
   .brand h1 { font-size:29px; }
   .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
@@ -294,7 +248,6 @@ footer a { color:#8ce9bc; }
 }
 </style>
 </head>
-
 <body>
 
 <div class="topline">
@@ -339,9 +292,7 @@ footer a { color:#8ce9bc; }
       <a href="mailto:info@3dprintplezier.nl">✉️ info@3dprintplezier.nl</a>
       <a href="#contact" onclick="openCart()">🛒 Naar je winkelmand</a>
     </div>
-    <p class="note">
-      Je kunt ons ook een bericht sturen via de bestelknop in je winkelmand.
-    </p>
+    <p class="note">Je kunt ons ook een bericht sturen via de bestelknop in je winkelmand.</p>
   </section>
 </main>
 
@@ -358,36 +309,29 @@ footer a { color:#8ce9bc; }
   <div class="modal">
     <div class="modal-head">
       <h2>Jouw winkelmand</h2>
-      <button class="close" type="button"
-        onclick="closeCart()" aria-label="Sluiten">✕</button>
+      <button class="close" type="button" onclick="closeCart()" aria-label="Sluiten">✕</button>
     </div>
-
     <div id="cartItems"></div>
     <div class="total" id="total">Producttotaal: € 0,00</div>
-
     <h3>Bestelling aanvragen</h3>
     <form onsubmit="sendOrder(event)">
       <div class="form-grid">
         <input id="customerName" placeholder="Naam" required>
-        <input id="customerEmail" type="email"
-          placeholder="E-mailadres" required>
-        <input id="customerPhone"
-          placeholder="Telefoonnummer (optioneel)">
-        <textarea id="customerNote"
-          placeholder="Opmerking of gewenste bezorging"></textarea>
+        <input id="customerEmail" type="email" placeholder="E-mailadres" required>
+        <input id="customerPhone" placeholder="Telefoonnummer (optioneel)">
+        <textarea id="customerNote" placeholder="Opmerking of gewenste bezorging"></textarea>
       </div>
       <p class="note">
-        Dit opent WhatsApp met je bestelling. Je verstuurt pas iets nadat
-        je zelf op verzenden drukt.
+        Dit opent WhatsApp met je bestelling. Je verstuurt pas iets nadat je zelf op verzenden drukt.
       </p>
-      <button class="primary" type="submit">
-        Bestelling via WhatsApp versturen
-      </button>
+      <button class="primary" type="submit">Bestelling via WhatsApp versturen</button>
     </form>
   </div>
 </div>
 
 <script>
+'use strict';
+
 let products = [];
 let cart = [];
 
@@ -418,15 +362,14 @@ function renderCategories() {
 
   sel.innerHTML =
     '<option value="">Alle categorieën</option>' +
-    cats.map(c =>
-      `<option value="${esc(c)}">${esc(c)}</option>`
-    ).join('');
+    cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
 
   if (cats.includes(current)) sel.value = current;
 }
 
 function renderProducts() {
-  const q = document.getElementById('search').value.toLowerCase();
+  const target = document.getElementById('products');
+  const q = document.getElementById('search').value.toLowerCase().trim();
   const cat = document.getElementById('category').value;
 
   const list = products.filter(p =>
@@ -435,13 +378,10 @@ function renderProducts() {
       .toLowerCase().includes(q)
   );
 
-  const target = document.getElementById('products');
-
   target.innerHTML = list.length ? list.map(p => {
+    const id = Number(p.id);
     const visual = p.image
-      ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}"
-          loading="lazy"
-          onerror="this.outerHTML='<div class=placeholder>🖨️</div>'">`
+      ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy">`
       : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
 
     return `
@@ -452,12 +392,11 @@ function renderProducts() {
           <div class="price">${euro(p.price)}</div>
           <p class="desc">${esc(p.desc || '')}</p>
           <p class="eco">🌱 3D-geprint product.</p>
-          <label for="color-${esc(p.id)}">Kies kleur filament:</label>
-          <select id="color-${esc(p.id)}">
+          <label for="color-${id}">Kies kleur filament:</label>
+          <select id="color-${id}">
             ${colors.map(c => `<option>${c}</option>`).join('')}
           </select>
-          <button class="add" type="button"
-            onclick="addToCart(${Number(p.id) || 0})">
+          <button class="add" type="button" onclick="addToCart(${id})">
             In winkelmand
           </button>
         </div>
@@ -472,10 +411,7 @@ function addToCart(id) {
 
   const colorSelect = document.getElementById('color-' + id);
   const color = colorSelect ? colorSelect.value : 'Zwart';
-
-  const found = cart.find(x =>
-    Number(x.id) === id && x.color === color
-  );
+  const found = cart.find(x => Number(x.id) === id && x.color === color);
 
   if (found) found.qty++;
   else cart.push({...p, color, qty:1});
@@ -496,8 +432,7 @@ function updateCart() {
           </div>
           <div>
             ${euro(Number(x.price) * x.qty)}<br>
-            <button class="remove" type="button"
-              onclick="removeItem(${i})">Verwijderen</button>
+            <button class="remove" type="button" onclick="removeItem(${i})">Verwijderen</button>
           </div>
         </div>
       `).join('')
@@ -505,9 +440,7 @@ function updateCart() {
 
   document.getElementById('total').textContent =
     'Producttotaal: ' +
-    euro(cart.reduce((s,x) =>
-      s + (Number(x.price) || 0) * x.qty, 0
-    ));
+    euro(cart.reduce((s,x) => s + (Number(x.price) || 0) * x.qty, 0));
 }
 
 function removeItem(i) {
@@ -526,7 +459,6 @@ function closeCart() {
 
 function sendOrder(e) {
   e.preventDefault();
-
   if (!cart.length) {
     alert('Je winkelmand is leeg.');
     return;
@@ -537,8 +469,7 @@ function sendOrder(e) {
   ).join('\n');
 
   const total = euro(cart.reduce((s,x) =>
-    s + (Number(x.price) || 0) * x.qty, 0
-  ));
+    s + (Number(x.price) || 0) * x.qty, 0));
 
   const msg =
     `Hallo 3D Printplezier, ik wil graag een bestelling aanvragen:\n` +
@@ -548,43 +479,14 @@ function sendOrder(e) {
     `Telefoon: ${document.getElementById('customerPhone').value}\n` +
     `Opmerking: ${document.getElementById('customerNote').value}`;
 
-  window.open(
-    'https://wa.me/?text=' + encodeURIComponent(msg),
-    '_blank'
-  );
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
 }
 
 async function loadProducts() {
-  const grid = document.getElementById('productGrid');
-
-  try {
-    const response = await fetch('./data/products.json');
-
-    if (!response.ok) {
-      throw new Error('Productbestand niet gevonden: ' + response.status);
-    }
-
-    const data = await response.json();
-
-    products = Array.isArray(data) ? data : data.products;
-
-    if (!Array.isArray(products)) {
-      throw new Error('Productbestand bevat geen productlijst.');
-    }
-
-    renderCategories();
-    renderProducts();
-
-  } catch (error) {
-    console.error('Fout bij laden producten:', error);
-    grid.innerHTML = '<p>Producten konden niet worden geladen. Probeer de pagina opnieuw.</p>';
-  }
-}
-
   const target = document.getElementById('products');
 
   try {
-    const response = await fetch('./data/products.json', {
+    const response = await fetch('./data/products.json?v=4', {
       cache:'no-store'
     });
 
@@ -593,23 +495,22 @@ async function loadProducts() {
     }
 
     const data = await response.json();
+    products = Array.isArray(data) ? data : data.products;
 
-    if (!Array.isArray(data)) {
-      throw new Error('Het productbestand moet een JSON-lijst zijn.');
+    if (!Array.isArray(products)) {
+      throw new Error('Het JSON-bestand bevat geen productlijst.');
     }
 
-    products = data;
     renderCategories();
     renderProducts();
 
   } catch (error) {
     console.error('Producten laden mislukt:', error);
-
     target.innerHTML = `
       <div class="empty">
-        De producten konden niet worden geladen.
-        Controleer of <strong>data/products.json</strong>
-        in de GitHub-map staat en geldige JSON bevat.
+        De producten konden niet worden geladen.<br>
+        Controleer data/products.json.<br>
+        Fout: ${esc(error.message)}
       </div>`;
   }
 }
@@ -617,6 +518,5 @@ async function loadProducts() {
 updateCart();
 loadProducts();
 </script>
-
 </body>
 </html>
