@@ -136,13 +136,18 @@ main {
   margin:0 0 12px;
   min-height:40px;
 }
-.eco { font-size:12px; color:#26956c; margin:0 0 10px; }
+.eco {
+  font-size:12px;
+  color:#26956c;
+  margin:0 0 10px;
+}
 .dimensions {
   font-size:13px;
-  color:#536073;
-  background:#f3f8f5;
+  color:#354b40;
+  background:#eff8f2;
+  border:1px solid #d9eee0;
   border-radius:8px;
-  padding:8px 10px;
+  padding:9px 10px;
   margin:0 0 12px;
 }
 .product label { font-size:12px; color:#536073; margin-bottom:5px; }
@@ -499,6 +504,26 @@ footer a { color:#8ce9bc; }
 let products = [];
 let cart = [];
 
+/* Geschatte afmetingen per product-ID.
+   Dit zijn voorbeeldmaten, geen opgemeten maten. */
+const estimatedDimensions = {
+  101:'12 × 8 × 3 cm',
+  102:'10 × 10 × 12 cm',
+  103:'12 × 12 × 14 cm',
+  104:'15 × 10 × 5 cm',
+  105:'9 × 4 × 3 cm',
+  106:'7 × 7 × 1 cm',
+  107:'5 × 5 × 1 cm',
+  108:'8 × 4 × 4 cm',
+  109:'15 × 5 × 3 cm',
+  110:'8 × 7 × 9 cm',
+  111:'16 × 8 × 5 cm',
+  112:'12 × 12 × 12 cm',
+  113:'15 × 15 × 3 cm',
+  114:'5 × 5 × 5 cm',
+  115:'18 × 12 × 15 cm'
+};
+
 const colors = [
   'Zwart','Wit','Rood','Blauw','Groen',
   'Geel','Oranje','Paars','Roze'
@@ -550,6 +575,11 @@ function renderProducts() {
       ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy">`
       : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
 
+    const dimensions =
+      estimatedDimensions[id] ||
+      p.dimensions ||
+      'Nog niet bekend';
+
     return `
       <article class="product">
         ${visual}
@@ -558,7 +588,9 @@ function renderProducts() {
           <div class="price">${euro(p.price)}</div>
           <p class="desc">${esc(p.desc || '')}</p>
           <p class="eco">🌱 3D-geprint product.</p>
-          <p class="dimensions">📏 Afmetingen: ${esc(p.dimensions || 'Nog niet bekend')}</p>
+          <p class="dimensions">
+            📏 Geschatte afmetingen: ${esc(dimensions)}
+          </p>
           <label for="color-${id}">Kies kleur filament:</label>
           <select id="color-${id}">
             ${colors.map(c => `<option>${c}</option>`).join('')}
