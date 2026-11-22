@@ -1,3 +1,68 @@
+
+[
+  {
+    "id": 101,
+    "name": "Print-in-Place Rotating Belt Organizer",
+    "price": 7.5,
+    "category": "Handig & praktisch",
+    "desc": "Handige draaibare organizer voor riemen en kleine accessoires.",
+    "emoji": "🧰"
+  },
+  {
+    "id": 102,
+    "name": "Modern Decorative Planter",
+    "price": 8.95,
+    "category": "Wonen & decoratie",
+    "desc": "Moderne decoratieve plantenpot voor in huis.",
+    "emoji": "🪴"
+  },
+  {
+    "id": 103,
+    "name": "Wooden Bucket Planter",
+    "price": 9.95,
+    "category": "Wonen & decoratie",
+    "desc": "Decoratieve plantenpot met een houten uitstraling.",
+    "emoji": "🌱"
+  },
+  {
+    "id": 104,
+    "name": "Desk Organizer",
+    "price": 6.95,
+    "category": "Handig & praktisch",
+    "desc": "Handige bureau-organizer voor pennen en kleine spullen.",
+    "emoji": "🖊️"
+  },
+  {
+    "id": 105,
+    "name": "Toy Car",
+    "price": 4.95,
+    "category": "Speelgoed",
+    "desc": "Leuk modelautootje om mee te spelen of te verzamelen.",
+    "emoji": "🚗"
+  },
+  {
+    "id": 106,
+    "name": "Fidget Spinner",
+    "price": 3.95,
+    "category": "Speelgoed",
+    "desc": "Leuke fidget spinner om mee te draaien.",
+    "emoji": "🌀"
+  },
+  {
+    "id": 107,
+    "name": "Fidget Spinner Keychain",
+    "price": 3.5,
+    "category": "Speelgoed",
+    "desc": "Kleine fidget spinner aan een handige sleutelhanger.",
+    "emoji": "🔑"
+  },
+  {
+    "id": 108,
+    "name": "Wall Double Hook",
+    "price": 4.95,
+    "category": "Handig & praktisch",
+    "desc": "Dubbele wandhaak voor het ophangen van kleine spullen.",
+    "emoji": "🪝"
   },
   {
     "id": 109,
