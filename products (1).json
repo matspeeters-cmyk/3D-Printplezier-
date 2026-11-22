@@ -1,0 +1,122 @@
+[
+  {
+    "id": 101,
+    "name": "Print-in-Place Rotating Belt Organizer",
+    "price": 7.5,
+    "category": "Handig & praktisch",
+    "desc": "Handige draaibare organizer voor riemen en kleine accessoires. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🧰"
+  },
+  {
+    "id": 102,
+    "name": "Modern Decorative Planter",
+    "price": 8.95,
+    "category": "Wonen & decoratie",
+    "desc": "Moderne plantenpot voor een gezellig plekje in huis. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🪴"
+  },
+  {
+    "id": 103,
+    "name": "Wooden Bucket Planter",
+    "price": 9.95,
+    "category": "Wonen & decoratie",
+    "desc": "Decoratieve plantenpot met houtachtige uitstraling. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🌱"
+  },
+  {
+    "id": 104,
+    "name": "Desk Organizer",
+    "price": 6.95,
+    "category": "Handig & praktisch",
+    "desc": "Houd pennen, kleine spullen en je bureau netjes bij elkaar. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "✏️"
+  },
+  {
+    "id": 105,
+    "name": "Toy Car",
+    "price": 4.95,
+    "category": "Speelgoed",
+    "desc": "Leuk 3D-geprint autootje om mee te spelen of neer te zetten. MakerWorld-ontwerp; controleer de licentie en productveiligheid vóór verkoop.",
+    "emoji": "🚗"
+  },
+  {
+    "id": 106,
+    "name": "Fidget Spinner",
+    "price": 3.95,
+    "category": "Speelgoed",
+    "desc": "Compact friemelspeeltje voor tussendoor. MakerWorld-ontwerp; controleer de licentie en productveiligheid vóór verkoop.",
+    "emoji": "🌀"
+  },
+  {
+    "id": 107,
+    "name": "Fidget Spinner Keychain",
+    "price": 3.5,
+    "category": "Speelgoed",
+    "desc": "Kleine fidget spinner als sleutelhanger. MakerWorld-ontwerp; controleer de licentie en productveiligheid vóór verkoop.",
+    "emoji": "🔑"
+  },
+  {
+    "id": 108,
+    "name": "Wall Double Hook",
+    "price": 4.95,
+    "category": "Handig & praktisch",
+    "desc": "Dubbele haak voor lichte spullen aan de muur. Gebruik geschikte bevestiging en controleer de draagkracht.",
+    "emoji": "🪝"
+  },
+  {
+    "id": 109,
+    "name": "Under-Desk Cable Management",
+    "price": 6.5,
+    "category": "Handig & praktisch",
+    "desc": "Hulp om kabels netjes onder je bureau te leiden. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🔌"
+  },
+  {
+    "id": 110,
+    "name": "Phone Stand",
+    "price": 4.95,
+    "category": "Handig & praktisch",
+    "desc": "Telefoonstandaard voor op je bureau of nachtkastje. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "📱"
+  },
+  {
+    "id": 111,
+    "name": "Laptop Vertical Stand",
+    "price": 8.95,
+    "category": "Handig & praktisch",
+    "desc": "Verticale standaard om een laptop netjes op te bergen. Controleer pasvorm en stabiliteit vóór verkoop.",
+    "emoji": "💻"
+  },
+  {
+    "id": 112,
+    "name": "Dodecahedron Piggy Bank",
+    "price": 7.95,
+    "category": "Wonen & decoratie",
+    "desc": "Bijzonder geometrisch spaarpotje voor muntgeld. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🐷"
+  },
+  {
+    "id": 113,
+    "name": "Modern Simple Bowl / Tray",
+    "price": 6.95,
+    "category": "Wonen & decoratie",
+    "desc": "Decoratief schaaltje voor sleutels, sieraden of kleine accessoires. Niet bedoeld voor direct voedselcontact zonder geschikte materialen en beoordeling.",
+    "emoji": "🥣"
+  },
+  {
+    "id": 114,
+    "name": "Puzzle Cube",
+    "price": 4.5,
+    "category": "Speelgoed",
+    "desc": "Compact puzzelspeeltje om mee te puzzelen en cadeau te geven. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🧩"
+  },
+  {
+    "id": 115,
+    "name": "Display Stand – 3 Shelf Version",
+    "price": 9.95,
+    "category": "Wonen & decoratie",
+    "desc": "Kleine displaystandaard om verzamelobjecten of miniaturen te presenteren. Controleer de licentie en belastbaarheid vóór verkoop.",
+    "emoji": "🗂️"
+  }
+]
