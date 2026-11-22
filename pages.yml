@@ -1,0 +1,45 @@
+media:
+  input: images
+  output: /images
+  categories: [image]
+  extensions: [jpg, jpeg, png, webp]
+content:
+  - name: products
+    label: Producten
+    type: file
+    path: data/products.json
+    format: json
+    list: true
+    fields:
+      - name: id
+        label: Productnummer (laat staan)
+        type: number
+      - name: name
+        label: Productnaam
+        type: string
+        required: true
+      - name: price
+        label: Prijs in euro
+        type: number
+        required: true
+      - name: category
+        label: Categorie
+        type: select
+        options:
+          values:
+            - Seizoen & feest
+            - Wonen & decoratie
+            - Handig & praktisch
+            - Speelgoed
+      - name: desc
+        label: Beschrijving
+        type: text
+      - name: emoji
+        label: Icoon als er geen foto is
+        type: string
+      - name: image
+        label: Productfoto
+        type: image
+        options:
+          path: products
+          extensions: [jpg, jpeg, png, webp]
