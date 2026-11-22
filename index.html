@@ -233,6 +233,12 @@ footer a { color:#8ce9bc; }
 .form-grid textarea { grid-column:1/-1; min-height:75px; }
 .primary { width:100%; }
 .note { font-size:12px; color:var(--muted); }
+.status {
+  font-size:14px;
+  margin:10px 0;
+}
+.status.error { color:#c62828; }
+.status.success { color:#138b62; }
 @media(max-width:760px) {
   .header { align-items:flex-start; flex-direction:column; }
   .brand h1 { font-size:29px; }
@@ -289,17 +295,17 @@ footer a { color:#8ce9bc; }
     <h2>Contact</h2>
     <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met ons op.</p>
     <div class="contact-links">
-      <a href="mailto:info@3dprintplezier.nl">✉️ info@3dprintplezier.nl</a>
+      <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
       <a href="#contact" onclick="openCart()">🛒 Naar je winkelmand</a>
     </div>
-    <p class="note">Je kunt ons ook een bericht sturen via de bestelknop in je winkelmand.</p>
+    <p class="note">Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.</p>
   </section>
 </main>
 
 <footer>
   <strong>3D Printplezier</strong><br>
   Met plezier 3D-geprint • Vragen? Mail naar
-  <a href="mailto:info@3dprintplezier.nl">info@3dprintplezier.nl</a>
+  <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a>
   <br><br>
   Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
 </footer>
@@ -314,17 +320,51 @@ footer a { color:#8ce9bc; }
     <div id="cartItems"></div>
     <div class="total" id="total">Producttotaal: € 0,00</div>
     <h3>Bestelling aanvragen</h3>
-    <form onsubmit="sendOrder(event)">
+
+    <form id="orderForm"
+      action="https://formspree.io/f/xqpqyrlv"
+      method="POST"
+      onsubmit="sendOrder(event)">
+
       <div class="form-grid">
-        <input id="customerName" placeholder="Naam" required>
-        <input id="customerEmail" type="email" placeholder="E-mailadres" required>
-        <input id="customerPhone" placeholder="Telefoonnummer (optioneel)">
-        <textarea id="customerNote" placeholder="Opmerking of gewenste bezorging"></textarea>
+        <input name="naam" id="customerName"
+          placeholder="Naam" autocomplete="name" required>
+
+        <input name="email" id="customerEmail"
+          type="email" placeholder="E-mailadres"
+          autocomplete="email" required>
+
+        <input name="telefoon" id="customerPhone"
+          type="tel" placeholder="Telefoonnummer (optioneel)"
+          autocomplete="tel">
+
+        <input name="adres" id="customerAddress"
+          placeholder="Straat en huisnummer"
+          autocomplete="street-address" required>
+
+        <input name="postcode_plaats" id="customerPostal"
+          placeholder="Postcode en woonplaats"
+          autocomplete="postal-code" required>
+
+        <textarea name="opmerking" id="customerNote"
+          placeholder="Opmerking of gewenste bezorging"></textarea>
       </div>
+
+      <input type="hidden" name="bestelling" id="orderDetails">
+      <input type="hidden" name="producttotaal" id="orderTotal">
+      <input type="hidden" name="_subject"
+        value="Nieuwe bestelling - 3D Printplezier">
+
       <p class="note">
-        Dit opent WhatsApp met je bestelling. Je verstuurt pas iets nadat je zelf op verzenden drukt.
+        Je bestelling wordt per e-mail naar 3D Printplezier verstuurd.
       </p>
-      <button class="primary" type="submit">Bestelling via WhatsApp versturen</button>
+
+      <p id="orderStatus" class="status" role="status"
+        aria-live="polite"></p>
+
+      <button class="primary" id="orderButton" type="submit">
+        Bestelling per e-mail versturen
+      </button>
     </form>
   </div>
 </div>
@@ -457,29 +497,62 @@ function closeCart() {
   document.getElementById('cartModal').classList.remove('show');
 }
 
-function sendOrder(e) {
+async function sendOrder(e) {
   e.preventDefault();
+
   if (!cart.length) {
     alert('Je winkelmand is leeg.');
     return;
   }
 
+  const form = document.getElementById('orderForm');
+  const button = document.getElementById('orderButton');
+  const status = document.getElementById('orderStatus');
+
   const lines = cart.map(x =>
-    `- ${x.qty}x ${x.name} (${x.color}) - ${euro(Number(x.price) * x.qty)}`
+    `${x.qty}x ${x.name} (${x.color}) - ${euro(Number(x.price) * x.qty)}`
   ).join('\n');
 
-  const total = euro(cart.reduce((s,x) =>
-    s + (Number(x.price) || 0) * x.qty, 0));
+  const total = cart.reduce((s,x) =>
+    s + (Number(x.price) || 0) * x.qty, 0);
 
-  const msg =
-    `Hallo 3D Printplezier, ik wil graag een bestelling aanvragen:\n` +
-    `${lines}\nProducttotaal: ${total}\n` +
-    `Naam: ${document.getElementById('customerName').value}\n` +
-    `E-mail: ${document.getElementById('customerEmail').value}\n` +
-    `Telefoon: ${document.getElementById('customerPhone').value}\n` +
-    `Opmerking: ${document.getElementById('customerNote').value}`;
+  document.getElementById('orderDetails').value = lines;
+  document.getElementById('orderTotal').value = euro(total);
 
-  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  button.disabled = true;
+  button.textContent = 'Bestelling versturen…';
+  status.textContent = '';
+  status.className = 'status';
+
+  try {
+    const response = await fetch(form.action, {
+      method:'POST',
+      body:new FormData(form),
+      headers:{'Accept':'application/json'}
+    });
+
+    if (!response.ok) {
+      throw new Error('De bestelling kon niet worden verstuurd.');
+    }
+
+    status.textContent =
+      'Bedankt! Je bestelling is verstuurd. We nemen zo snel mogelijk contact met je op.';
+    status.className = 'status success';
+
+    cart = [];
+    updateCart();
+    form.reset();
+
+  } catch (error) {
+    status.textContent =
+      'Er ging iets mis bij het versturen. Probeer het opnieuw of mail ons rechtstreeks.';
+    status.className = 'status error';
+    console.error(error);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Bestelling per e-mail versturen';
+  }
 }
 
 async function loadProducts() {
