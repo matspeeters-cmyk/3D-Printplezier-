@@ -138,7 +138,10 @@ main {
 }
 .eco { font-size:12px; color:#26956c; margin:0 0 10px; }
 .product label { font-size:12px; color:#536073; margin-bottom:5px; }
-.product select { width:100%; margin-bottom:11px; }
+.product select {
+  width:100%;
+  margin-bottom:11px;
+}
 .add,.primary {
   border:0;
   background:var(--green);
@@ -166,7 +169,11 @@ main {
   margin-top:34px;
 }
 .info-section h2 { margin-top:0; }
-.contact-links { display:flex; flex-wrap:wrap; gap:12px 22px; }
+.contact-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 22px;
+}
 a { color:#138b62; }
 footer {
   background:var(--navy);
@@ -216,9 +223,22 @@ footer a { color:#8ce9bc; }
   padding:10px 0;
   border-bottom:1px solid var(--line);
 }
-.cart-row small { display:block; color:var(--muted); }
-.remove { border:0; background:none; color:#d23b50; cursor:pointer; }
-.total { font-weight:bold; text-align:right; padding:15px 0; font-size:18px; }
+.cart-row small {
+  display:block;
+  color:var(--muted);
+}
+.remove {
+  border:0;
+  background:none;
+  color:#d23b50;
+  cursor:pointer;
+}
+.total {
+  font-weight:bold;
+  text-align:right;
+  padding:15px 0;
+  font-size:18px;
+}
 .form-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -230,17 +250,88 @@ footer a { color:#8ce9bc; }
   border:1px solid var(--line);
   border-radius:8px;
 }
-.form-grid textarea { grid-column:1/-1; min-height:75px; }
+.form-grid textarea {
+  grid-column:1/-1;
+  min-height:75px;
+}
 .primary { width:100%; }
-.note { font-size:12px; color:var(--muted); }
+.note {
+  font-size:12px;
+  color:var(--muted);
+}
 .status {
   font-size:14px;
   margin:10px 0;
 }
 .status.error { color:#c62828; }
 .status.success { color:#138b62; }
+
+/* Pop-up na toevoegen aan winkelwagen */
+.added-popup {
+  position:fixed;
+  inset:0;
+  background:#0710229c;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:20;
+}
+.added-popup.show {
+  display:flex;
+}
+.added-box {
+  width:min(390px,100%);
+  background:white;
+  border-radius:16px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 12px 40px #0003;
+  animation:popupAppear .2s ease-out;
+}
+@keyframes popupAppear {
+  from { opacity:0; transform:scale(.94); }
+  to { opacity:1; transform:scale(1); }
+}
+.added-icon {
+  font-size:42px;
+  color:#159b67;
+  margin-bottom:5px;
+}
+.added-box h2 {
+  color:#159b67;
+  margin:0 0 10px;
+}
+.added-box p {
+  color:#536073;
+  margin:0 0 20px;
+}
+.added-actions {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.added-actions button {
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.continue-button {
+  background:#eef1f5;
+  color:#202a3a;
+}
+.continue-button:hover {
+  background:#e1e6ed;
+}
+
 @media(max-width:760px) {
-  .header { align-items:flex-start; flex-direction:column; }
+  .header {
+    align-items:flex-start;
+    flex-direction:column;
+  }
   .brand h1 { font-size:29px; }
   .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
@@ -298,7 +389,9 @@ footer a { color:#8ce9bc; }
       <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
       <a href="#contact" onclick="openCart()">🛒 Naar je winkelmand</a>
     </div>
-    <p class="note">Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.</p>
+    <p class="note">
+      Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.
+    </p>
   </section>
 </main>
 
@@ -310,15 +403,19 @@ footer a { color:#8ce9bc; }
   Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
 </footer>
 
+<!-- Winkelwagen pop-up -->
 <div class="modal-backdrop" id="cartModal"
   onclick="if(event.target===this)closeCart()">
   <div class="modal">
     <div class="modal-head">
       <h2>Jouw winkelmand</h2>
-      <button class="close" type="button" onclick="closeCart()" aria-label="Sluiten">✕</button>
+      <button class="close" type="button"
+        onclick="closeCart()" aria-label="Sluiten">✕</button>
     </div>
+
     <div id="cartItems"></div>
     <div class="total" id="total">Producttotaal: € 0,00</div>
+
     <h3>Bestelling aanvragen</h3>
 
     <form id="orderForm"
@@ -369,6 +466,25 @@ footer a { color:#8ce9bc; }
   </div>
 </div>
 
+<!-- Pop-up na toevoegen aan winkelwagen -->
+<div class="added-popup" id="addedPopup"
+  onclick="if(event.target===this)closeAddedPopup()">
+  <div class="added-box">
+    <div class="added-icon">✓</div>
+    <h2>Toegevoegd aan je winkelwagen!</h2>
+    <p>Het product staat nu in je winkelmandje.</p>
+    <div class="added-actions">
+      <button class="primary" type="button" onclick="viewCart()">
+        🛒 Winkelwagen bekijken
+      </button>
+      <button class="continue-button" type="button"
+        onclick="closeAddedPopup()">
+        Verder winkelen
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 
@@ -402,7 +518,9 @@ function renderCategories() {
 
   sel.innerHTML =
     '<option value="">Alle categorieën</option>' +
-    cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    cats.map(c =>
+      `<option value="${esc(c)}">${esc(c)}</option>`
+    ).join('');
 
   if (cats.includes(current)) sel.value = current;
 }
@@ -451,12 +569,17 @@ function addToCart(id) {
 
   const colorSelect = document.getElementById('color-' + id);
   const color = colorSelect ? colorSelect.value : 'Zwart';
-  const found = cart.find(x => Number(x.id) === id && x.color === color);
+  const found = cart.find(x =>
+    Number(x.id) === id && x.color === color
+  );
 
   if (found) found.qty++;
   else cart.push({...p, color, qty:1});
 
   updateCart();
+
+  // Toon de bevestigingspop-up
+  showAddedPopup();
 }
 
 function updateCart() {
@@ -472,7 +595,8 @@ function updateCart() {
           </div>
           <div>
             ${euro(Number(x.price) * x.qty)}<br>
-            <button class="remove" type="button" onclick="removeItem(${i})">Verwijderen</button>
+            <button class="remove" type="button"
+              onclick="removeItem(${i})">Verwijderen</button>
           </div>
         </div>
       `).join('')
@@ -480,7 +604,8 @@ function updateCart() {
 
   document.getElementById('total').textContent =
     'Producttotaal: ' +
-    euro(cart.reduce((s,x) => s + (Number(x.price) || 0) * x.qty, 0));
+    euro(cart.reduce((s,x) =>
+      s + (Number(x.price) || 0) * x.qty, 0));
 }
 
 function removeItem(i) {
@@ -495,6 +620,20 @@ function openCart() {
 
 function closeCart() {
   document.getElementById('cartModal').classList.remove('show');
+}
+
+/* Functies voor de nieuwe pop-up */
+function showAddedPopup() {
+  document.getElementById('addedPopup').classList.add('show');
+}
+
+function closeAddedPopup() {
+  document.getElementById('addedPopup').classList.remove('show');
+}
+
+function viewCart() {
+  closeAddedPopup();
+  openCart();
 }
 
 async function sendOrder(e) {
