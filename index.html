@@ -555,6 +555,32 @@ function sendOrder(e) {
 }
 
 async function loadProducts() {
+  const grid = document.getElementById('productGrid');
+
+  try {
+    const response = await fetch('./data/products.json');
+
+    if (!response.ok) {
+      throw new Error('Productbestand niet gevonden: ' + response.status);
+    }
+
+    const data = await response.json();
+
+    products = Array.isArray(data) ? data : data.products;
+
+    if (!Array.isArray(products)) {
+      throw new Error('Productbestand bevat geen productlijst.');
+    }
+
+    renderCategories();
+    renderProducts();
+
+  } catch (error) {
+    console.error('Fout bij laden producten:', error);
+    grid.innerHTML = '<p>Producten konden niet worden geladen. Probeer de pagina opnieuw.</p>';
+  }
+}
+
   const target = document.getElementById('products');
 
   try {
