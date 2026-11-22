@@ -1,83 +1,58 @@
-[
-  {
-    "id": 1,
-    "name": "Sinterklaas Bowl",
-    "price": 5,
-    "category": "Seizoen & feest",
-    "desc": "Sfeervolle kom in Sinterklaas-sfeer voor al je snoepgoed.",
-    "emoji": "🍬",
-    "image": ""
   },
   {
-    "id": 2,
-    "name": "Sint en Piet",
-    "price": 2.5,
-    "category": "Seizoen & feest",
-    "desc": "Leuke 3D-geprinte decoratie van Sint en Piet.",
-    "emoji": "🎅",
-    "image": ""
-  },
-  {
-    "id": 3,
-    "name": "Sint Set",
-    "price": 5,
-    "category": "Seizoen & feest",
-    "desc": "Complete set in Sinterklaasthema voor de feestdagen.",
-    "emoji": "🎁",
-    "image": ""
-  },
-  {
-    "id": 4,
-    "name": "Christmas Dinner Set",
-    "price": 8,
-    "category": "Wonen & decoratie",
-    "desc": "Feestelijke tafeldecoratie voor een gezellige kersttafel.",
-    "emoji": "🎄",
-    "image": "images/christmas-dinner-set.jpg"
-  },
-  {
-    "id": 5,
-    "name": "Christmas Hexagon",
-    "price": 1.5,
-    "category": "Wonen & decoratie",
-    "desc": "Kleine decoratieve kerstprint voor in huis.",
-    "emoji": "❄️",
-    "image": "images/christmas-hexagon.jpg"
-  },
-  {
-    "id": 6,
-    "name": "Christmas Tree",
-    "price": 2.5,
-    "category": "Wonen & decoratie",
-    "desc": "Decoratieve 3D-kerstboom voor een warme sfeer.",
-    "emoji": "🎄",
-    "image": "images/christmas-tree.jpg"
-  },
-  {
-    "id": 7,
-    "name": "Sleutelhanger",
-    "price": 2,
+    "id": 109,
+    "name": "Under-Desk Cable Management",
+    "price": 6.5,
     "category": "Handig & praktisch",
-    "desc": "Een leuke, lichte sleutelhanger in jouw favoriete kleur.",
-    "emoji": "🔑",
-    "image": ""
+    "desc": "Hulp om kabels netjes onder je bureau te leiden. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🔌"
   },
   {
-    "id": 8,
-    "name": "Kabelhouder",
-    "price": 3,
+    "id": 110,
+    "name": "Phone Stand",
+    "price": 4.95,
     "category": "Handig & praktisch",
-    "desc": "Houd je kabels netjes bij elkaar op je bureau.",
-    "emoji": "🔌",
-    "image": ""
+    "desc": "Telefoonstandaard voor op je bureau of nachtkastje. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "📱"
   },
   {
-    "id": 9,
-    "name": "Fidget Speeltje",
-    "price": 3.5,
+    "id": 111,
+    "name": "Laptop Vertical Stand",
+    "price": 8.95,
+    "category": "Handig & praktisch",
+    "desc": "Verticale standaard om een laptop netjes op te bergen. Controleer pasvorm en stabiliteit vóór verkoop.",
+    "emoji": "💻"
+  },
+  {
+    "id": 112,
+    "name": "Dodecahedron Piggy Bank",
+    "price": 7.95,
+    "category": "Wonen & decoratie",
+    "desc": "Bijzonder geometrisch spaarpotje voor muntgeld. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🐷"
+  },
+  {
+    "id": 113,
+    "name": "Modern Simple Bowl / Tray",
+    "price": 6.95,
+    "category": "Wonen & decoratie",
+    "desc": "Decoratief schaaltje voor sleutels, sieraden of kleine accessoires. Niet bedoeld voor direct voedselcontact zonder geschikte materialen en beoordeling.",
+    "emoji": "🥣"
+  },
+  {
+    "id": 114,
+    "name": "Puzzle Cube",
+    "price": 4.5,
     "category": "Speelgoed",
-    "desc": "Een leuk friemelspeeltje om mee te spelen.",
-    "emoji": "🌀",
-    "image": ""
+    "desc": "Compact puzzelspeeltje om mee te puzzelen en cadeau te geven. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
+    "emoji": "🧩"
+  },
+  {
+    "id": 115,
+    "name": "Display Stand – 3 Shelf Version",
+    "price": 9.95,
+    "category": "Wonen & decoratie",
+    "desc": "Kleine displaystandaard om verzamelobjecten of miniaturen te presenteren. Controleer de licentie en belastbaarheid vóór verkoop.",
+    "emoji": "🗂️"
   }
 ]
