@@ -3,121 +3,136 @@
   {
     "id": 101,
     "name": "Print-in-Place Rotating Belt Organizer",
-    "price": 7.5,
-    "category": "Handig & praktisch",
-    "desc": "Handige draaibare organizer voor riemen en kleine accessoires.",
-    "emoji": "🧰"
+    "price": 7.50,
+    "category": "Organizers",
+    "desc": "Handige draaiende organizer voor het opbergen van kleine spullen.",
+    "emoji": "🔄",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUSd3b7a3be94b5a0%2Fdesign%2F2025-11-27_eba90d04702e98.jpg&w=800&h=800&output=webp&q=82"
   },
   {
     "id": 102,
     "name": "Modern Decorative Planter",
     "price": 8.95,
-    "category": "Wonen & decoratie",
+    "category": "Wonen",
     "desc": "Moderne decoratieve plantenpot voor in huis.",
-    "emoji": "🪴"
+    "emoji": "🪴",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUS81fd183bb61c80%2Fdesign%2Fded67e2fa5b5a7f7.jpg&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 103,
     "name": "Wooden Bucket Planter",
     "price": 9.95,
-    "category": "Wonen & decoratie",
-    "desc": "Decoratieve plantenpot met een houten uitstraling.",
-    "emoji": "🌱"
+    "category": "Wonen",
+    "desc": "Plantenpot met een houten emmeruitstraling.",
+    "emoji": "🪴",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUS239c98ddfa19af%2Fdesign%2F2025-11-27_9d8ba14353748.jpeg&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 104,
     "name": "Desk Organizer",
     "price": 6.95,
-    "category": "Handig & praktisch",
-    "desc": "Handige bureau-organizer voor pennen en kleine spullen.",
-    "emoji": "🖊️"
+    "category": "Organizers",
+    "desc": "Praktische organizer voor een opgeruimd bureau.",
+    "emoji": "🗂️",
+    "image": "https://3dsearch.net/imgproxy.php?url=https%3A%2F%2Fnp.nexprint.com%2Fimages%2F2089945477922816000%2F58c3c83d6d932bfd7ec25f3c4f5de9c0b37be2bea48ef5332db96874847bb387-1787411318782-a02b66a50f0d74d559f8349b672851933e041d2b699de594e89429200053ef70.png&w=640&h=480"
   },
   {
     "id": 105,
     "name": "Toy Car",
     "price": 4.95,
     "category": "Speelgoed",
-    "desc": "Leuk modelautootje om mee te spelen of te verzamelen.",
-    "emoji": "🚗"
+    "desc": "Leuk 3D-geprint autootje.",
+    "emoji": "🚗",
+    "image": "https://3dsearch.net/imgproxy.php?url=https%3A%2F%2Fmedia.printables.com%2Fmedia%2Fprints%2F8c3db190-ced7-494e-9a77-2e9d1e611b49%2Fimages%2F9464665_31cbf181-e2b6-4779-b45f-98c7e8763a0e_a822bfdd-79f7-4130-bc3a-b59b46cda3c4%2Fcar-render.png&w=800&h=800"
   },
   {
     "id": 106,
     "name": "Fidget Spinner",
     "price": 3.95,
     "category": "Speelgoed",
-    "desc": "Leuke fidget spinner om mee te draaien.",
-    "emoji": "🌀"
+    "desc": "Draaiende fidget spinner om mee te spelen.",
+    "emoji": "🌀",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUSc29b42e7b26396%2Fdesign%2F2025-03-18_e5ff798a9e93f.jpg&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 107,
     "name": "Fidget Spinner Keychain",
-    "price": 3.5,
-    "category": "Speelgoed",
-    "desc": "Kleine fidget spinner aan een handige sleutelhanger.",
-    "emoji": "🔑"
+    "price": 3.50,
+    "category": "Accessoires",
+    "desc": "Kleine fidget spinner die je aan je sleutelbos kunt hangen.",
+    "emoji": "🔑",
+    "image": "https://3dsearch.net/imgproxy.php?url=https%3A%2F%2Fmedia.printables.com%2Fmedia%2Fprints%2F1162168%2Fimages%2F8815408_05aaf5b9-7401-4974-97ac-ee3e2befb101_3b016f22-b064-4f98-9eb8-5d7ae4314e36%2F20250130_124736.jpg&w=640&h=480"
   },
   {
     "id": 108,
     "name": "Wall Double Hook",
     "price": 4.95,
-    "category": "Handig & praktisch",
-    "desc": "Dubbele wandhaak voor het ophangen van kleine spullen.",
-    "emoji": "🪝"
+    "category": "Wonen",
+    "desc": "Dubbele haak voor aan de muur.",
+    "emoji": "🪝",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUS6c1b9974f49a5c%2Fdesign%2F812c265ca031c712.jpg&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 109,
     "name": "Under-Desk Cable Management",
-    "price": 6.5,
-    "category": "Handig & praktisch",
-    "desc": "Hulp om kabels netjes onder je bureau te leiden. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
-    "emoji": "🔌"
+    "price": 6.50,
+    "category": "Organizers",
+    "desc": "Helpt kabels netjes onder je bureau weg te werken.",
+    "emoji": "🔌",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FDSM00000002002463%2Fdesign%2F2025-11-16_aa01af9fdf3758.jpg&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 110,
     "name": "Phone Stand",
     "price": 4.95,
-    "category": "Handig & praktisch",
-    "desc": "Telefoonstandaard voor op je bureau of nachtkastje. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
-    "emoji": "📱"
+    "category": "Accessoires",
+    "desc": "Handige standaard om je telefoon neer te zetten.",
+    "emoji": "📱",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fcdn.thingiverse.com%2Fassets%2F12%2Feb%2F52%2F8e%2F15%2FPhone_stand03.jpg&w=640&h=480&output=webp&q=82&default=https%3A%2F%2F3dsearch.net%2Fno-image.svg"
   },
   {
     "id": 111,
     "name": "Laptop Vertical Stand",
     "price": 8.95,
-    "category": "Handig & praktisch",
-    "desc": "Verticale standaard om een laptop netjes op te bergen. Controleer pasvorm en stabiliteit vóór verkoop.",
-    "emoji": "💻"
+    "category": "Accessoires",
+    "desc": "Verticale standaard om je laptop netjes op te bergen.",
+    "emoji": "💻",
+    "image": "https://3dsearch.net/imgproxy.php?url=https%3A%2F%2Fmedia.printables.com%2Fmedia%2Fprints%2F240716%2Fimages%2F2178962_857c88a4-c747-4928-b4a3-ff7611958fba%2Fimg_3683.jpg&w=640&h=480"
   },
   {
     "id": 112,
     "name": "Dodecahedron Piggy Bank",
     "price": 7.95,
-    "category": "Wonen & decoratie",
-    "desc": "Bijzonder geometrisch spaarpotje voor muntgeld. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
-    "emoji": "🐷"
+    "category": "Wonen",
+    "desc": "Bijzonder geometrisch spaarpotje.",
+    "emoji": "🐷",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUS311bf9570517d4%2Fdesign%2F2025-02-01_a1d651f3c4551.jpg&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 113,
     "name": "Modern Simple Bowl / Tray",
     "price": 6.95,
-    "category": "Wonen & decoratie",
-    "desc": "Decoratief schaaltje voor sleutels, sieraden of kleine accessoires. Niet bedoeld voor direct voedselcontact zonder geschikte materialen en beoordeling.",
-    "emoji": "🥣"
+    "category": "Wonen",
+    "desc": "Minimalistische schaal of opbergbak.",
+    "emoji": "🥣",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUS169ebdb096b72c%2Fdesign%2F2025-06-20_c6c5d5c9e2de98.png&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 114,
     "name": "Puzzle Cube",
-    "price": 4.5,
+    "price": 4.50,
     "category": "Speelgoed",
-    "desc": "Compact puzzelspeeltje om mee te puzzelen en cadeau te geven. MakerWorld-ontwerp; controleer de licentie vóór verkoop.",
-    "emoji": "🧩"
+    "desc": "Leuke puzzelkubus voor uren speelplezier.",
+    "emoji": "🧩",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FDSM00000000663152%2Fdesign%2F2024-09-25_e199d383c5ba8.webp&w=640&h=480&output=webp&q=82"
   },
   {
     "id": 115,
     "name": "Display Stand – 3 Shelf Version",
     "price": 9.95,
-    "category": "Wonen & decoratie",
-    "desc": "Kleine displaystandaard om verzamelobjecten of miniaturen te presenteren. Controleer de licentie en belastbaarheid vóór verkoop.",
-    "emoji": "🗂️"
+    "category": "Organizers",
+    "desc": "Displaystand met drie niveaus om producten of verzamelingen neer te zetten.",
+    "emoji": "🗄️",
+    "image": "https://wsrv.nl/?url=https%3A%2F%2Fmakerworld.bblmw.com%2Fmakerworld%2Fmodel%2FUSb880d7a805ad4f%2Fdesign%2F2025-02-21_53b2e0ff87f01.jpg&w=640&h=480&output=webp&q=82"
   }
 ]
