@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Leuke 3D-geprinte producten bij 3D Printplezier.">
-<title>3D Printplezier | Onze collectie</title>
+<title>3D Printplezier | Mijn collectie</title>
 <style>
 :root {
   --navy:#10182d;
@@ -364,7 +364,7 @@ footer a { color:#8ce9bc; }
 
 <main>
   <section class="banner">
-    <h2>📢 Ontdek onze collectie!</h2>
+    <h2>📢 Ontdek mijn collectie!</h2>
     <p>Leuke 3D-prints, met plezier gemaakt.</p>
   </section>
 
@@ -377,7 +377,7 @@ footer a { color:#8ce9bc; }
     </select>
   </div>
 
-  <h2 class="section-title">Onze collectie</h2>
+  <h2 class="section-title">Mijn collectie</h2>
   <section class="grid" id="products">
     <div class="empty">Producten laden…</div>
   </section>
@@ -577,8 +577,6 @@ function addToCart(id) {
   else cart.push({...p, color, qty:1});
 
   updateCart();
-
-  // Toon de bevestigingspop-up
   showAddedPopup();
 }
 
@@ -622,7 +620,6 @@ function closeCart() {
   document.getElementById('cartModal').classList.remove('show');
 }
 
-/* Functies voor de nieuwe pop-up */
 function showAddedPopup() {
   document.getElementById('addedPopup').classList.add('show');
 }
