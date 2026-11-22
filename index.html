@@ -8,343 +8,80 @@
 <title>3D Printplezier | Mijn collectie</title>
 <style>
 :root {
-  --navy:#10182d;
-  --green:#20c982;
-  --green-dark:#13a96e;
-  --ink:#202a3a;
-  --muted:#687386;
-  --bg:#f5f7fa;
-  --line:#e7ebf0;
+  --navy:#10182d; --green:#20c982; --green-dark:#13a96e;
+  --ink:#202a3a; --muted:#687386; --bg:#f5f7fa; --line:#e7ebf0;
 }
 * { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font:15px/1.5 Arial,sans-serif;
-}
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 Arial,sans-serif; }
 button,input,select,textarea { font:inherit; }
-.topline {
-  background:#0d1426;
-  color:#e7edf7;
-  text-align:center;
-  padding:8px 12px;
-  font-size:12px;
-}
+.topline { background:#0d1426; color:#e7edf7; text-align:center; padding:8px 12px; font-size:12px; }
 .topline strong { color:#65e5a5; }
-.header {
-  background:var(--navy);
-  color:white;
-  padding:24px max(4vw,20px);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-}
-.brand h1 {
-  margin:0;
-  font-size:34px;
-  color:#eafff4;
-}
+.header { background:var(--navy); color:white; padding:24px max(4vw,20px); display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.brand h1 { margin:0; font-size:34px; color:#eafff4; }
 .brand p { margin:5px 0 0; color:#aebbd0; }
-.pill {
-  border:1px solid #34415a;
-  border-radius:24px;
-  padding:10px 16px;
-  color:white;
-  background:#1b263e;
-  cursor:pointer;
-}
-main {
-  max-width:1200px;
-  margin:auto;
-  padding:22px 22px 55px;
-}
-.banner {
-  background:linear-gradient(105deg,#20d878,#159c79);
-  color:white;
-  border-radius:13px;
-  padding:20px;
-  margin-bottom:22px;
-}
+.pill { border:1px solid #34415a; border-radius:24px; padding:10px 16px; color:white; background:#1b263e; cursor:pointer; }
+main { max-width:1200px; margin:auto; padding:22px 22px 55px; }
+.banner { background:linear-gradient(105deg,#20d878,#159c79); color:white; border-radius:13px; padding:20px; margin-bottom:22px; }
 .banner h2 { margin:0 0 4px; }
 .banner p { margin:0; }
-.filters {
-  display:flex;
-  gap:12px;
-  background:white;
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:10px;
-  margin-bottom:22px;
-}
-.filters input {
-  flex:1;
-  min-width:0;
-  border:0;
-  outline:0;
-  padding:7px;
-}
-.filters select,.product select {
-  border:1px solid var(--line);
-  border-radius:9px;
-  padding:9px;
-  background:white;
-}
+.filters { display:flex; gap:12px; background:white; border:1px solid var(--line); border-radius:13px; padding:10px; margin-bottom:22px; }
+.filters input { flex:1; min-width:0; border:0; outline:0; padding:7px; }
+.filters select,.product select { border:1px solid var(--line); border-radius:9px; padding:9px; background:white; }
 .section-title { font-size:24px; margin:22px 0 17px; }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
-}
-.product {
-  background:white;
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 5px 18px #17243b0b;
-  display:flex;
-  flex-direction:column;
-}
-.product img,.placeholder {
-  width:100%;
-  height:190px;
-  object-fit:cover;
-  background:#edf2f3;
-}
-.placeholder {
-  display:grid;
-  place-items:center;
-  font-size:68px;
-}
-.product-body {
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
-}
+.category-section { margin-bottom:32px; }
+.category-heading { font-size:22px; margin:25px 0 15px; padding:0 0 9px; border-bottom:2px solid #dce8e1; color:#172b25; }
+.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.product { background:white; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 5px 18px #17243b0b; display:flex; flex-direction:column; }
+.product img,.placeholder { width:100%; height:190px; object-fit:cover; background:#edf2f3; }
+.placeholder { display:grid; place-items:center; font-size:68px; }
+.product-body { padding:16px; display:flex; flex-direction:column; flex:1; }
 .product h3 { font-size:17px; margin:0 0 5px; }
-.price {
-  font-size:18px;
-  font-weight:bold;
-  color:#159b67;
-  margin-bottom:8px;
-}
-.desc {
-  color:#536073;
-  font-size:13px;
-  margin:0 0 12px;
-  min-height:40px;
-}
-.eco {
-  font-size:12px;
-  color:#26956c;
-  margin:0 0 10px;
-}
-.dimensions {
-  font-size:13px;
-  color:#354b40;
-  background:#eff8f2;
-  border:1px solid #d9eee0;
-  border-radius:8px;
-  padding:9px 10px;
-  margin:0 0 12px;
-}
+.price { font-size:18px; font-weight:bold; color:#159b67; margin-bottom:8px; }
+.desc { color:#536073; font-size:13px; margin:0 0 12px; min-height:40px; }
+.eco { font-size:12px; color:#26956c; margin:0 0 10px; }
+.dimensions { font-size:13px; color:#354b40; background:#eff8f2; border:1px solid #d9eee0; border-radius:8px; padding:9px 10px; margin:0 0 12px; }
 .product label { font-size:12px; color:#536073; margin-bottom:5px; }
-.product select {
-  width:100%;
-  margin-bottom:11px;
-}
-.add,.primary {
-  border:0;
-  background:var(--green);
-  color:white;
-  font-weight:bold;
-  padding:11px;
-  border-radius:9px;
-  cursor:pointer;
-}
+.product select { width:100%; margin-bottom:11px; }
+.add,.primary { border:0; background:var(--green); color:white; font-weight:bold; padding:11px; border-radius:9px; cursor:pointer; }
 .add { margin-top:auto; }
 .add:hover,.primary:hover { background:var(--green-dark); }
-.empty {
-  grid-column:1/-1;
-  background:white;
-  border-radius:12px;
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-}
-.info-section {
-  background:white;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:22px;
-  margin-top:34px;
-}
+.empty { grid-column:1/-1; background:white; border-radius:12px; padding:30px; text-align:center; color:var(--muted); }
+.info-section { background:white; border:1px solid var(--line); border-radius:14px; padding:22px; margin-top:34px; }
 .info-section h2 { margin-top:0; }
-.contact-links {
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px 22px;
-}
+.contact-links { display:flex; flex-wrap:wrap; gap:12px 22px; }
 a { color:#138b62; }
-footer {
-  background:var(--navy);
-  color:#c6d0e0;
-  text-align:center;
-  padding:24px 15px;
-  font-size:13px;
-}
+footer { background:var(--navy); color:#c6d0e0; text-align:center; padding:24px 15px; font-size:13px; }
 footer a { color:#8ce9bc; }
-.modal-backdrop {
-  position:fixed;
-  inset:0;
-  background:#0710229c;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:10;
-}
+.modal-backdrop { position:fixed; inset:0; background:#0710229c; display:none; align-items:center; justify-content:center; padding:18px; z-index:10; }
 .modal-backdrop.show { display:flex; }
-.modal {
-  width:min(560px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:white;
-  border-radius:16px;
-  padding:22px;
-}
-.modal-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-.close {
-  border:0;
-  background:#eef1f5;
-  border-radius:50%;
-  width:34px;
-  height:34px;
-  cursor:pointer;
-}
-.cart-row {
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid var(--line);
-}
-.cart-row small {
-  display:block;
-  color:var(--muted);
-}
-.remove {
-  border:0;
-  background:none;
-  color:#d23b50;
-  cursor:pointer;
-}
-.total {
-  font-weight:bold;
-  text-align:right;
-  padding:15px 0;
-  font-size:18px;
-}
-.form-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.form-grid input,.form-grid textarea {
-  width:100%;
-  padding:11px;
-  border:1px solid var(--line);
-  border-radius:8px;
-}
-.form-grid textarea {
-  grid-column:1/-1;
-  min-height:75px;
-}
+.modal { width:min(560px,100%); max-height:90vh; overflow:auto; background:white; border-radius:16px; padding:22px; }
+.modal-head { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.close { border:0; background:#eef1f5; border-radius:50%; width:34px; height:34px; cursor:pointer; }
+.cart-row { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); }
+.cart-row small { display:block; color:var(--muted); }
+.remove { border:0; background:none; color:#d23b50; cursor:pointer; }
+.total { font-weight:bold; text-align:right; padding:15px 0; font-size:18px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.form-grid input,.form-grid textarea { width:100%; padding:11px; border:1px solid var(--line); border-radius:8px; }
+.form-grid textarea { grid-column:1/-1; min-height:75px; }
 .primary { width:100%; }
-.note {
-  font-size:12px;
-  color:var(--muted);
-}
-.status {
-  font-size:14px;
-  margin:10px 0;
-}
+.note { font-size:12px; color:var(--muted); }
+.status { font-size:14px; margin:10px 0; }
 .status.error { color:#c62828; }
 .status.success { color:#138b62; }
-
-/* Pop-up na toevoegen aan winkelwagen */
-.added-popup {
-  position:fixed;
-  inset:0;
-  background:#0710229c;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:20;
-}
-.added-popup.show {
-  display:flex;
-}
-.added-box {
-  width:min(390px,100%);
-  background:white;
-  border-radius:16px;
-  padding:25px;
-  text-align:center;
-  box-shadow:0 12px 40px #0003;
-  animation:popupAppear .2s ease-out;
-}
-@keyframes popupAppear {
-  from { opacity:0; transform:scale(.94); }
-  to { opacity:1; transform:scale(1); }
-}
-.added-icon {
-  font-size:42px;
-  color:#159b67;
-  margin-bottom:5px;
-}
-.added-box h2 {
-  color:#159b67;
-  margin:0 0 10px;
-}
-.added-box p {
-  color:#536073;
-  margin:0 0 20px;
-}
-.added-actions {
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.added-actions button {
-  width:100%;
-  border:0;
-  border-radius:9px;
-  padding:12px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.continue-button {
-  background:#eef1f5;
-  color:#202a3a;
-}
-.continue-button:hover {
-  background:#e1e6ed;
-}
-
+.added-popup { position:fixed; inset:0; background:#0710229c; display:none; align-items:center; justify-content:center; padding:18px; z-index:20; }
+.added-popup.show { display:flex; }
+.added-box { width:min(390px,100%); background:white; border-radius:16px; padding:25px; text-align:center; box-shadow:0 12px 40px #0003; animation:popupAppear .2s ease-out; }
+@keyframes popupAppear { from { opacity:0; transform:scale(.94); } to { opacity:1; transform:scale(1); } }
+.added-icon { font-size:42px; color:#159b67; margin-bottom:5px; }
+.added-box h2 { color:#159b67; margin:0 0 10px; }
+.added-box p { color:#536073; margin:0 0 20px; }
+.added-actions { display:flex; flex-direction:column; gap:10px; }
+.added-actions button { width:100%; border:0; border-radius:9px; padding:12px; font-weight:bold; cursor:pointer; }
+.continue-button { background:#eef1f5; color:#202a3a; }
+.continue-button:hover { background:#e1e6ed; }
 @media(max-width:760px) {
-  .header {
-    align-items:flex-start;
-    flex-direction:column;
-  }
+  .header { align-items:flex-start; flex-direction:column; }
   .brand h1 { font-size:29px; }
   .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
@@ -360,18 +97,14 @@ footer a { color:#8ce9bc; }
 </head>
 <body>
 
-<div class="topline">
-  📦 Verzending vanaf € 3,95
-</div>
+<div class="topline">📦 Verzending vanaf € 3,95</div>
 
 <header class="header">
   <div class="brand">
     <h1>3D Printplezier</h1>
     <p>Uw 3D-geprinte spullen voor een lage prijs</p>
   </div>
-  <button class="pill" type="button" onclick="openCart()">
-    🛒 Winkelmand <span id="count">0</span>
-  </button>
+  <button class="pill" type="button" onclick="openCart()">🛒 Winkelmand <span id="count">0</span></button>
 </header>
 
 <main>
@@ -381,29 +114,25 @@ footer a { color:#8ce9bc; }
   </section>
 
   <div class="filters">
-    <input id="search" type="search"
-      placeholder="⌕ Zoek een 3D-print..."
-      oninput="renderProducts()">
+    <input id="search" type="search" placeholder="⌕ Zoek een 3D-print..." oninput="renderProducts()">
     <select id="category" onchange="renderProducts()">
       <option value="">Alle categorieën</option>
     </select>
   </div>
 
   <h2 class="section-title">Mijn collectie</h2>
-  <section class="grid" id="products">
+  <section id="products">
     <div class="empty">Producten laden…</div>
   </section>
 
   <section class="info-section" id="contact">
     <h2>Contact</h2>
-    <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met ons op.</p>
+    <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met mij op.</p>
     <div class="contact-links">
       <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
-      <a href="#contact" onclick="openCart()">🛒 Naar je winkelmand</a>
+      <a href="https://matspeeters-cmyk.github.io/3D-Printplezier-/#contact">🛒 Naar je winkelmand</a>
     </div>
-    <p class="note">
-      Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.
-    </p>
+    <p class="note">Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.</p>
   </section>
 </main>
 
@@ -415,84 +144,43 @@ footer a { color:#8ce9bc; }
   Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
 </footer>
 
-<!-- Winkelwagen pop-up -->
-<div class="modal-backdrop" id="cartModal"
-  onclick="if(event.target===this)closeCart()">
+<div class="modal-backdrop" id="cartModal" onclick="if(event.target===this)closeCart()">
   <div class="modal">
     <div class="modal-head">
       <h2>Jouw winkelmand</h2>
-      <button class="close" type="button"
-        onclick="closeCart()" aria-label="Sluiten">✕</button>
+      <button class="close" type="button" onclick="closeCart()" aria-label="Sluiten">✕</button>
     </div>
-
     <div id="cartItems"></div>
     <div class="total" id="total">Producttotaal: € 0,00</div>
-
     <h3>Bestelling aanvragen</h3>
 
-    <form id="orderForm"
-      action="https://formspree.io/f/xqpqyrlv"
-      method="POST"
-      onsubmit="sendOrder(event)">
-
+    <form id="orderForm" action="https://formspree.io/f/xqpqyrlv" method="POST" onsubmit="sendOrder(event)">
       <div class="form-grid">
-        <input name="naam" id="customerName"
-          placeholder="Naam" autocomplete="name" required>
-
-        <input name="email" id="customerEmail"
-          type="email" placeholder="E-mailadres"
-          autocomplete="email" required>
-
-        <input name="telefoon" id="customerPhone"
-          type="tel" placeholder="Telefoonnummer (optioneel)"
-          autocomplete="tel">
-
-        <input name="adres" id="customerAddress"
-          placeholder="Straat en huisnummer"
-          autocomplete="street-address" required>
-
-        <input name="postcode_plaats" id="customerPostal"
-          placeholder="Postcode en woonplaats"
-          autocomplete="postal-code" required>
-
-        <textarea name="opmerking" id="customerNote"
-          placeholder="Opmerking of gewenste bezorging"></textarea>
+        <input name="naam" id="customerName" placeholder="Naam" autocomplete="name" required>
+        <input name="email" id="customerEmail" type="email" placeholder="E-mailadres" autocomplete="email" required>
+        <input name="telefoon" id="customerPhone" type="tel" placeholder="Telefoonnummer (optioneel)" autocomplete="tel">
+        <input name="adres" id="customerAddress" placeholder="Straat en huisnummer" autocomplete="street-address" required>
+        <input name="postcode_plaats" id="customerPostal" placeholder="Postcode en woonplaats" autocomplete="postal-code" required>
+        <textarea name="opmerking" id="customerNote" placeholder="Opmerking of gewenste bezorging"></textarea>
       </div>
-
       <input type="hidden" name="bestelling" id="orderDetails">
       <input type="hidden" name="producttotaal" id="orderTotal">
-      <input type="hidden" name="_subject"
-        value="Nieuwe bestelling - 3D Printplezier">
-
-      <p class="note">
-        Je bestelling wordt per e-mail naar 3D Printplezier verstuurd.
-      </p>
-
-      <p id="orderStatus" class="status" role="status"
-        aria-live="polite"></p>
-
-      <button class="primary" id="orderButton" type="submit">
-        Bestelling per e-mail versturen
-      </button>
+      <input type="hidden" name="_subject" value="Nieuwe bestelling - 3D Printplezier">
+      <p class="note">Je bestelling wordt per e-mail naar 3D Printplezier verstuurd.</p>
+      <p id="orderStatus" class="status" role="status" aria-live="polite"></p>
+      <button class="primary" id="orderButton" type="submit">Bestelling per e-mail versturen</button>
     </form>
   </div>
 </div>
 
-<!-- Pop-up na toevoegen aan winkelwagen -->
-<div class="added-popup" id="addedPopup"
-  onclick="if(event.target===this)closeAddedPopup()">
+<div class="added-popup" id="addedPopup" onclick="if(event.target===this)closeAddedPopup()">
   <div class="added-box">
     <div class="added-icon">✓</div>
     <h2>Toegevoegd aan je winkelwagen!</h2>
     <p>Het product staat nu in je winkelmandje.</p>
     <div class="added-actions">
-      <button class="primary" type="button" onclick="viewCart()">
-        🛒 Winkelwagen bekijken
-      </button>
-      <button class="continue-button" type="button"
-        onclick="closeAddedPopup()">
-        Verder winkelen
-      </button>
+      <button class="primary" type="button" onclick="viewCart()">🛒 Winkelwagen bekijken</button>
+      <button class="continue-button" type="button" onclick="closeAddedPopup()">Verder winkelen</button>
     </div>
   </div>
 </div>
@@ -503,56 +191,56 @@ footer a { color:#8ce9bc; }
 let products = [];
 let cart = [];
 
-/* Geschatte afmetingen per product-ID.
-   Dit zijn voorbeeldmaten, geen opgemeten maten. */
 const estimatedDimensions = {
-  101:'12 × 8 × 3 cm',
-  102:'10 × 10 × 12 cm',
-  103:'12 × 12 × 14 cm',
-  104:'15 × 10 × 5 cm',
-  105:'9 × 4 × 3 cm',
-  106:'7 × 7 × 1 cm',
-  107:'5 × 5 × 1 cm',
-  108:'8 × 4 × 4 cm',
-  109:'15 × 5 × 3 cm',
-  110:'8 × 7 × 9 cm',
-  111:'16 × 8 × 5 cm',
-  112:'12 × 12 × 12 cm',
-  113:'15 × 15 × 3 cm',
-  114:'5 × 5 × 5 cm',
+  101:'12 × 8 × 3 cm', 102:'10 × 10 × 12 cm',
+  103:'12 × 12 × 14 cm', 104:'15 × 10 × 5 cm',
+  105:'9 × 4 × 3 cm', 106:'7 × 7 × 1 cm',
+  107:'5 × 5 × 1 cm', 108:'8 × 4 × 4 cm',
+  109:'15 × 5 × 3 cm', 110:'8 × 7 × 9 cm',
+  111:'16 × 8 × 5 cm', 112:'12 × 12 × 12 cm',
+  113:'15 × 15 × 3 cm', 114:'5 × 5 × 5 cm',
   115:'18 × 12 × 15 cm'
 };
 
-const colors = [
-  'Zwart','Wit','Rood','Blauw','Groen',
-  'Geel','Oranje','Paars','Roze'
-];
+const colors = ['Zwart','Wit','Rood','Blauw','Groen','Geel','Oranje','Paars','Roze'];
 
 const euro = n => new Intl.NumberFormat('nl-NL', {
-  style:'currency',
-  currency:'EUR'
+  style:'currency', currency:'EUR'
 }).format(Number(n) || 0);
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
+  '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
 }[c]));
+
+/* Maakt categorienamen netjes en consequent. */
+function categoryName(category) {
+  const original = String(category || '').trim();
+  const key = original.toLowerCase();
+
+  const names = {
+    'kerst':'Kerst',
+    'christmas':'Kerst',
+    'gadget':'Gadgets',
+    'gadgets':'Gadgets',
+    'organizer':'Organizers',
+    'organizers':'Organizers',
+    'organiser':'Organizers',
+    'organisers':'Organizers'
+  };
+
+  return names[key] || (original
+    ? original.charAt(0).toUpperCase() + original.slice(1)
+    : 'Overige producten');
+}
 
 function renderCategories() {
   const sel = document.getElementById('category');
   const current = sel.value;
-  const cats = [...new Set(
-    products.map(p => p.category).filter(Boolean)
-  )].sort();
 
-  sel.innerHTML =
-    '<option value="">Alle categorieën</option>' +
-    cats.map(c =>
-      `<option value="${esc(c)}">${esc(c)}</option>`
-    ).join('');
+  const cats = [...new Set(products.map(p => categoryName(p.category)))].sort((a,b) => a.localeCompare(b,'nl'));
+
+  sel.innerHTML = '<option value="">Alle categorieën</option>' +
+    cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
 
   if (cats.includes(current)) sel.value = current;
 }
@@ -563,44 +251,57 @@ function renderProducts() {
   const cat = document.getElementById('category').value;
 
   const list = products.filter(p =>
-    (!cat || p.category === cat) &&
-    (`${p.name || ''} ${p.desc || ''} ${p.category || ''}`)
+    (!cat || categoryName(p.category) === cat) &&
+    (`${p.name || ''} ${p.desc || ''} ${categoryName(p.category)}`)
       .toLowerCase().includes(q)
   );
 
-  target.innerHTML = list.length ? list.map(p => {
-    const id = Number(p.id);
-    const visual = p.image
-      ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy">`
-      : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
+  if (!list.length) {
+    target.innerHTML = '<div class="empty">Geen producten gevonden. Probeer een andere zoekterm.</div>';
+    return;
+  }
 
-    const dimensions =
-      estimatedDimensions[id] ||
-      p.dimensions ||
-      'Nog niet bekend';
+  /* Producten verdelen over groepen met een eigen kopje. */
+  const groups = {};
+  list.forEach(p => {
+    const name = categoryName(p.category);
+    if (!groups[name]) groups[name] = [];
+    groups[name].push(p);
+  });
+
+  target.innerHTML = Object.keys(groups).sort((a,b) => a.localeCompare(b,'nl')).map(category => {
+    const cards = groups[category].map(p => {
+      const id = Number(p.id);
+      const visual = p.image
+        ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy">`
+        : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
+
+      const dimensions = estimatedDimensions[id] || p.dimensions || 'Nog niet bekend';
+
+      return `
+        <article class="product">
+          ${visual}
+          <div class="product-body">
+            <h3>${esc(p.name || '3D-geprint product')}</h3>
+            <div class="price">${euro(p.price)}</div>
+            <p class="desc">${esc(p.desc || '')}</p>
+            <p class="eco">🌱 3D-geprint product.</p>
+            <p class="dimensions">📏 Geschatte afmetingen: ${esc(dimensions)}</p>
+            <label for="color-${id}">Kies kleur filament:</label>
+            <select id="color-${id}">
+              ${colors.map(c => `<option>${c}</option>`).join('')}
+            </select>
+            <button class="add" type="button" onclick="addToCart(${id})">In winkelmand</button>
+          </div>
+        </article>`;
+    }).join('');
 
     return `
-      <article class="product">
-        ${visual}
-        <div class="product-body">
-          <h3>${esc(p.name || '3D-geprint product')}</h3>
-          <div class="price">${euro(p.price)}</div>
-          <p class="desc">${esc(p.desc || '')}</p>
-          <p class="eco">🌱 3D-geprint product.</p>
-          <p class="dimensions">
-            📏 Geschatte afmetingen: ${esc(dimensions)}
-          </p>
-          <label for="color-${id}">Kies kleur filament:</label>
-          <select id="color-${id}">
-            ${colors.map(c => `<option>${c}</option>`).join('')}
-          </select>
-          <button class="add" type="button" onclick="addToCart(${id})">
-            In winkelmand
-          </button>
-        </div>
-      </article>`;
-  }).join('') :
-    '<div class="empty">Geen producten gevonden. Probeer een andere zoekterm.</div>';
+      <section class="category-section">
+        <h2 class="category-heading">${esc(category)}</h2>
+        <div class="grid">${cards}</div>
+      </section>`;
+  }).join('');
 }
 
 function addToCart(id) {
@@ -609,9 +310,7 @@ function addToCart(id) {
 
   const colorSelect = document.getElementById('color-' + id);
   const color = colorSelect ? colorSelect.value : 'Zwart';
-  const found = cart.find(x =>
-    Number(x.id) === id && x.color === color
-  );
+  const found = cart.find(x => Number(x.id) === id && x.color === color);
 
   if (found) found.qty++;
   else cart.push({...p, color, qty:1});
@@ -621,29 +320,20 @@ function addToCart(id) {
 }
 
 function updateCart() {
-  document.getElementById('count').textContent =
-    cart.reduce((s,x) => s + x.qty, 0);
+  document.getElementById('count').textContent = cart.reduce((s,x) => s + x.qty, 0);
 
   document.getElementById('cartItems').innerHTML = cart.length
     ? cart.map((x,i) => `
         <div class="cart-row">
-          <div>
-            <strong>${esc(x.name)}</strong>
-            <small>${esc(x.color)} • ${x.qty} × ${euro(x.price)}</small>
+          <div><strong>${esc(x.name)}</strong><small>${esc(x.color)} • ${x.qty} × ${euro(x.price)}</small></div>
+          <div>${euro(Number(x.price) * x.qty)}<br>
+            <button class="remove" type="button" onclick="removeItem(${i})">Verwijderen</button>
           </div>
-          <div>
-            ${euro(Number(x.price) * x.qty)}<br>
-            <button class="remove" type="button"
-              onclick="removeItem(${i})">Verwijderen</button>
-          </div>
-        </div>
-      `).join('')
+        </div>`).join('')
     : '<p>Je winkelmand is nog leeg.</p>';
 
-  document.getElementById('total').textContent =
-    'Producttotaal: ' +
-    euro(cart.reduce((s,x) =>
-      s + (Number(x.price) || 0) * x.qty, 0));
+  document.getElementById('total').textContent = 'Producttotaal: ' +
+    euro(cart.reduce((s,x) => s + (Number(x.price) || 0) * x.qty, 0));
 }
 
 function removeItem(i) {
@@ -655,19 +345,15 @@ function openCart() {
   updateCart();
   document.getElementById('cartModal').classList.add('show');
 }
-
 function closeCart() {
   document.getElementById('cartModal').classList.remove('show');
 }
-
 function showAddedPopup() {
   document.getElementById('addedPopup').classList.add('show');
 }
-
 function closeAddedPopup() {
   document.getElementById('addedPopup').classList.remove('show');
 }
-
 function viewCart() {
   closeAddedPopup();
   openCart();
@@ -689,8 +375,7 @@ async function sendOrder(e) {
     `${x.qty}x ${x.name} (${x.color}) - ${euro(Number(x.price) * x.qty)}`
   ).join('\n');
 
-  const total = cart.reduce((s,x) =>
-    s + (Number(x.price) || 0) * x.qty, 0);
+  const total = cart.reduce((s,x) => s + (Number(x.price) || 0) * x.qty, 0);
 
   document.getElementById('orderDetails').value = lines;
   document.getElementById('orderTotal').value = euro(total);
@@ -707,24 +392,18 @@ async function sendOrder(e) {
       headers:{'Accept':'application/json'}
     });
 
-    if (!response.ok) {
-      throw new Error('De bestelling kon niet worden verstuurd.');
-    }
+    if (!response.ok) throw new Error('De bestelling kon niet worden verstuurd.');
 
-    status.textContent =
-      'Bedankt! Je bestelling is verstuurd. We nemen zo snel mogelijk contact met je op.';
+    status.textContent = 'Bedankt! Je bestelling is verstuurd. We nemen zo snel mogelijk contact met je op.';
     status.className = 'status success';
 
     cart = [];
     updateCart();
     form.reset();
-
   } catch (error) {
-    status.textContent =
-      'Er ging iets mis bij het versturen. Probeer het opnieuw of mail ons rechtstreeks.';
+    status.textContent = 'Er ging iets mis bij het versturen. Probeer het opnieuw of mail ons rechtstreeks.';
     status.className = 'status error';
     console.error(error);
-
   } finally {
     button.disabled = false;
     button.textContent = 'Bestelling per e-mail versturen';
@@ -735,13 +414,8 @@ async function loadProducts() {
   const target = document.getElementById('products');
 
   try {
-    const response = await fetch('./data/products.json?v=4', {
-      cache:'no-store'
-    });
-
-    if (!response.ok) {
-      throw new Error('HTTP ' + response.status);
-    }
+    const response = await fetch('./data/products.json?v=4', {cache:'no-store'});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
 
     const data = await response.json();
     products = Array.isArray(data) ? data : data.products;
@@ -752,7 +426,6 @@ async function loadProducts() {
 
     renderCategories();
     renderProducts();
-
   } catch (error) {
     console.error('Producten laden mislukt:', error);
     target.innerHTML = `
