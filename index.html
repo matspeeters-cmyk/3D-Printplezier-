@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Leuke 3D-geprinte producten bij 3D Printplezier.">
+<meta name="description" content="Leuke zelfgemaakte 3D-geprinte producten bij 3D Printplezier van Mats Peeters.">
 <title>3D Printplezier | Mijn collectie</title>
 <style>
 :root {
@@ -21,10 +21,16 @@ body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 Arial,san
 button,input,select,textarea { font:inherit; }
 .topline { background:#0d1426; color:#e7edf7; text-align:center; padding:8px 12px; font-size:12px; }
 .topline strong { color:#65e5a5; }
-.header { background:var(--navy); color:white; padding:24px max(4vw,20px); display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.header { background:var(--navy); color:white; padding:24px max(4vw,20px); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
 .brand h1 { margin:0; font-size:34px; color:#eafff4; }
 .brand p { margin:5px 0 0; color:#aebbd0; }
-.pill { border:1px solid #34415a; border-radius:24px; padding:10px 16px; color:white; background:#1b263e; cursor:pointer; }
+.header-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.pill { border:1px solid #34415a; border-radius:24px; padding:10px 16px; color:white; background:#1b263e; cursor:pointer; text-decoration:none; display:inline-block; }
+.pill:hover { background:#2b3b59; }
+.youtube-button { background:#d92d35; border-color:#d92d35; }
+.youtube-button:hover { background:#b91f29; }
+.about-button { background:#20a978; border-color:#20a978; }
+.about-button:hover { background:#138b62; }
 main { max-width:1200px; margin:auto; padding:22px 22px 55px; }
 .banner { background:linear-gradient(105deg,#20d878,#159c79); color:white; border-radius:13px; padding:20px; margin-bottom:22px; }
 .banner h2 { margin:0 0 4px; }
@@ -61,7 +67,10 @@ footer a { color:#8ce9bc; }
 .modal-backdrop.show { display:flex; }
 .modal { width:min(560px,100%); max-height:90vh; overflow:auto; background:white; border-radius:16px; padding:22px; }
 .modal-head { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.close { border:0; background:#eef1f5; border-radius:50%; width:34px; height:34px; cursor:pointer; }
+.close { border:0; background:#eef1f5; border-radius:50%; width:34px; height:34px; cursor:pointer; flex-shrink:0; }
+.about-content { color:#536073; }
+.about-content h3 { color:#172b25; margin-bottom:5px; }
+.about-emoji { font-size:42px; margin:8px 0; }
 .cart-row { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); }
 .cart-row small { display:block; color:var(--muted); }
 .remove { border:0; background:none; color:#d23b50; cursor:pointer; }
@@ -146,6 +155,8 @@ footer a { color:#8ce9bc; }
   .form-grid textarea { grid-column:auto; }
   .design-fields { grid-template-columns:1fr; }
   .design-section { padding:17px; }
+  .header-actions { width:100%; }
+  .header-actions .pill { flex:1; text-align:center; }
 }
 </style>
 </head>
@@ -156,17 +167,28 @@ footer a { color:#8ce9bc; }
 <header class="header">
   <div class="brand">
     <h1>3D Printplezier</h1>
-    <p>Uw 3D-geprinte spullen voor een lage prijs</p>
+    <p>Mijn eigen 3D-geprinte producten, met plezier gemaakt!</p>
   </div>
-  <button class="pill" type="button" onclick="openCart()">
-    🛒 Winkelmand <span id="count">0</span>
-  </button>
+
+  <div class="header-actions">
+    <button class="pill about-button" type="button" onclick="openAbout()">
+      👋 Over ons
+    </button>
+    <a class="pill youtube-button"
+       href="https://www.youtube.com/@3dprintplezier"
+       target="_blank" rel="noopener noreferrer">
+      ▶️ Mijn YouTube
+    </a>
+    <button class="pill" type="button" onclick="openCart()">
+      🛒 Winkelmand <span id="count">0</span>
+    </button>
+  </div>
 </header>
 
 <main>
   <section class="banner">
     <h2>📢 Ontdek mijn collectie!</h2>
-    <p>Leuke 3D-prints, met plezier gemaakt.</p>
+    <p>Leuke 3D-prints, zelf bedacht en met plezier gemaakt.</p>
   </section>
 
   <div class="filters">
@@ -266,7 +288,8 @@ footer a { color:#8ce9bc; }
     <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met mij op.</p>
     <div class="contact-links">
       <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
-      <a href="https://matspeeters-cmyk.github.io/3D-Printplezier-/#contact">🛒 Naar je winkelmand</a>
+      <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Mijn YouTube-kanaal</a>
+      <a href="#eigen-ontwerp">💡 Eigen ontwerpidee insturen</a>
     </div>
     <p class="note">
       Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.
@@ -276,11 +299,57 @@ footer a { color:#8ce9bc; }
 
 <footer>
   <strong>3D Printplezier</strong><br>
-  Met plezier 3D-geprint • Vragen? Mail naar
+  Met plezier 3D-geprint door Mats Peeters • Vragen? Mail naar
   <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a>
+  <br><br>
+  <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Bekijk mijn YouTube-kanaal</a>
   <br><br>
   Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
 </footer>
+
+<!-- Over ons pop-up -->
+<div class="modal-backdrop" id="aboutModal"
+  onclick="if(event.target===this)closeAbout()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="modal-head">
+      <h2 id="aboutTitle">👋 Over 3D Printplezier</h2>
+      <button class="close" type="button" onclick="closeAbout()" aria-label="Sluiten">✕</button>
+    </div>
+
+    <div class="about-content">
+      <div class="about-emoji">🖨️✨</div>
+      <h3>Hoi! Ik ben Mats Peeters.</h3>
+      <p>
+        Ik ben 14 jaar en de maker achter <strong>3D Printplezier</strong>!
+        Ik vind het superleuk om zelf producten te bedenken, te ontwerpen
+        en met mijn 3D-printer te maken.
+      </p>
+      <p>
+        Op mijn website vind je allerlei leuke 3D-geprinte producten.
+        Alles draait om creativiteit, nieuwe ideeën en natuurlijk plezier
+        met 3D-printen!
+      </p>
+      <p>
+        Heb jij zelf een leuk idee voor een product? Dan kun je dat via mijn
+        website insturen. Ik kijk graag of ik jouw idee kan maken.
+      </p>
+      <p>
+        Neem ook een kijkje op mijn YouTube-kanaal om meer van
+        3D Printplezier te ontdekken!
+      </p>
+      <p><strong>Bedankt voor je bezoek en veel winkelplezier! 😃</strong></p>
+
+      <a class="pill youtube-button" href="https://www.youtube.com/@3dprintplezier"
+         target="_blank" rel="noopener noreferrer">
+        ▶️ Bekijk mijn YouTube-kanaal
+      </a>
+      <br><br>
+      <button class="primary" type="button" onclick="goToDesign()">
+        💡 Mijn eigen ontwerpidee insturen
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- Winkelwagen -->
 <div class="modal-backdrop" id="cartModal"
@@ -379,6 +448,29 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
   '"':'&quot;',
   "'":'&#39;'
 }[c]));
+
+function openAbout() {
+  document.getElementById('aboutModal').classList.add('show');
+}
+
+function closeAbout() {
+  document.getElementById('aboutModal').classList.remove('show');
+}
+
+function goToDesign() {
+  closeAbout();
+  document.getElementById('eigen-ontwerp').scrollIntoView({
+    behavior:'smooth'
+  });
+}
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeAbout();
+    closeCart();
+    closeAddedPopup();
+  }
+});
 
 function categoryName(category) {
   const original = String(category || '').trim();
