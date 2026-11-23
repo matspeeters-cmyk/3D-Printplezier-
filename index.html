@@ -6,81 +6,423 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Leuke zelfgemaakte 3D-geprinte producten bij 3D Printplezier van Mats Peeters.">
 <title>3D Printplezier | Mijn collectie</title>
+
 <style>
 :root {
-  --navy:#10182d;
-  --green:#20c982;
-  --green-dark:#13a96e;
-  --ink:#202a3a;
-  --muted:#687386;
-  --bg:#f5f7fa;
-  --line:#e7ebf0;
+  --navy:#171717;
+  --green:#00ae75;
+  --green-dark:#008f60;
+  --ink:#202124;
+  --muted:#74777d;
+  --bg:#f1f2f3;
+  --line:#e5e6e8;
 }
+
 * { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 Arial,sans-serif; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:15px/1.5 Arial,sans-serif;
+}
+
 button,input,select,textarea { font:inherit; }
-.topline { background:#0d1426; color:#e7edf7; text-align:center; padding:8px 12px; font-size:12px; }
+
+.topline {
+  background:#080808;
+  color:#e7edf7;
+  text-align:center;
+  padding:9px 12px;
+  font-size:12px;
+}
+
 .topline strong { color:#65e5a5; }
-.header { background:var(--navy); color:white; padding:24px max(4vw,20px); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
-.brand h1 { margin:0; font-size:34px; color:#eafff4; }
-.brand p { margin:5px 0 0; color:#aebbd0; }
-.header-actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-.pill { border:1px solid #34415a; border-radius:24px; padding:10px 16px; color:white; background:#1b263e; cursor:pointer; text-decoration:none; display:inline-block; }
-.pill:hover { background:#2b3b59; }
-.youtube-button { background:#d92d35; border-color:#d92d35; }
+
+.header {
+  background:#171717;
+  color:white;
+  padding:24px max(4vw,20px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  border-bottom:1px solid #292929;
+}
+
+.brand h1 {
+  margin:0;
+  font-size:34px;
+  color:#fff;
+  letter-spacing:-1px;
+}
+
+.brand p {
+  margin:5px 0 0;
+  color:#b8b8b8;
+}
+
+.header-actions {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.pill {
+  border:1px solid #414141;
+  border-radius:8px;
+  padding:10px 16px;
+  color:white;
+  background:#262626;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  transition:background .2s ease;
+}
+
+.pill:hover { background:#393939; }
+
+.youtube-button {
+  background:#d92d35;
+  border-color:#d92d35;
+}
+
 .youtube-button:hover { background:#b91f29; }
-.about-button { background:#20a978; border-color:#20a978; }
-.about-button:hover { background:#138b62; }
-main { max-width:1200px; margin:auto; padding:22px 22px 55px; }
-.banner { background:linear-gradient(105deg,#20d878,#159c79); color:white; border-radius:13px; padding:20px; margin-bottom:22px; }
-.banner h2 { margin:0 0 4px; }
-.banner p { margin:0; }
-.filters { display:flex; gap:12px; background:white; border:1px solid var(--line); border-radius:13px; padding:10px; margin-bottom:22px; }
-.filters input { flex:1; min-width:0; border:0; outline:0; padding:7px; }
-.filters select,.product select { border:1px solid var(--line); border-radius:9px; padding:9px; background:white; }
-.section-title { font-size:24px; margin:22px 0 17px; }
-.category-section { margin-bottom:32px; }
-.category-heading { font-size:22px; margin:25px 0 15px; padding:0 0 9px; border-bottom:2px solid #dce8e1; color:#172b25; }
-.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
-.product { background:white; border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 5px 18px #17243b0b; display:flex; flex-direction:column; }
-.product img,.placeholder { width:100%; height:190px; object-fit:cover; background:#edf2f3; }
-.placeholder { display:grid; place-items:center; font-size:68px; }
-.product-body { padding:16px; display:flex; flex-direction:column; flex:1; }
-.product h3 { font-size:17px; margin:0 0 5px; }
-.price { font-size:18px; font-weight:bold; color:#159b67; margin-bottom:8px; }
-.desc { color:#536073; font-size:13px; margin:0 0 12px; min-height:40px; }
-.eco { font-size:12px; color:#26956c; margin:0 0 10px; }
-.dimensions { font-size:13px; color:#354b40; background:#eff8f2; border:1px solid #d9eee0; border-radius:8px; padding:9px 10px; margin:0 0 12px; }
-.product label { font-size:12px; color:#536073; margin-bottom:5px; }
-.product select { width:100%; margin-bottom:11px; }
-.add,.primary { border:0; background:var(--green); color:white; font-weight:bold; padding:11px; border-radius:9px; cursor:pointer; }
+
+.about-button {
+  background:#00ae75;
+  border-color:#00ae75;
+}
+
+.about-button:hover { background:#008f60; }
+
+main {
+  max-width:1200px;
+  margin:auto;
+  padding:25px 22px 60px;
+}
+
+.banner {
+  background:linear-gradient(120deg,#171717,#343a3b);
+  border:1px solid #414747;
+  color:white;
+  border-radius:13px;
+  padding:32px;
+  margin-bottom:25px;
+}
+
+.banner h2 {
+  margin:0 0 5px;
+  font-size:27px;
+}
+
+.banner p {
+  margin:0;
+  color:#d0d5d5;
+}
+
+.filters {
+  display:flex;
+  gap:12px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:25px;
+  box-shadow:0 3px 12px rgba(0,0,0,.025);
+}
+
+.filters input {
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  padding:8px;
+  color:var(--ink);
+}
+
+.filters select,
+.product select {
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px;
+  background:white;
+  color:var(--ink);
+}
+
+.section-title {
+  font-size:25px;
+  margin:25px 0 18px;
+  letter-spacing:-.5px;
+}
+
+.category-section { margin-bottom:35px; }
+
+.category-heading {
+  font-size:22px;
+  margin:25px 0 16px;
+  padding:0 0 9px;
+  border-bottom:2px solid #00ae75;
+  color:#202124;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+
+.product {
+  background:white;
+  border:1px solid #e5e6e8;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,.035);
+  display:flex;
+  flex-direction:column;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.product:hover {
+  transform:translateY(-4px);
+  box-shadow:0 10px 28px rgba(0,0,0,.09);
+}
+
+.product img,
+.placeholder {
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  background:#e9ebed;
+}
+
+.placeholder {
+  display:grid;
+  place-items:center;
+  font-size:68px;
+}
+
+.product-body {
+  padding:17px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.product h3 {
+  font-size:17px;
+  margin:0 0 6px;
+  color:#202124;
+}
+
+.price {
+  font-size:19px;
+  font-weight:bold;
+  color:#009c69;
+  margin-bottom:8px;
+}
+
+.desc {
+  color:#74777d;
+  font-size:13px;
+  margin:0 0 12px;
+  min-height:40px;
+}
+
+.eco {
+  font-size:12px;
+  color:#26956c;
+  margin:0 0 10px;
+}
+
+.dimensions {
+  font-size:13px;
+  color:#354b40;
+  background:#eff8f2;
+  border:1px solid #d9eee0;
+  border-radius:8px;
+  padding:9px 10px;
+  margin:0 0 12px;
+}
+
+.product label {
+  font-size:12px;
+  color:#536073;
+  margin-bottom:5px;
+}
+
+.product select {
+  width:100%;
+  margin-bottom:11px;
+}
+
+.add,.primary {
+  border:0;
+  background:#00ae75;
+  color:white;
+  font-weight:bold;
+  padding:12px;
+  border-radius:7px;
+  cursor:pointer;
+  transition:background .2s ease;
+}
+
 .add { margin-top:auto; }
-.add:hover,.primary:hover { background:var(--green-dark); }
-.empty { grid-column:1/-1; background:white; border-radius:12px; padding:30px; text-align:center; color:var(--muted); }
-.info-section { background:white; border:1px solid var(--line); border-radius:14px; padding:22px; margin-top:34px; }
+
+.add:hover,.primary:hover { background:#008f60; }
+
+.empty {
+  grid-column:1/-1;
+  background:white;
+  border-radius:12px;
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.info-section {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:24px;
+  margin-top:35px;
+  box-shadow:0 4px 18px rgba(0,0,0,.035);
+}
+
 .info-section h2 { margin-top:0; }
-.contact-links { display:flex; flex-wrap:wrap; gap:12px 22px; }
-a { color:#138b62; }
-footer { background:var(--navy); color:#c6d0e0; text-align:center; padding:24px 15px; font-size:13px; }
+
+.contact-links {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 22px;
+}
+
+a { color:#009c69; }
+
+footer {
+  background:#171717;
+  color:#c6d0e0;
+  text-align:center;
+  padding:28px 15px;
+  font-size:13px;
+}
+
 footer a { color:#8ce9bc; }
-.modal-backdrop { position:fixed; inset:0; background:#0710229c; display:none; align-items:center; justify-content:center; padding:18px; z-index:10; }
+
+.modal-backdrop {
+  position:fixed;
+  inset:0;
+  background:#071022b5;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:10;
+}
+
 .modal-backdrop.show { display:flex; }
-.modal { width:min(560px,100%); max-height:90vh; overflow:auto; background:white; border-radius:16px; padding:22px; }
-.modal-head { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.close { border:0; background:#eef1f5; border-radius:50%; width:34px; height:34px; cursor:pointer; flex-shrink:0; }
+
+.modal {
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:14px;
+  padding:23px;
+  box-shadow:0 15px 50px rgba(0,0,0,.2);
+}
+
+.modal-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.close {
+  border:0;
+  background:#eef1f5;
+  border-radius:50%;
+  width:34px;
+  height:34px;
+  cursor:pointer;
+  flex-shrink:0;
+}
+
 .about-content { color:#536073; }
-.about-content h3 { color:#172b25; margin-bottom:5px; }
-.about-emoji { font-size:42px; margin:8px 0; }
-.cart-row { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); }
-.cart-row small { display:block; color:var(--muted); }
-.remove { border:0; background:none; color:#d23b50; cursor:pointer; }
-.total { font-weight:bold; text-align:right; padding:15px 0; font-size:18px; }
-.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.form-grid input,.form-grid textarea { width:100%; padding:11px; border:1px solid var(--line); border-radius:8px; }
-.form-grid textarea { grid-column:1/-1; min-height:75px; }
+
+.about-content h3 {
+  color:#202124;
+  margin-bottom:5px;
+}
+
+.about-emoji {
+  font-size:42px;
+  margin:8px 0;
+}
+
+.cart-row {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.cart-row small {
+  display:block;
+  color:var(--muted);
+}
+
+.remove {
+  border:0;
+  background:none;
+  color:#d23b50;
+  cursor:pointer;
+}
+
+.total {
+  font-weight:bold;
+  text-align:right;
+  padding:15px 0;
+  font-size:18px;
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.form-grid input,
+.form-grid textarea {
+  width:100%;
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+
+.form-grid textarea {
+  grid-column:1/-1;
+  min-height:75px;
+}
+
 .primary { width:100%; }
-.note { font-size:12px; color:var(--muted); }
-.status { font-size:14px; margin:10px 0; }
+
+.note {
+  font-size:12px;
+  color:var(--muted);
+}
+
+.status {
+  font-size:14px;
+  margin:10px 0;
+}
+
 .status.error { color:#c62828; }
 .status.success { color:#138b62; }
 
@@ -88,15 +430,33 @@ footer a { color:#8ce9bc; }
 .design-section {
   background:white;
   border:1px solid var(--line);
-  border-radius:14px;
-  padding:24px;
+  border-radius:12px;
+  padding:25px;
   margin-top:38px;
-  box-shadow:0 5px 18px #17243b0b;
+  box-shadow:0 4px 18px rgba(0,0,0,.035);
 }
-.design-section h2 { margin:0 0 8px; font-size:24px; }
-.design-intro { color:var(--muted); margin:0 0 20px; }
-.design-form { display:grid; gap:15px; }
-.design-form label { display:block; font-weight:bold; margin-bottom:6px; }
+
+.design-section h2 {
+  margin:0 0 8px;
+  font-size:24px;
+}
+
+.design-intro {
+  color:var(--muted);
+  margin:0 0 20px;
+}
+
+.design-form {
+  display:grid;
+  gap:15px;
+}
+
+.design-form label {
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
 .design-form input,
 .design-form textarea {
   width:100%;
@@ -105,19 +465,32 @@ footer a { color:#8ce9bc; }
   border-radius:9px;
   background:white;
 }
+
 .design-form input:focus,
 .design-form textarea:focus {
   outline:2px solid #b7efd3;
   border-color:var(--green);
 }
-.design-form textarea { min-height:90px; resize:vertical; }
-.design-form small { display:block; color:var(--muted); margin-top:5px; }
+
+.design-form textarea {
+  min-height:90px;
+  resize:vertical;
+}
+
+.design-form small {
+  display:block;
+  color:var(--muted);
+  margin-top:5px;
+}
+
 .design-fields {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
 }
+
 .design-submit { width:100%; }
+
 .file-preview {
   display:none;
   margin-top:10px;
@@ -127,39 +500,116 @@ footer a { color:#8ce9bc; }
   border-radius:10px;
   border:1px solid var(--line);
 }
+
 .file-preview.show { display:block; }
 
-.added-popup { position:fixed; inset:0; background:#0710229c; display:none; align-items:center; justify-content:center; padding:18px; z-index:20; }
+/* Toegevoegd aan winkelwagen */
+.added-popup {
+  position:fixed;
+  inset:0;
+  background:#071022b5;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:20;
+}
+
 .added-popup.show { display:flex; }
-.added-box { width:min(390px,100%); background:white; border-radius:16px; padding:25px; text-align:center; box-shadow:0 12px 40px #0003; animation:popupAppear .2s ease-out; }
-@keyframes popupAppear { from { opacity:0; transform:scale(.94); } to { opacity:1; transform:scale(1); } }
-.added-icon { font-size:42px; color:#159b67; margin-bottom:5px; }
-.added-box h2 { color:#159b67; margin:0 0 10px; }
-.added-box p { color:#536073; margin:0 0 20px; }
-.added-actions { display:flex; flex-direction:column; gap:10px; }
-.added-actions button { width:100%; border:0; border-radius:9px; padding:12px; font-weight:bold; cursor:pointer; }
-.continue-button { background:#eef1f5; color:#202a3a; }
+
+.added-box {
+  width:min(390px,100%);
+  background:white;
+  border-radius:14px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 12px 40px #0003;
+  animation:popupAppear .2s ease-out;
+}
+
+@keyframes popupAppear {
+  from { opacity:0; transform:scale(.94); }
+  to { opacity:1; transform:scale(1); }
+}
+
+.added-icon {
+  font-size:42px;
+  color:#159b67;
+  margin-bottom:5px;
+}
+
+.added-box h2 {
+  color:#159b67;
+  margin:0 0 10px;
+}
+
+.added-box p {
+  color:#536073;
+  margin:0 0 20px;
+}
+
+.added-actions {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.added-actions button {
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.continue-button {
+  background:#eef1f5;
+  color:#202a3a;
+}
+
 .continue-button:hover { background:#e1e6ed; }
 
 @media(max-width:760px) {
-  .header { align-items:flex-start; flex-direction:column; }
+  .header {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
   .brand h1 { font-size:29px; }
+
   .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
 @media(max-width:520px) {
   main { padding:14px 13px 40px; }
+
   .grid { grid-template-columns:1fr; }
+
   .filters { flex-direction:column; }
+
   .filters select { width:100%; }
+
   .form-grid { grid-template-columns:1fr; }
+
   .form-grid textarea { grid-column:auto; }
+
   .design-fields { grid-template-columns:1fr; }
+
   .design-section { padding:17px; }
+
   .header-actions { width:100%; }
-  .header-actions .pill { flex:1; text-align:center; }
+
+  .header-actions .pill {
+    flex:1;
+    text-align:center;
+  }
+
+  .banner { padding:23px; }
 }
 </style>
 </head>
+
 <body>
 
 <div class="topline">📦 Verzending vanaf € 3,95</div>
@@ -174,11 +624,13 @@ footer a { color:#8ce9bc; }
     <button class="pill about-button" type="button" onclick="openAbout()">
       👋 Over ons
     </button>
+
     <a class="pill youtube-button"
        href="https://www.youtube.com/@3dprintplezier"
        target="_blank" rel="noopener noreferrer">
       ▶️ Mijn YouTube
     </a>
+
     <button class="pill" type="button" onclick="openCart()">
       🛒 Winkelmand <span id="count">0</span>
     </button>
@@ -193,12 +645,14 @@ footer a { color:#8ce9bc; }
 
   <div class="filters">
     <input id="search" type="search" placeholder="⌕ Zoek een 3D-print..." oninput="renderProducts()">
+
     <select id="category" onchange="renderProducts()">
       <option value="">Alle categorieën</option>
     </select>
   </div>
 
   <h2 class="section-title">Mijn collectie</h2>
+
   <section id="products">
     <div class="empty">Producten laden…</div>
   </section>
@@ -206,6 +660,7 @@ footer a { color:#8ce9bc; }
   <!-- Eigen ontwerpidee insturen -->
   <section class="design-section" id="eigen-ontwerp">
     <h2>💡 Jouw eigen ontwerpidee</h2>
+
     <p class="design-intro">
       Heb je zelf een leuk idee voor een 3D-print? Vul hieronder je gegevens in,
       voeg een foto toe en geef de gewenste afmetingen door. Dan kan ik bekijken
@@ -242,17 +697,20 @@ footer a { color:#8ce9bc; }
 
       <div>
         <label>Gewenste afmetingen in centimeters *</label>
+
         <div class="design-fields">
           <div>
             <label for="designLength">Lengte</label>
             <input id="designLength" name="lengte_cm" type="number"
               min="0.1" step="0.1" placeholder="Bijv. 10" required>
           </div>
+
           <div>
             <label for="designWidth">Breedte</label>
             <input id="designWidth" name="breedte_cm" type="number"
               min="0.1" step="0.1" placeholder="Bijv. 5" required>
           </div>
+
           <div>
             <label for="designHeight">Hoogte</label>
             <input id="designHeight" name="hoogte_cm" type="number"
@@ -285,12 +743,20 @@ footer a { color:#8ce9bc; }
 
   <section class="info-section" id="contact">
     <h2>Contact</h2>
+
     <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met mij op.</p>
+
     <div class="contact-links">
       <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
-      <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Mijn YouTube-kanaal</a>
+
+      <a href="https://www.youtube.com/@3dprintplezier"
+         target="_blank" rel="noopener noreferrer">
+        ▶️ Mijn YouTube-kanaal
+      </a>
+
       <a href="#eigen-ontwerp">💡 Eigen ontwerpidee insturen</a>
     </div>
+
     <p class="note">
       Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.
     </p>
@@ -301,8 +767,14 @@ footer a { color:#8ce9bc; }
   <strong>3D Printplezier</strong><br>
   Met plezier 3D-geprint door Mats Peeters • Vragen? Mail naar
   <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a>
+
   <br><br>
-  <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Bekijk mijn YouTube-kanaal</a>
+
+  <a href="https://www.youtube.com/@3dprintplezier"
+     target="_blank" rel="noopener noreferrer">
+    ▶️ Bekijk mijn YouTube-kanaal
+  </a>
+
   <br><br>
   Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
 </footer>
@@ -310,40 +782,52 @@ footer a { color:#8ce9bc; }
 <!-- Over ons pop-up -->
 <div class="modal-backdrop" id="aboutModal"
   onclick="if(event.target===this)closeAbout()">
+
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
     <div class="modal-head">
       <h2 id="aboutTitle">👋 Over 3D Printplezier</h2>
-      <button class="close" type="button" onclick="closeAbout()" aria-label="Sluiten">✕</button>
+
+      <button class="close" type="button"
+        onclick="closeAbout()" aria-label="Sluiten">✕</button>
     </div>
 
     <div class="about-content">
       <div class="about-emoji">🖨️✨</div>
+
       <h3>Hoi! Ik ben Mats Peeters.</h3>
+
       <p>
         Ik ben 14 jaar en de maker achter <strong>3D Printplezier</strong>!
         Ik vind het superleuk om zelf producten te bedenken, te ontwerpen
         en met mijn 3D-printer te maken.
       </p>
+
       <p>
         Op mijn website vind je allerlei leuke 3D-geprinte producten.
         Alles draait om creativiteit, nieuwe ideeën en natuurlijk plezier
         met 3D-printen!
       </p>
+
       <p>
         Heb jij zelf een leuk idee voor een product? Dan kun je dat via mijn
         website insturen. Ik kijk graag of ik jouw idee kan maken.
       </p>
+
       <p>
         Neem ook een kijkje op mijn YouTube-kanaal om meer van
         3D Printplezier te ontdekken!
       </p>
+
       <p><strong>Bedankt voor je bezoek en veel winkelplezier! 😃</strong></p>
 
-      <a class="pill youtube-button" href="https://www.youtube.com/@3dprintplezier"
+      <a class="pill youtube-button"
+         href="https://www.youtube.com/@3dprintplezier"
          target="_blank" rel="noopener noreferrer">
         ▶️ Bekijk mijn YouTube-kanaal
       </a>
+
       <br><br>
+
       <button class="primary" type="button" onclick="goToDesign()">
         💡 Mijn eigen ontwerpidee insturen
       </button>
@@ -354,13 +838,17 @@ footer a { color:#8ce9bc; }
 <!-- Winkelwagen -->
 <div class="modal-backdrop" id="cartModal"
   onclick="if(event.target===this)closeCart()">
+
   <div class="modal">
     <div class="modal-head">
       <h2>Jouw winkelmand</h2>
-      <button class="close" type="button" onclick="closeCart()" aria-label="Sluiten">✕</button>
+
+      <button class="close" type="button"
+        onclick="closeCart()" aria-label="Sluiten">✕</button>
     </div>
 
     <div id="cartItems"></div>
+
     <div class="total" id="total">Producttotaal: € 0,00</div>
 
     <h3>Bestelling aanvragen</h3>
@@ -372,10 +860,15 @@ footer a { color:#8ce9bc; }
 
       <div class="form-grid">
         <input name="naam" id="customerName" placeholder="Naam" autocomplete="name" required>
+
         <input name="email" id="customerEmail" type="email" placeholder="E-mailadres" autocomplete="email" required>
+
         <input name="telefoon" id="customerPhone" type="tel" placeholder="Telefoonnummer (optioneel)" autocomplete="tel">
+
         <input name="adres" id="customerAddress" placeholder="Straat en huisnummer" autocomplete="street-address" required>
+
         <input name="postcode_plaats" id="customerPostal" placeholder="Postcode en woonplaats" autocomplete="postal-code" required>
+
         <textarea name="opmerking" id="customerNote" placeholder="Opmerking of gewenste bezorging"></textarea>
       </div>
 
@@ -384,6 +877,7 @@ footer a { color:#8ce9bc; }
       <input type="hidden" name="_subject" value="Nieuwe bestelling - 3D Printplezier">
 
       <p class="note">Je bestelling wordt per e-mail naar 3D Printplezier verstuurd.</p>
+
       <p id="orderStatus" class="status" role="status" aria-live="polite"></p>
 
       <button class="primary" id="orderButton" type="submit">
@@ -396,13 +890,22 @@ footer a { color:#8ce9bc; }
 <!-- Toegevoegd aan winkelwagen -->
 <div class="added-popup" id="addedPopup"
   onclick="if(event.target===this)closeAddedPopup()">
+
   <div class="added-box">
     <div class="added-icon">✓</div>
+
     <h2>Toegevoegd aan je winkelwagen!</h2>
+
     <p>Het product staat nu in je winkelmandje.</p>
+
     <div class="added-actions">
-      <button class="primary" type="button" onclick="viewCart()">🛒 Winkelwagen bekijken</button>
-      <button class="continue-button" type="button" onclick="closeAddedPopup()">Verder winkelen</button>
+      <button class="primary" type="button" onclick="viewCart()">
+        🛒 Winkelwagen bekijken
+      </button>
+
+      <button class="continue-button" type="button" onclick="closeAddedPopup()">
+        Verder winkelen
+      </button>
     </div>
   </div>
 </div>
@@ -535,6 +1038,7 @@ function renderProducts() {
     .map(category => {
       const cards = groups[category].map(p => {
         const id = Number(p.id);
+
         const visual = p.image
           ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy">`
           : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
@@ -545,16 +1049,24 @@ function renderProducts() {
         return `
           <article class="product">
             ${visual}
+
             <div class="product-body">
               <h3>${esc(p.name || '3D-geprint product')}</h3>
+
               <div class="price">${euro(p.price)}</div>
+
               <p class="desc">${esc(p.desc || '')}</p>
+
               <p class="eco">🌱 3D-geprint product.</p>
+
               <p class="dimensions">📏 Geschatte afmetingen: ${esc(dimensions)}</p>
+
               <label for="color-${id}">Kies kleur filament:</label>
+
               <select id="color-${id}">
                 ${colors.map(c => `<option>${c}</option>`).join('')}
               </select>
+
               <button class="add" type="button" onclick="addToCart(${id})">
                 In winkelmand
               </button>
@@ -599,8 +1111,10 @@ function updateCart() {
             <strong>${esc(x.name)}</strong>
             <small>${esc(x.color)} • ${x.qty} × ${euro(x.price)}</small>
           </div>
+
           <div>
             ${euro(Number(x.price) * x.qty)}<br>
+
             <button class="remove" type="button" onclick="removeItem(${i})">
               Verwijderen
             </button>
@@ -771,6 +1285,7 @@ async function sendDesign(e) {
     status.className = 'status success';
 
     form.reset();
+
     document.getElementById('designPreview').removeAttribute('src');
     document.getElementById('designPreview').classList.remove('show');
 
@@ -810,6 +1325,7 @@ async function loadProducts() {
 
   } catch (error) {
     console.error('Producten laden mislukt:', error);
+
     target.innerHTML = `
       <div class="empty">
         De producten konden niet worden geladen.<br>
@@ -822,5 +1338,6 @@ async function loadProducts() {
 updateCart();
 loadProducts();
 </script>
+
 </body>
 </html>
