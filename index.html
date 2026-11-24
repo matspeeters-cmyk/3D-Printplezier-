@@ -2,870 +2,621 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Leuke zelfgemaakte 3D-geprinte producten bij 3D Printplezier van Mats Peeters.">
-<title>3D Printplezier | Mijn collectie</title>
-<style>
-:root {
-  --navy:#171717;
-  --green:#00ae75;
-  --green-dark:#008f60;
-  --ink:#202124;
-  --muted:#74777d;
-  --bg:#f1f2f3;
-  --line:#e5e6e8;
-}
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font:15px/1.5 Arial,sans-serif;
-}
-button,input,select,textarea { font:inherit; }
-.topline {
-  background:#080808;color:#e7edf7;text-align:center;
-  padding:9px 12px;font-size:12px;
-}
-.topline strong { color:#65e5a5; }
-header {
-  background:#171717;color:white;
-  padding:23px max(4vw,20px);
-  display:flex;justify-content:space-between;align-items:center;
-  gap:16px;flex-wrap:wrap;border-bottom:1px solid #292929;
-}
-.brand h1 { margin:0;font-size:32px;letter-spacing:-1px; }
-.brand p { margin:5px 0 0;color:#bbb; }
-.actions { display:flex;gap:10px;align-items:center;flex-wrap:wrap; }
-.pill {
-  border:1px solid #414141;border-radius:8px;padding:10px 15px;
-  color:white;background:#262626;cursor:pointer;text-decoration:none;
-}
-.pill:hover { background:#393939; }
-.green { background:var(--green);border-color:var(--green); }
-.green:hover { background:var(--green-dark); }
-.youtube { background:#d92d35;border-color:#d92d35; }
-main { max-width:1180px;margin:auto;padding:25px 22px 60px; }
-.banner {
-  background:linear-gradient(120deg,#171717,#343a3b);
-  border:1px solid #414747;color:white;border-radius:13px;
-  padding:30px;margin-bottom:28px;
-}
-.banner h2 { margin:0 0 5px;font-size:27px; }
-.banner p { margin:0;color:#d0d5d5; }
-.filters {
-  display:flex;gap:12px;flex-wrap:wrap;background:white;
-  padding:14px;border:1px solid var(--line);
-  border-radius:10px;margin-bottom:25px;
-}
-.filters input,.filters select {
-  flex:1;min-width:190px;padding:12px;
-  border:1px solid var(--line);border-radius:8px;background:white;
-}
-.section-title { font-size:25px;margin:28px 0 16px; }
-.category-section { margin:0 0 38px; }
-.category-heading {
-  font-size:23px;margin:0 0 17px;padding:0 0 9px;
-  border-bottom:2px solid var(--green);
-}
-.grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px; }
-.product {
-  background:white;border:1px solid var(--line);border-radius:12px;
-  overflow:hidden;box-shadow:0 4px 18px #00000009;
-  display:flex;flex-direction:column;
-  transition:transform .2s,box-shadow .2s;
-}
-.product:hover { transform:translateY(-4px);box-shadow:0 10px 28px #00000017; }
-.product img {
-  width:100%;height:225px;object-fit:contain;
-  background:#e9ebed;padding:10px;
-}
-.placeholder {
-  display:grid;place-items:center;font-size:68px;
-  height:225px;background:#e9ebed;
-}
-.product-body { padding:17px;display:flex;flex-direction:column;flex:1; }
-.product h3 { font-size:17px;margin:0 0 6px;color:#202124; }
-.price { font-size:19px;font-weight:bold;color:#009c69;margin-bottom:8px; }
-.desc { color:var(--muted);margin:0 0 12px;font-size:14px; }
-.eco { font-size:13px;color:#56816b;margin:0 0 10px; }
-.dimensions {
-  font-size:13px;color:#354b40;background:#eff8f2;
-  border:1px solid #d9eee0;border-radius:8px;
-  padding:9px 10px;margin:0 0 12px;
-}
-.product label { font-size:13px;margin-bottom:5px; }
-.product select {
-  width:100%;border:1px solid var(--line);border-radius:8px;
-  padding:10px;margin-bottom:12px;background:white;
-}
-.add,.primary {
-  border:0;background:var(--green);color:white;
-  font-weight:bold;padding:12px;border-radius:7px;cursor:pointer;
-}
-.add { margin-top:auto; }
-.add:hover,.primary:hover { background:var(--green-dark); }
-.info-section,.design-section {
-  background:white;border:1px solid var(--line);border-radius:12px;
-  padding:24px;margin-top:35px;box-shadow:0 4px 18px #00000009;
-}
-.info-section h2,.design-section h2 { margin-top:0; }
-.links { display:flex;flex-wrap:wrap;gap:12px 22px; }
-a { color:#009c69; }
-footer {
-  background:#171717;color:#c6d0e0;text-align:center;
-  padding:28px 15px;font-size:13px;
-}
-footer a { color:#8ce9bc; }
-.backdrop,.added-popup {
-  position:fixed;inset:0;background:#071022b5;display:none;
-  align-items:center;justify-content:center;padding:18px;z-index:10;
-}
-.backdrop.show,.added-popup.show { display:flex; }
-.modal {
-  width:min(560px,100%);max-height:90vh;overflow:auto;
-  background:white;border-radius:14px;padding:23px;
-  box-shadow:0 15px 50px #0003;
-}
-.modal-head { display:flex;justify-content:space-between;align-items:center;gap:12px; }
-.close {
-  border:0;background:#eef1f5;border-radius:50%;
-  width:34px;height:34px;cursor:pointer;
-}
-.about-content { color:#536073; }
-.about-content h3 { color:#202124; }
-.cart-row {
-  display:flex;justify-content:space-between;gap:10px;
-  padding:10px 0;border-bottom:1px solid var(--line);
-}
-.cart-row small { display:block;color:var(--muted); }
-.remove { border:0;background:none;color:#d23b50;cursor:pointer; }
-.total { font-weight:bold;text-align:right;padding:15px 0;font-size:18px; }
-.form-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
-.form-grid input,.form-grid textarea,
-.design-form input,.design-form textarea {
-  width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;
-}
-.form-grid textarea { grid-column:1/-1;min-height:75px; }
-.primary { width:100%; }
-.note,small { font-size:12px;color:var(--muted); }
-.status { font-size:14px;margin:10px 0; }
-.status.error { color:#c62828; }
-.status.success { color:#138b62; }
-.design-form { display:grid;gap:14px; }
-.design-form label { display:block;font-weight:bold;margin-bottom:6px; }
-.design-form textarea { min-height:90px; }
-.design-fields { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px; }
-.file-preview {
-  display:none;max-width:220px;max-height:180px;object-fit:contain;
-  margin-top:10px;border-radius:10px;border:1px solid var(--line);
-}
-.file-preview.show { display:block; }
-.added-box {
-  width:min(390px,100%);background:white;border-radius:14px;
-  padding:25px;text-align:center;box-shadow:0 12px 40px #0003;
-}
-.added-box h2 { color:#159b67;margin:0 0 10px; }
-.added-box p { color:#536073; }
-.added-actions { display:flex;flex-direction:column;gap:10px; }
-.added-actions button {
-  width:100%;border:0;border-radius:9px;padding:12px;
-  font-weight:bold;cursor:pointer;
-}
-.continue-button { background:#eef1f5;color:#202a3a; }
-.empty {
-  background:white;border:1px solid var(--line);
-  border-radius:10px;padding:25px;color:var(--muted);
-}
-@media(max-width:850px) {
-  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
-@media(max-width:560px) {
-  header { flex-direction:column;align-items:flex-start; }
-  .grid { grid-template-columns:1fr; }
-  .product img { height:245px; }
-  .form-grid,.design-fields { grid-template-columns:1fr; }
-  .form-grid textarea { grid-column:auto; }
-  .actions { width:100%; }
-  .actions .pill { flex:1;text-align:center; }
-  .banner { padding:23px; }
-  main { padding:15px 13px 40px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Leuke 3D-geprinte producten bij 3D Printplezier.">
+  <title>3D Printplezier | Onze collectie</title>
+  <style>
+    :root{--navy:#10182d;--green:#20c982;--green-dark:#13a96e;--bg:#f5f7fa;--muted:#647084;--line:#e5e9ef}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--navy);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .topbar{background:var(--navy);color:white;text-align:center;padding:9px 14px;font-size:14px}
+    header{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+    .nav{max-width:1150px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .brand{font-size:23px;font-weight:800;letter-spacing:-.5px}
+    .brand small{display:block;color:var(--muted);font-size:12px;font-weight:400;letter-spacing:0}
+    .nav-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+    .btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;background:var(--green);color:#062b1c}
+    .btn:hover{background:#35d895}
+    .btn.secondary{background:#eef2f6;color:var(--navy)}
+    main{max-width:1150px;margin:auto;padding:24px 20px 55px}
+    .hero{background:linear-gradient(120deg,#10182d,#253958);color:white;border-radius:18px;padding:34px 30px;margin:12px 0 25px}
+    .hero h1{font-size:clamp(26px,4vw,38px);margin:0 0 8px}
+    .hero p{margin:0;color:#e2eaf4}
+    .toolbar{display:flex;gap:12px;margin:20px 0;flex-wrap:wrap}
+    .toolbar input{flex:1;min-width:210px}
+    .field,select,textarea{width:100%;padding:12px;border:1px solid #d8dee8;border-radius:9px;background:white;color:var(--navy)}
+    .toolbar select{max-width:250px}
+    h2{font-size:25px;margin:28px 0 14px}
+    .products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .product{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 3px 12px #17243b08}
+    .photo{height:220px;background:#f0f2f5;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .photo img{width:100%;height:100%;object-fit:contain}
+    .photo .fallback{font-size:60px}
+    .pbody{padding:16px;display:flex;flex-direction:column;gap:9px;flex:1}
+    .pbody h3{font-size:18px;margin:0}
+    .desc{font-size:14px;color:var(--muted);margin:0}
+    .dimensions{font-size:13px;background:#f3f6f8;padding:7px 9px;border-radius:7px}
+    .price{font-size:20px;font-weight:800;margin-top:auto}
+    .name-field{display:none}
+    .name-field.show{display:block}
+    .pbody .btn{width:100%;margin-top:5px}
+    .section{background:white;border:1px solid var(--line);border-radius:15px;padding:22px;margin-top:28px}
+    .section p{color:var(--muted)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    footer{background:var(--navy);color:white;padding:25px 20px;text-align:center}
+    footer a{color:#70e5b4}
+    a{color:var(--green-dark)}
+    .cart-count{display:inline-flex;background:white;color:var(--navy);border-radius:20px;padding:1px 7px;margin-left:4px}
+    .modal{display:none;position:fixed;inset:0;background:#07101dcc;z-index:30;align-items:center;justify-content:center;padding:15px}
+    .modal.open{display:flex}
+    .dialog{background:white;border-radius:16px;width:min(620px,100%);max-height:90vh;overflow:auto;padding:22px}
+    .dialog-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .close{border:0;background:#eef2f6;border-radius:50%;width:36px;height:36px;font-size:21px}
+    .cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;border-bottom:1px solid var(--line);padding:12px 0}
+    .cart-line small{display:block;color:var(--muted)}
+    .cart-line button{border:0;background:#fee;color:#a22;border-radius:7px;padding:5px 8px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-grid .full{grid-column:1/-1}
+    label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}
+    .notice{font-size:13px;color:var(--muted)}
+    @media(max-width:800px){
+      .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .nav{align-items:flex-start}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:540px){
+      .products{grid-template-columns:1fr}
+      .nav{flex-direction:column}
+      .nav-actions{width:100%}
+      .nav-actions .btn{flex:1}
+      .hero{padding:25px 20px}
+      .form-grid{grid-template-columns:1fr}
+      .form-grid .full{grid-column:auto}
+      .toolbar select{max-width:none}
+    }
+  </style>
 </head>
-
 <body>
-<div class="topline">📦 Verzending vanaf € 3,95 (afhankelijk van grootte) • <strong>Eigen bezorging in IJmuiden en omgeving</strong></div>
 
-<header>
-  <div class="brand">
-    <h1>3D Printplezier</h1>
-    <p>Uw 3D-geprinte spullen voor een lage prijs</p>
-  </div>
-  <div class="actions">
-    <button class="pill green" type="button" onclick="openAbout()">👋 Over mij</button>
-    <a class="pill youtube" href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Mijn YouTube</a>
-    <button class="pill" type="button" onclick="openCart()">🛒 Winkelmand <span id="count">0</span></button>
-  </div>
-</header>
-
-<main>
-  <section class="banner">
-    <h2>📢 Ontdek mijn collectie!</h2>
-    <p>Leuke 3D-prints, zelf bedacht en met plezier gemaakt.</p>
-  </section>
-
-  <div class="filters">
-    <input id="search" type="search" placeholder="⌕ Zoek een 3D-print..." oninput="renderProducts()">
-    <select id="category" onchange="renderProducts()">
-      <option value="">Alle categorieën</option>
-    </select>
+  <div class="topbar">
+    📦 Verzending vanaf € 3,95 (afhankelijk van grootte) •
+    <strong>Eigen bezorging in IJmuiden en omgeving</strong>
   </div>
 
-  <h2 class="section-title">Mijn collectie</h2>
-  <section id="products">
-    <div class="empty">Producten laden…</div>
-  </section>
-
-  <section class="design-section" id="eigen-ontwerp">
-    <h2>💡 Jouw eigen ontwerpidee</h2>
-    <p class="design-intro">
-      Heb je zelf een leuk idee voor een 3D-print? Vul hieronder je gegevens in,
-      voeg een foto toe en geef de gewenste afmetingen door. Dan kan ik bekijken
-      of ik jouw idee kan maken!
-    </p>
-
-    <form class="design-form" id="designForm"
-      action="https://formspree.io/f/xqpqyrlv"
-      method="POST" enctype="multipart/form-data"
-      onsubmit="sendDesign(event)">
-
-      <div>
-        <label for="designName">Je naam *</label>
-        <input id="designName" name="naam_ontwerp" required>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        3D Printplezier
+        <small>Uw 3D-geprinte spullen voor een lage prijs</small>
       </div>
-
-      <div>
-        <label for="designEmail">Je e-mailadres</label>
-        <input id="designEmail" name="email_ontwerp" type="email" placeholder="Optioneel">
+      <div class="nav-actions">
+        <a class="btn secondary" href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener">▶ YouTube</a>
+        <button class="btn" onclick="openCart()">🛒 Winkelmand <span class="cart-count" id="count">0</span></button>
       </div>
+    </div>
+  </header>
 
-      <div>
-        <label for="designPhoto">Foto van je ontwerpidee *</label>
-        <input id="designPhoto" name="foto_ontwerp" type="file"
-          accept="image/png,image/jpeg,image/webp" required onchange="previewDesignPhoto(event)">
-        <small>Foto-upload via Formspree vereist dat bestandsuploads voor je formulier/account beschikbaar zijn.</small>
-        <img id="designPreview" class="file-preview" alt="Voorbeeld van gekozen foto">
-      </div>
+  <main>
+    <section class="hero">
+      <h1>📢 Ontdek onze collectie!</h1>
+      <p>Leuke 3D-prints, met plezier gemaakt.</p>
+    </section>
 
-      <div>
-        <label>Gewenste afmetingen in centimeters *</label>
-        <div class="design-fields">
-          <div>
-            <label for="designLength">Lengte</label>
-            <input id="designLength" name="lengte_cm" type="number" min="0.1" step="0.1" required>
-          </div>
-          <div>
-            <label for="designWidth">Breedte</label>
-            <input id="designWidth" name="breedte_cm" type="number" min="0.1" step="0.1" required>
-          </div>
-          <div>
-            <label for="designHeight">Hoogte</label>
-            <input id="designHeight" name="hoogte_cm" type="number" min="0.1" step="0.1" required>
-          </div>
+    <div class="toolbar">
+      <input class="field" id="search" type="search" placeholder="⌕ Zoek een 3D-print..." aria-label="Zoek producten">
+      <select id="category" aria-label="Kies categorie">
+        <option value="">Alle categorieën</option>
+      </select>
+    </div>
+
+    <h2>Onze collectie</h2>
+    <div class="products" id="products">
+      <p>Producten laden…</p>
+    </div>
+
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met ons op.</p>
+      <div class="contact-grid">
+        <div>
+          <strong>E-mail</strong>
+          <p><a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a></p>
+          <strong>YouTube</strong>
+          <p><a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener">Bekijk 3D Printplezier op YouTube</a></p>
+        </div>
+        <div>
+          <strong>Een eigen ontwerpidee?</strong>
+          <p>Heb je zelf een idee voor een 3D-print? Stuur je idee en afmetingen in.</p>
+          <button class="btn" onclick="document.getElementById('idea').scrollIntoView({behavior:'smooth'})">Stuur je idee in</button>
         </div>
       </div>
+    </section>
 
-      <div>
-        <label for="designPrice">Eventuele gewenste prijs (optioneel)</label>
-        <input id="designPrice" name="gewenste_prijs" type="number" min="0" step="0.01">
+    <section class="section" id="idea">
+      <h2>Eigen ontwerpidee insturen</h2>
+      <p>Vertel wat je wilt laten maken. Je kunt een foto of voorbeeldlink meesturen.</p>
+      <form id="ideaForm">
+        <div class="form-grid">
+          <div>
+            <label for="ideaName">Naam *</label>
+            <input class="field" id="ideaName" name="Naam" required>
+          </div>
+          <div>
+            <label for="ideaEmail">E-mailadres</label>
+            <input class="field" id="ideaEmail" name="E-mailadres" type="email">
+          </div>
+          <div>
+            <label for="ideaPhoto">Foto (optioneel)</label>
+            <input class="field" id="ideaPhoto" name="Foto-link" type="url" placeholder="Plak eventueel een afbeeldingslink">
+          </div>
+          <div>
+            <label for="ideaSize">Afmetingen (cm)</label>
+            <input class="field" id="ideaSize" name="Afmetingen" placeholder="Bijv. 10 x 5 x 3 cm">
+          </div>
+          <div class="full">
+            <label for="ideaText">Vertel je idee *</label>
+            <textarea class="field" id="ideaText" name="Idee" rows="4" required></textarea>
+          </div>
+        </div>
+        <p class="notice">Gebruik een deelbare afbeeldingslink als je een voorbeeldfoto wilt meesturen.</p>
+        <button class="btn" type="submit">Idee versturen</button>
+        <p id="ideaStatus" class="notice" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <strong>3D Printplezier</strong>
+    <p>Met plezier 3D-geprint • Vragen? Mail naar <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a></p>
+    <p>Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.</p>
+  </footer>
+
+  <div class="modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="dialog">
+      <div class="dialog-head">
+        <h2 id="cartTitle">Jouw winkelmand</h2>
+        <button class="close" onclick="closeCart()" aria-label="Sluiten">×</button>
       </div>
+      <div id="cartItems"></div>
+      <h3 id="cartTotal">Totaal: € 0,00</h3>
 
-      <div>
-        <label for="designDescription">Extra uitleg (optioneel)</label>
-        <textarea id="designDescription" name="uitleg_ontwerp" placeholder="Vertel iets meer over je idee, kleur of gebruik."></textarea>
-      </div>
-
-      <p id="designStatus" class="status" role="status" aria-live="polite"></p>
-      <button class="primary" id="designButton">Mijn ontwerpidee versturen</button>
-    </form>
-  </section>
-
-  <section class="info-section" id="contact">
-    <h2>Contact</h2>
-    <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met mij op.</p>
-    <div class="links">
-      <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
-      <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Mijn YouTube-kanaal</a>
-      <a href="#eigen-ontwerp">💡 Eigen ontwerpidee insturen</a>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <strong>3D Printplezier</strong><br>
-  Met plezier 3D-geprint door Mats Peeters<br>
-  <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a><br><br>
-  <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Bekijk mijn YouTube-kanaal</a>
-</footer>
-
-<div class="backdrop" id="aboutModal" onclick="if(event.target===this)closeAbout()">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
-    <div class="modal-head">
-      <h2 id="aboutTitle">👋 Over 3D Printplezier</h2>
-      <button class="close" type="button" onclick="closeAbout()" aria-label="Sluiten">✕</button>
-    </div>
-    <div class="about-content">
-      <h3>Hoi! Ik ben Mats Peeters.</h3>
-      <p>Ik ben 14 jaar en de maker achter 3D Printplezier! Ik vind het superleuk om zelf producten te bedenken, te ontwerpen en met mijn 3D-printer te maken.</p>
-      <p>Heb jij zelf een leuk idee voor een product? Dan kun je dat via mijn website insturen. Ik kijk graag of ik jouw idee kan maken.</p>
-      <p><strong>Bedankt voor je bezoek en veel winkelplezier! 😃</strong></p>
-      <a class="pill youtube" href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener noreferrer">▶️ Mijn YouTube-kanaal</a>
-      <br><br>
-      <button class="primary" type="button" onclick="goToDesign()">💡 Eigen ontwerpidee insturen</button>
+      <form id="orderForm">
+        <input type="hidden" name="Bestelling" id="orderDetails">
+        <input type="hidden" name="Producttotaal" id="orderTotal">
+        <div class="form-grid">
+          <div>
+            <label for="customerName">Naam *</label>
+            <input class="field" id="customerName" name="Naam" required>
+          </div>
+          <div>
+            <label for="customerEmail">E-mailadres *</label>
+            <input class="field" id="customerEmail" name="E-mailadres" type="email" required>
+          </div>
+          <div>
+            <label for="customerPhone">Telefoonnummer</label>
+            <input class="field" id="customerPhone" name="Telefoonnummer" type="tel">
+          </div>
+          <div>
+            <label for="customerPostcode">Postcode en plaats</label>
+            <input class="field" id="customerPostcode" name="Postcode en plaats">
+          </div>
+          <div class="full">
+            <label for="customerAddress">Adres</label>
+            <input class="field" id="customerAddress" name="Adres">
+          </div>
+          <div class="full">
+            <label for="customerNote">Opmerking of gewenste bezorging</label>
+            <textarea class="field" id="customerNote" name="Opmerking" rows="3"></textarea>
+          </div>
+        </div>
+        <p class="notice">Verzendkosten worden apart bevestigd. Je ontvangt bericht over de bestelling.</p>
+        <button class="btn" type="submit">Bestelling versturen</button>
+        <p id="orderStatus" class="notice" aria-live="polite"></p>
+      </form>
     </div>
   </div>
-</div>
-
-<div class="backdrop" id="cartModal" onclick="if(event.target===this)closeCart()">
-  <div class="modal">
-    <div class="modal-head">
-      <h2>Jouw winkelmand</h2>
-      <button class="close" type="button" onclick="closeCart()" aria-label="Sluiten">✕</button>
-    </div>
-
-    <div id="cartItems"></div>
-    <div class="total" id="total"></div>
-    <h3>Bestelling aanvragen</h3>
-
-    <form id="orderForm" action="https://formspree.io/f/xqpqyrlv"
-      method="POST" onsubmit="sendOrder(event)">
-      <div class="form-grid">
-        <input name="naam" placeholder="Naam" autocomplete="name" required>
-        <input name="email" type="email" placeholder="E-mailadres" autocomplete="email" required>
-        <input name="telefoon" type="tel" placeholder="Telefoonnummer (optioneel)" autocomplete="tel">
-        <input name="adres" placeholder="Straat en huisnummer" autocomplete="street-address" required>
-        <input name="postcode_plaats" placeholder="Postcode en woonplaats" autocomplete="postal-code" required>
-        <textarea name="opmerking" placeholder="Opmerking of gewenste bezorging"></textarea>
-      </div>
-
-      <input type="hidden" name="bestelling" id="orderDetails">
-      <input type="hidden" name="producttotaal" id="orderTotal">
-      <input type="hidden" name="_subject" value="Nieuwe bestelling - 3D Printplezier">
-
-      <p class="note">Verzendkosten vanaf € 3,95. De prijs van dierenprints begint bij € 4,00 en hangt af van de grootte.</p>
-      <p id="orderStatus" class="status" role="status" aria-live="polite"></p>
-      <button class="primary" id="orderButton">Bestelling per e-mail versturen</button>
-    </form>
-  </div>
-</div>
-
-<div class="added-popup" id="addedPopup" onclick="if(event.target===this)closeAddedPopup()">
-  <div class="added-box">
-    <div style="font-size:40px;color:#159b67">✓</div>
-    <h2>Toegevoegd aan je winkelwagen!</h2>
-    <p>Het product staat nu in je winkelmandje.</p>
-    <div class="added-actions">
-      <button class="primary" type="button" onclick="viewCart()">🛒 Winkelwagen bekijken</button>
-      <button class="continue-button" type="button" onclick="closeAddedPopup()">Verder winkelen</button>
-    </div>
-  </div>
-</div>
 
 <script>
-'use strict';
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqpqyrlv";
+const euro = n => new Intl.NumberFormat("nl-NL", {
+  style:"currency",
+  currency:"EUR"
+}).format(n);
 
-let products = [
+const products = [
   {
-    id:1,
-    category:'Huishouden',
-    name:'HomeWizard-schermophanging',
-    price:10.00,
-    image:'./images/homewizard-schermophanging.png',
-    desc:'Schermophanging voor het HomeWizard-scherm.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"homewizard",
+    name:"HomeWizard-schermophanging",
+    price:10,
+    category:"Huishouden",
+    desc:"3D-geprinte ophanging voor een HomeWizard-scherm.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🏠",
+    image:"./images/homewizard-schermophanging.png"
   },
   {
-    id:2,
+    id:"graafschap",
+    name:"De Graafschap-logo",
+    price:4,
     category:"Voetbal- en clublogo's",
-    name:'De Graafschap-logo',
-    price:4.00,
-    image:'./images/de-graafschap-logo.jpg',
-    desc:'3D-geprint De Graafschap-clublogo.',
-    dimensions:'Afmetingen niet opgegeven'
+    desc:"3D-geprint clublogo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"⚽",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbkmoqEqZ7QUQYB-vaH4rzieJNJ-EifsDLDqPnyjMDv01367YIa2qU8G_RlW0o1xuB8STWovajFL0TKrzfNaaXZKh1mWVIk0RhkkFwQ0RUpmzctaVc5RIcT9gMrYf8rJ14IycAM-dyl0mh2Ffg=s2048"
   },
   {
-    id:3,
+    id:"telstar-logo",
+    name:"Telstar-logo groot",
+    price:4,
     category:"Voetbal- en clublogo's",
-    name:'Telstar-logo groot',
-    price:4.00,
-    image:'./images/telstar-logo-groot.png',
-    desc:'Groot 3D-geprint Telstar-logo.',
-    dimensions:'Ongeveer 13 × 10 cm'
+    desc:"Groot 3D-geprint Telstar-logo.",
+    size:"Ongeveer 13 × 10 cm",
+    emoji:"⚽",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbnGVq-h0fUzAD-ML4mf8Zm6__ItvFNkFsNj-_yuIYu0OuqGCc6nH6LKym2b8wArqg1fE0dAzflQKGX31fzaf31cA3PLGza2qeOTnYT9SZixUpDqqhpFMuoIVjDkxK8WM536L6VaLQLzPvdd7fiU=s2048"
   },
   {
-    id:4,
+    id:"vsv",
+    name:"V.S.V.-logo",
+    price:4,
     category:"Voetbal- en clublogo's",
-    name:'V.S.V.-logo',
-    price:4.00,
-    image:'./images/vsv-logo.jpg',
-    desc:'3D-geprint V.S.V.-clublogo.',
-    dimensions:'Afmetingen niet opgegeven'
+    desc:"3D-geprint V.S.V.-clublogo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"⚽",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapblddCOVu0JMYWmB7ulVglfgq2dKjwfBPtIFFVPx0ELDQTGU26nsjo0zYvWmsx7yi5sTMYLyOwxgehPUoL7nuz8CzBbtrz1KBggG-u9lgWqjngd8m4UcxZ78CiHTOrtlcgLNECBwCT_pIpKIvGvU=s2048"
   },
   {
-    id:5,
-    category:'Halloween-sleutelhangers',
-    name:'Spookje',
-    price:1.00,
-    image:'./images/sleutelhanger-spookje.jpg',
-    desc:'Halloween-sleutelhanger in de vorm van een spookje.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"stormvogels",
+    name:"Stormvogels-logo",
+    price:4,
+    category:"Voetbal- en clublogo's",
+    desc:"3D-geprint Stormvogels-clublogo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"⚽",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbkTOTOUVJhG8UoDv_YbtxcIOKtXZhm5kF7cHEw0f-1DNhMLjZRuSmW-SwB2DnfPVmZhbUd6VLnfhqkH8kIUqid0gmNPvIFtIrYEKketLm5P89HUXhz0y4p3aNU95TQocb6MIjW3uRrs4JmY4Opg=s2048"
   },
   {
-    id:6,
-    category:'Halloween-sleutelhangers',
-    name:'Pompoen',
-    price:1.00,
-    image:'./images/sleutelhanger-pompoen.jpg',
-    desc:'Halloween-sleutelhanger in de vorm van een pompoen.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"spookje",
+    name:"Halloween spookje",
+    price:1,
+    category:"Halloween",
+    desc:"Klein 3D-geprint spookje.",
+    size:"Afmetingen op aanvraag",
+    emoji:"👻",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbkSwF5k8yWHCBQtx6iAI63fQSLn8SI4FEj6WmapwYZ3YjW163CGxZA4MfJyOikEFbApD4BUEdKswVrUG4gmu-F3L5whTSHy0rs6xkA7m4_BbR34eeq5hJycxVy39JQAzvBZPsr9qXY7oYWqlijK=s2048"
   },
   {
-    id:7,
-    category:'Halloween-sleutelhangers',
-    name:'Spookje met pompoen',
-    price:1.00,
-    image:'./images/halloween-voorbeelden.jpg',
-    desc:'Halloween-sleutelhanger met spookje en pompoen.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"pompoen",
+    name:"Halloween pompoen",
+    price:1,
+    category:"Halloween",
+    desc:"Klein 3D-geprint pompoentje.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🎃",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbnDENu-bpe0BXmGNE-iOd8qVjEMWU4UtJjXSMfVEDMQf-e2-P_qFD6zB6SQEjwMRaUrVLeokZ1yiJ76t7Iwel6nPUgV9cOJ_VnvKfaH2yZ5B-pYHJ-T3t265q27GvH_d487gZsUeSkGyVoLUg=s2048"
   },
   {
-    id:8,
-    category:'Sleutelhangers',
-    name:'Telstar-sleutelhanger',
-    price:2.50,
-    image:'./images/telstar-logo-video.jpg',
-    desc:'Sleutelhanger met Telstar-logo.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"spook-pompoen",
+    name:"Halloween spookje met pompoen",
+    price:1,
+    category:"Halloween",
+    desc:"3D-geprint spookje met pompoen.",
+    size:"Afmetingen op aanvraag",
+    emoji:"👻",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapblTMKSBcxFaR67z9LwQRiqkKE9aSZayzr5EKeGQC8ix-gN9aaJgSdCxfAi16VPtrA8qleN7LxSNRqoEsCuPd5u0JxwuUgvdolYHLoTPa_3ol6zjyIOESo7aD5iv9UyldlUfQDs-Qjp9Iuo9vFDM=s2048"
   },
   {
-    id:9,
-    category:'Sleutelhangers',
-    name:'Skoda-sleutelhanger',
-    price:2.50,
-    image:'./images/skoda-sleutelhanger.jpg',
-    desc:'Sleutelhanger met Skoda-logo.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"telstar-sleutelhanger",
+    name:"Telstar-sleutelhanger",
+    price:2.5,
+    category:"Sleutelhangers",
+    desc:"3D-geprinte sleutelhanger met Telstar-logo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🔑",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbnfyY7T4RBslt1_vjJ14VTaT0pkGcxN8LgV2bmOkYRYUAwyvEhZYYeEW6zOg5uVbDW_SbXUz9m544rhcH6GiAnLJwMQ0rRcNTm-c_JZZCFoeVnsz62IwsKNiYNYDVZtRRC-M_24vYjG1RfBOle-=s2048"
   },
   {
-    id:10,
-    category:'Sleutelhangers',
-    name:'Halloween-sleutelhanger',
-    price:2.50,
-    image:'./images/halloween-sleutelhanger.jpg',
-    desc:'Halloween-sleutelhanger.',
-    dimensions:'Afmetingen niet opgegeven'
+    id:"skoda",
+    name:"Skoda-sleutelhanger",
+    price:2.5,
+    category:"Sleutelhangers",
+    desc:"3D-geprinte sleutelhanger met Skoda-logo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🔑",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbnrOWONQJKvdgkZCrm-LZB_Q7X5EQMU2k8ogF-SmtfeB1Voqa0D7k_JtUI6NOWpUw3BylXXyv6uEx8H3NoTfmWFbns9GTH_JodBydx7VGPh7lPV5OMiQZiuoSwqhL9CYFLSa-yGr8AQVvrEEA=s2048"
   },
   {
-    id:11,
-    category:'Sleutelhangers',
-    name:'Sleutelhanger met eigen naam',
-    price:2.50,
-    image:'./images/sleutelhanger-eigen-naam.jpg',
-    desc:'Sleutelhanger met een naam naar keuze.',
-    dimensions:'Naam doorgeven bij opmerkingen van de bestelling'
+    id:"audi",
+    name:"Audi-sleutelhanger",
+    price:2.5,
+    category:"Sleutelhangers",
+    desc:"3D-geprinte sleutelhanger met Audi-logo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🔑",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbnCCpMRvUSJnt_aru1lLaG1N566d7EVXoqC9m3gjse2nnA8NzqxlKSpojFARk7rLOWfBMTT582-KaEGoyF37ZijZPf8EiBl4kgrmKCAcIutaIqE_GqsLP4LtBjCPSPgf6c5rV6D1G1THUvi50GP=s2048"
   },
   {
-    id:12,
-    category:'Dierenprints',
-    name:'Edelhert',
-    price:4.00,
-    image:'./images/edelhert.jpg',
-    desc:'3D-geprinte dierenprint. De prijs hangt af van de gekozen grootte.',
-    dimensions:'Prijs vanaf € 4,00; grootte in overleg'
+    id:"suzuki",
+    name:"Suzuki-sleutelhanger",
+    price:2.5,
+    category:"Sleutelhangers",
+    desc:"3D-geprinte sleutelhanger met Suzuki-logo.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🔑",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbnJumAb3mQced1lv6fhNHsqnzNaZkwBY-o9CiLvVC2ziwDCy0vii4YRMTZBRWjyKN7CjCMB8IvTovPsgrOZ5RfHYYz4q0xQEUrtRnK6ElLCq1BRMA3E_waduOUhEFdkhCSq4bRvdaSRwRVThg=s2048"
   },
   {
-    id:13,
-    category:'Dierenprints',
-    name:'Uil',
-    price:4.00,
-    image:'./images/uil.jpg',
-    desc:'3D-geprinte dierenprint. De prijs hangt af van de gekozen grootte.',
-    dimensions:'Prijs vanaf € 4,00; grootte in overleg'
+    id:"halloween-sleutelhanger",
+    name:"Halloween-sleutelhanger",
+    price:2.5,
+    category:"Sleutelhangers",
+    desc:"3D-geprinte Halloween-sleutelhanger.",
+    size:"Afmetingen op aanvraag",
+    emoji:"🎃",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbn2LMtx7_-3XK0ZfYi3rqVOin8C2rmFV5NcLSMX63cmjHR83_pSqTIa53sCdVMxP2W6zrnLLEewTQTrR0TJH0WxGBR_0nndmlTtFADDDRPaGsrT3s_1hwRVepfb78ZNBVXzFyXi8KkUDNZyfH3p=s2048"
   },
   {
-    id:14,
-    category:'Dierenprints',
-    name:'Labradoodle',
-    price:4.00,
-    image:'./images/labradoodle.jpg',
-    desc:'3D-geprinte dierenprint. De prijs hangt af van de gekozen grootte.',
-    dimensions:'Prijs vanaf € 4,00; grootte in overleg'
+    id:"eigen-naam",
+    name:"Sleutelhanger met eigen naam",
+    price:2.5,
+    category:"Sleutelhangers",
+    desc:"Een sleutelhanger met de naam die jij zelf invult.",
+    size:"Lengte afhankelijk van de naam; hoogte op aanvraag",
+    emoji:"✍️",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapblQFkp8H2l8kpRFzRF0D_WCYMBytbxXSHX981HQLSVDG97Y-oZkdP5faeuf--pBc4Egtjzkfz3ZTp7VHon8juh36I831PjU2K9DsfBgc96-nvYvSwARre2J-r-44Z3caliSFGLDTQ3mtm52jQ=s2048",
+    customName:true
+  },
+  {
+    id:"edelhert",
+    name:"Edelhert",
+    price:4,
+    category:"Dierenprints",
+    desc:"3D-geprinte dierenprint. Prijs vanaf € 4,00, afhankelijk van de grootte.",
+    size:"Afmetingen en prijs afhankelijk van gekozen formaat",
+    emoji:"🦌",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapblbZpiapIAHn2gSJz2xBxg9wSbepxav9Mei8OirJMlIkhm24cwPtpToVFxUxF-Hl3r9_meA29PDPvP7gGEuCtZtnLu_hMT396CkMo8h0wRPBe7MBn5Z8YD_ljuMarqeMb5y_t_kuoGwnvWUWOg5=s2048"
+  },
+  {
+    id:"uil",
+    name:"Uil",
+    price:4,
+    category:"Dierenprints",
+    desc:"3D-geprinte uil. Prijs vanaf € 4,00, afhankelijk van de grootte.",
+    size:"Afmetingen en prijs afhankelijk van gekozen formaat",
+    emoji:"🦉",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbkstflZnkgDa6XutYy6y6WcQn7de7uutI8A91m3vUjy_eV3Jn9cDaL6vseRTSFJFLlEo4GRou-JYScPCPtOeOs_ykbxQP0DFs11suRyJmLVr3-vXa3c26crfEpL8zLtB9Cg0JMOlBIPH9mP6Sc6=s2048"
+  },
+  {
+    id:"labradoodle",
+    name:"Labradoodle",
+    price:4,
+    category:"Dierenprints",
+    desc:"3D-geprinte Labradoodle. Prijs vanaf € 4,00, afhankelijk van de grootte.",
+    size:"Afmetingen en prijs afhankelijk van gekozen formaat",
+    emoji:"🐶",
+    image:"https://docs.google.com/u/0/forms-images-rt/AMfapbkstflZnkgDa6XutYy6y6WcQn7de7uutI8A91m3vUjy_eV3Jn9cDaL6vseRTSFJFLlEo4GRou-JYScPCPtOeOs_ykbxQP0DFs11suRyJmLVr3-vXa3c26crfEpL8zLtB9Cg0JMOlBIPH9mP6Sc6=s2048"
   }
 ];
 
 let cart = [];
 
-const colors = [
-  'Zwart','Wit','Rood','Blauw','Groen',
-  'Geel','Oranje','Paars','Roze'
-];
-
-const euro = n => new Intl.NumberFormat('nl-NL', {
-  style:'currency',
-  currency:'EUR'
-}).format(Number(n) || 0);
-
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
-}[c]));
-
-function openAbout() {
-  document.getElementById('aboutModal').classList.add('show');
-}
-
-function closeAbout() {
-  document.getElementById('aboutModal').classList.remove('show');
-}
-
-function goToDesign() {
-  closeAbout();
-  document.getElementById('eigen-ontwerp').scrollIntoView({
-    behavior:'smooth'
+function renderCategories(){
+  const sel = document.getElementById("category");
+  [...new Set(products.map(p => p.category))].forEach(c => {
+    const o = document.createElement("option");
+    o.value = c;
+    o.textContent = c;
+    sel.appendChild(o);
   });
 }
 
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') {
-    closeAbout();
-    closeCart();
-    closeAddedPopup();
-  }
-});
-
-function categoryName(category) {
-  const original = String(category || '').trim();
-  const key = original.toLowerCase();
-
-  const names = {
-    'kerst':'Kerst',
-    'christmas':'Kerst',
-    'gadget':'Gadgets',
-    'gadgets':'Gadgets',
-    'organizer':'Organizers',
-    'organizers':'Organizers',
-    'organiser':'Organizers',
-    'organisers':'Organizers'
-  };
-
-  return names[key] || (original
-    ? original.charAt(0).toUpperCase() + original.slice(1)
-    : 'Overige producten');
-}
-
-const categoryOrder = [
-  'Huishouden',
-  "Voetbal- en clublogo's",
-  'Halloween-sleutelhangers',
-  'Sleutelhangers',
-  'Dierenprints'
-];
-
-function sortCategories(a,b) {
-  return categoryOrder.indexOf(a) - categoryOrder.indexOf(b);
-}
-
-function renderCategories() {
-  const sel = document.getElementById('category');
-  const current = sel.value;
-
-  const cats = [...new Set(
-    products.map(p => categoryName(p.category))
-  )].sort(sortCategories);
-
-  sel.innerHTML = '<option value="">Alle categorieën</option>' +
-    cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
-
-  if (cats.includes(current)) sel.value = current;
-}
-
-function renderProducts() {
-  const target = document.getElementById('products');
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  const cat = document.getElementById('category').value;
-
-  const list = products.filter(p =>
-    (!cat || categoryName(p.category) === cat) &&
-    (`${p.name || ''} ${p.desc || ''} ${categoryName(p.category)}`)
-      .toLowerCase().includes(q)
+function renderProducts(){
+  const q = document.getElementById("search").value.toLowerCase();
+  const cat = document.getElementById("category").value;
+  const filtered = products.filter(p =>
+    (!cat || p.category === cat) &&
+    [p.name,p.desc,p.category].join(" ").toLowerCase().includes(q)
   );
 
-  if (!list.length) {
-    target.innerHTML = '<div class="empty">Geen producten gevonden. Probeer een andere zoekterm.</div>';
+  const host = document.getElementById("products");
+  host.innerHTML = "";
+
+  if(!filtered.length){
+    host.innerHTML = "<p>Geen producten gevonden.</p>";
     return;
   }
 
-  const groups = {};
+  filtered.forEach(p => {
+    const card = document.createElement("article");
+    card.className = "product";
 
-  list.forEach(p => {
-    const name = categoryName(p.category);
-    if (!groups[name]) groups[name] = [];
-    groups[name].push(p);
-  });
+    const photo = document.createElement("div");
+    photo.className = "photo";
 
-  target.innerHTML = Object.keys(groups)
-    .sort(sortCategories)
-    .map(category => {
-      const cards = groups[category].map(p => {
-        const id = Number(p.id);
+    const img = document.createElement("img");
+    img.src = p.image;
+    img.alt = p.name;
+    img.loading = "lazy";
+    img.onerror = () => {
+      photo.innerHTML = '<span class="fallback">' + p.emoji + '</span>';
+    };
+    photo.appendChild(img);
 
-        const visual = p.image
-          ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="placeholder" style="display:none">🖨️</div>`
-          : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
+    const body = document.createElement("div");
+    body.className = "pbody";
 
-        const priceText = category === 'Dierenprints'
-          ? 'Vanaf ' + euro(p.price)
-          : euro(p.price);
+    const h = document.createElement("h3");
+    h.textContent = p.name;
 
-        return `
-          <article class="product">
-            ${visual}
-            <div class="product-body">
-              <h3>${esc(p.name || '3D-geprint product')}</h3>
-              <div class="price">${priceText}</div>
-              <p class="desc">${esc(p.desc || '')}</p>
-              <p class="eco">🌱 3D-geprint product.</p>
-              <p class="dimensions">📏 ${esc(p.dimensions || 'Afmetingen nog niet bekend')}</p>
-              <label for="color-${id}">Kies kleur filament:</label>
-              <select id="color-${id}">
-                ${colors.map(c => `<option>${c}</option>`).join('')}
-              </select>
-              <button class="add" type="button" onclick="addToCart(${id})">
-                In winkelmand
-              </button>
-            </div>
-          </article>`;
-      }).join('');
+    const d = document.createElement("p");
+    d.className = "desc";
+    d.textContent = p.desc;
 
-      return `
-        <section class="category-section">
-          <h2 class="category-heading">${esc(category)}</h2>
-          <div class="grid">${cards}</div>
-        </section>`;
-    }).join('');
-}
+    const size = document.createElement("div");
+    size.className = "dimensions";
+    size.textContent = "📏 " + p.size;
 
-function addToCart(id) {
-  const p = products.find(x => Number(x.id) === id);
-  if (!p) return;
+    body.append(h,d,size);
 
-  const colorSelect = document.getElementById('color-' + id);
-  const color = colorSelect ? colorSelect.value : 'Zwart';
-
-  const found = cart.find(x =>
-    Number(x.id) === id && x.color === color
-  );
-
-  if (found) found.qty++;
-  else cart.push({...p, color, qty:1});
-
-  updateCart();
-  showAddedPopup();
-}
-
-function updateCart() {
-  document.getElementById('count').textContent =
-    cart.reduce((s,x) => s + x.qty, 0);
-
-  document.getElementById('cartItems').innerHTML = cart.length
-    ? cart.map((x,i) => `
-        <div class="cart-row">
-          <div>
-            <strong>${esc(x.name)}</strong>
-            <small>${esc(x.color)} • ${x.qty} × ${euro(x.price)}</small>
-          </div>
-          <div>
-            ${euro(Number(x.price) * x.qty)}<br>
-            <button class="remove" type="button" onclick="removeItem(${i})">
-              Verwijderen
-            </button>
-          </div>
-        </div>
-      `).join('')
-    : '<p>Je winkelmand is nog leeg.</p>';
-
-  document.getElementById('total').textContent =
-    'Producttotaal: ' +
-    euro(cart.reduce((s,x) =>
-      s + (Number(x.price) || 0) * x.qty, 0));
-}
-
-function removeItem(i) {
-  cart.splice(i,1);
-  updateCart();
-}
-
-function openCart() {
-  updateCart();
-  document.getElementById('cartModal').classList.add('show');
-}
-
-function closeCart() {
-  document.getElementById('cartModal').classList.remove('show');
-}
-
-function showAddedPopup() {
-  document.getElementById('addedPopup').classList.add('show');
-}
-
-function closeAddedPopup() {
-  document.getElementById('addedPopup').classList.remove('show');
-}
-
-function viewCart() {
-  closeAddedPopup();
-  openCart();
-}
-
-async function sendOrder(e) {
-  e.preventDefault();
-
-  if (!cart.length) {
-    alert('Je winkelmand is leeg.');
-    return;
-  }
-
-  const form = e.target;
-  const button = document.getElementById('orderButton');
-  const status = document.getElementById('orderStatus');
-
-  document.getElementById('orderDetails').value =
-    cart.map(x =>
-      `${x.qty}x ${x.name} (${x.color}) - ${euro(x.price * x.qty)}`
-    ).join('\n');
-
-  document.getElementById('orderTotal').value =
-    euro(cart.reduce((s,x) =>
-      s + Number(x.price) * x.qty, 0));
-
-  button.disabled = true;
-  button.textContent = 'Bestelling versturen…';
-  status.textContent = '';
-
-  try {
-    const response = await fetch(form.action, {
-      method:'POST',
-      body:new FormData(form),
-      headers:{Accept:'application/json'}
-    });
-
-    if (!response.ok) throw new Error('Bestelling versturen is niet gelukt.');
-
-    status.textContent = 'Bedankt! Je bestelling is verstuurd. Ik neem zo snel mogelijk contact met je op.';
-    status.className = 'status success';
-    cart = [];
-    updateCart();
-    form.reset();
-
-  } catch (error) {
-    status.textContent = 'Versturen is niet gelukt. Probeer het opnieuw of mail matspeeters@ziggo.nl.';
-    status.className = 'status error';
-    console.error(error);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Bestelling per e-mail versturen';
-  }
-}
-
-function previewDesignPhoto(event) {
-  const file = event.target.files[0];
-  const preview = document.getElementById('designPreview');
-
-  if (!file) {
-    preview.classList.remove('show');
-    return;
-  }
-
-  if (!file.type.startsWith('image/')) {
-    event.target.value = '';
-    alert('Kies een afbeeldingsbestand.');
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    preview.src = reader.result;
-    preview.classList.add('show');
-  };
-  reader.readAsDataURL(file);
-}
-
-async function sendDesign(e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const button = document.getElementById('designButton');
-  const status = document.getElementById('designStatus');
-  const file = document.getElementById('designPhoto').files[0];
-
-  if (!file) {
-    status.textContent = 'Voeg eerst een foto toe.';
-    status.className = 'status error';
-    return;
-  }
-
-  if (file.size > 25 * 1024 * 1024) {
-    status.textContent = 'De foto is te groot. Maximaal 25 MB.';
-    status.className = 'status error';
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = 'Versturen…';
-
-  try {
-    const response = await fetch(form.action, {
-      method:'POST',
-      body:new FormData(form),
-      headers:{Accept:'application/json'}
-    });
-
-    if (!response.ok) {
-      throw new Error('Controleer of bestandsuploads bij Formspree beschikbaar zijn.');
+    if(p.customName){
+      const wrap = document.createElement("div");
+      wrap.className = "name-field";
+      wrap.innerHTML = '<label>Welke naam wil je op de sleutelhanger?</label><input class="field custom-name" maxlength="20" placeholder="Vul hier je naam in" aria-label="Gewenste naam">';
+      body.appendChild(wrap);
     }
 
-    status.textContent = 'Bedankt! Je ontwerpidee is verstuurd.';
-    status.className = 'status success';
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent = "Vanaf " + euro(p.price);
+    body.appendChild(price);
+
+    if(p.customName){
+      const inp = body.querySelector(".custom-name");
+      inp.addEventListener("input", () => {
+        body.querySelector(".name-field").classList.toggle("show", !!inp.value.trim());
+      });
+    }
+
+    const add = document.createElement("button");
+    add.className = "btn";
+    add.textContent = "Toevoegen aan winkelmand";
+    add.onclick = () => addToCart(
+      p.id,
+      body.querySelector(".custom-name")?.value.trim() || ""
+    );
+
+    body.appendChild(add);
+    card.append(photo,body);
+    host.appendChild(card);
+  });
+}
+
+function addToCart(id,customName=""){
+  const p = products.find(x => x.id === id);
+
+  if(p.customName && !customName){
+    alert("Vul eerst de gewenste naam in.");
+    return;
+  }
+
+  const existing = cart.find(x => x.id === id && x.customName === customName);
+
+  if(existing){
+    existing.qty++;
+  }else{
+    cart.push({...p,qty:1,customName});
+  }
+
+  updateCart();
+  alert("Toegevoegd aan je winkelmand!");
+}
+
+function updateCart(){
+  document.getElementById("count").textContent =
+    cart.reduce((s,x) => s + x.qty,0);
+
+  const host = document.getElementById("cartItems");
+  host.innerHTML = "";
+
+  cart.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "cart-line";
+
+    const info = document.createElement("div");
+    info.textContent = item.name + (item.customName ? " — Naam: " + item.customName : "");
+
+    const small = document.createElement("small");
+    small.textContent = item.qty + " × " + euro(item.price);
+    info.appendChild(small);
+
+    const remove = document.createElement("button");
+    remove.textContent = "Verwijderen";
+    remove.onclick = () => {
+      cart = cart.filter(x => x !== item);
+      updateCart();
+    };
+
+    row.append(info,remove);
+    host.appendChild(row);
+  });
+
+  const total = cart.reduce((s,x) => s + x.price * x.qty,0);
+  document.getElementById("cartTotal").textContent = "Producttotaal: " + euro(total);
+
+  document.getElementById("orderDetails").value = cart.map(x =>
+    `${x.qty}x ${x.name}${x.customName ? " (naam: " + x.customName + ")" : ""} - ${euro(x.price*x.qty)}`
+  ).join("\n");
+
+  document.getElementById("orderTotal").value = euro(total);
+}
+
+function openCart(){
+  document.getElementById("cartModal").classList.add("open");
+  updateCart();
+}
+
+function closeCart(){
+  document.getElementById("cartModal").classList.remove("open");
+}
+
+document.getElementById("search").addEventListener("input",renderProducts);
+document.getElementById("category").addEventListener("change",renderProducts);
+
+document.getElementById("cartModal").addEventListener("click",e => {
+  if(e.target.id === "cartModal") closeCart();
+});
+
+document.addEventListener("keydown",e => {
+  if(e.key === "Escape") closeCart();
+});
+
+async function sendForm(form,statusId){
+  const status = document.getElementById(statusId);
+  status.textContent = "Versturen…";
+
+  try{
+    const response = await fetch(FORMSPREE_ENDPOINT,{
+      method:"POST",
+      body:new FormData(form),
+      headers:{Accept:"application/json"}
+    });
+
+    if(!response.ok) throw new Error("Formulier kon niet worden verstuurd.");
+
+    status.textContent = "Bedankt! Je bericht is verstuurd.";
     form.reset();
 
-    document.getElementById('designPreview').removeAttribute('src');
-    document.getElementById('designPreview').classList.remove('show');
-
-  } catch (error) {
-    status.textContent =
-      error.message || 'Er ging iets mis. Probeer het opnieuw.';
-    status.className = 'status error';
-    console.error(error);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Mijn ontwerpidee versturen';
+    if(form.id === "orderForm"){
+      cart = [];
+      updateCart();
+    }
+  }catch(err){
+    status.textContent = "Versturen is niet gelukt. Probeer het opnieuw of mail naar matspeeters@ziggo.nl.";
   }
 }
 
-/* Producten staan nu rechtstreeks in index.html.
-   Er wordt geen products.json meer opgehaald. */
+document.getElementById("orderForm").addEventListener("submit",e => {
+  e.preventDefault();
+
+  if(!cart.length){
+    document.getElementById("orderStatus").textContent = "Je winkelmand is nog leeg.";
+    return;
+  }
+
+  sendForm(e.target,"orderStatus");
+});
+
+document.getElementById("ideaForm").addEventListener("submit",e => {
+  e.preventDefault();
+  sendForm(e.target,"ideaStatus");
+});
+
 renderCategories();
 renderProducts();
 updateCart();
 </script>
-
 </body>
 </html>
