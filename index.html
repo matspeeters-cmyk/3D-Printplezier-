@@ -1,1193 +1,1066 @@
-```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Leuke zelfgemaakte 3D-geprinte producten bij 3D Printplezier van Mats Peeters.">
+<title>3D Printplezier | 3D-geprinte producten</title>
 
-      <div>
-        <label for="designPrice">Eventuele gewenste prijs (optioneel)</label>
-        <input id="designPrice" name="gewenste_prijs" type="number"
-          min="0" step="0.01" placeholder="Bijv. 10,00">
-        <small>Dit is een richtprijs. Ik laat je weten wat het ontwerp daadwerkelijk kost.</small>
-      </div>
+<style>
+:root {
+  --navy:#171717;
+  --green:#00ae75;
+  --green-dark:#008f60;
+  --ink:#202124;
+  --muted:#74777d;
+  --bg:#f1f2f3;
+  --line:#e5e6e8;
+}
 
-      <div>
-        <label for="designDescription">Extra uitleg (optioneel)</label>
-        <textarea id="designDescription" name="uitleg_ontwerp"
-          placeholder="Vertel iets meer over je idee, bijvoorbeeld de kleur of waarvoor je het wilt gebruiken."></textarea>
-      </div>
+* { box-sizing:border-box; }
 
-      <p class="note">* Verplichte velden.</p>
-      <p id="designStatus" class="status" role="status" aria-live="polite"></p>
+html { scroll-behavior:smooth; }
 
-      <button class="primary design-submit" id="designButton" type="submit">
-        Mijn ontwerpidee versturen
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:15px/1.5 Arial,sans-serif;
+}
+
+button,input,select,textarea { font:inherit; }
+
+.topline {
+  background:#080808;
+  color:#e7edf7;
+  text-align:center;
+  padding:9px 12px;
+  font-size:12px;
+}
+
+header {
+  background:var(--navy);
+  color:white;
+  padding:18px 20px;
+}
+
+.header-inner {
+  max-width:1150px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand h1 {
+  margin:0;
+  font-size:25px;
+  line-height:1.2;
+}
+
+.brand p {
+  margin:4px 0 0;
+  color:#c9c9c9;
+  font-size:13px;
+}
+
+.header-actions {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+button {
+  cursor:pointer;
+  border:0;
+}
+
+.cart-button {
+  background:var(--green);
+  color:#071b14;
+  padding:11px 15px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+.cart-button:hover { background:#35d69f; }
+
+main {
+  max-width:1150px;
+  margin:auto;
+  padding:22px 18px 45px;
+}
+
+.hero {
+  background:linear-gradient(120deg,#101010,#292929);
+  color:white;
+  border-radius:15px;
+  padding:30px 25px;
+  margin-bottom:22px;
+}
+
+.hero h2 {
+  margin:0 0 7px;
+  font-size:27px;
+}
+
+.hero p {
+  margin:0;
+  color:#dedede;
+}
+
+.toolbar {
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+  flex-wrap:wrap;
+}
+
+.toolbar input,
+.toolbar select {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:12px;
+  min-width:190px;
+  flex:1;
+}
+
+.section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin:25px 0 14px;
+}
+
+.section-heading h2 {
+  margin:0;
+  font-size:22px;
+}
+
+.product-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:17px;
+}
+
+.product-card {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 3px 12px rgba(0,0,0,.045);
+}
+
+.product-image {
+  height:205px;
+  background:#f7f7f7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.product-image img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:10px;
+}
+
+.product-placeholder {
+  font-size:58px;
+}
+
+.product-info {
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.product-info h3 {
+  margin:0 0 6px;
+  font-size:17px;
+}
+
+.product-category {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.product-description {
+  color:#555;
+  font-size:13px;
+  margin:0 0 12px;
+  flex:1;
+}
+
+.product-dimensions {
+  font-size:12px;
+  color:#666;
+  margin-bottom:9px;
+}
+
+.product-price {
+  font-size:19px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.product-controls {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.product-controls select,
+.product-controls input {
+  width:100%;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:white;
+}
+
+.add-button,
+.primary-button {
+  background:var(--green);
+  color:#071b14;
+  padding:11px 14px;
+  border-radius:8px;
+  font-weight:700;
+}
+
+.add-button:hover,
+.primary-button:hover {
+  background:#35d69f;
+}
+
+.secondary-button {
+  background:#e9ecef;
+  color:#202124;
+  padding:10px 13px;
+  border-radius:8px;
+  font-weight:700;
+}
+
+.empty-message {
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  color:#666;
+  text-align:center;
+  grid-column:1/-1;
+}
+
+.info-section {
+  margin-top:35px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:22px;
+}
+
+.info-section h2 {
+  margin:0 0 10px;
+}
+
+.info-section p { margin:7px 0; }
+
+.info-section a {
+  color:var(--green-dark);
+  font-weight:700;
+}
+
+.footer {
+  background:#101010;
+  color:#eee;
+  text-align:center;
+  padding:25px 15px;
+  font-size:13px;
+}
+
+.footer p { margin:5px 0; }
+
+.modal-backdrop {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(0,0,0,.65);
+  padding:18px;
+  overflow:auto;
+}
+
+.modal-backdrop.open {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.modal {
+  background:white;
+  width:100%;
+  max-width:600px;
+  margin:30px auto;
+  border-radius:14px;
+  padding:22px;
+  position:relative;
+}
+
+.modal h2 { margin:0 35px 16px 0; }
+
+.close-button {
+  position:absolute;
+  right:15px;
+  top:13px;
+  background:#eee;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  font-size:20px;
+}
+
+.cart-list {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.cart-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid var(--line);
+  padding:10px 0;
+}
+
+.cart-item small {
+  display:block;
+  color:#666;
+}
+
+.cart-item button {
+  background:#ffe6e6;
+  color:#a40000;
+  padding:7px 10px;
+  border-radius:7px;
+}
+
+.cart-total {
+  font-size:20px;
+  font-weight:700;
+  text-align:right;
+  margin:15px 0;
+}
+
+.form-field {
+  margin:12px 0;
+}
+
+.form-field label {
+  display:block;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width:100%;
+  padding:11px;
+  border:1px solid #d8dadd;
+  border-radius:8px;
+  background:white;
+}
+
+.form-field textarea {
+  min-height:90px;
+  resize:vertical;
+}
+
+.form-note {
+  font-size:12px;
+  color:#666;
+  margin-top:9px;
+}
+
+.modal-actions {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.modal-actions button { flex:1; }
+
+.category-title {
+  margin:25px 0 12px;
+  padding-bottom:7px;
+  border-bottom:2px solid var(--green);
+  font-size:20px;
+}
+
+.hidden { display:none !important; }
+
+@media(max-width:760px) {
+  .product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .header-inner { align-items:flex-start; }
+  .product-image { height:175px; }
+}
+
+@media(max-width:520px) {
+  .product-grid { grid-template-columns:1fr; }
+  .header-inner { flex-direction:column; }
+  .brand h1 { font-size:23px; }
+  main { padding:15px 12px 35px; }
+  .hero { padding:23px 18px; }
+  .hero h2 { font-size:23px; }
+  .product-image { height:220px; }
+  .toolbar { flex-direction:column; }
+  .toolbar input,.toolbar select { width:100%; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topline">
+  📦 Verzending vanaf € 3,95 (afhankelijk van grootte) •
+  <strong>Eigen bezorging in IJmuiden en omgeving</strong>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <h1>3D Printplezier</h1>
+      <p>Uw 3D-geprinte spullen voor een lage prijs</p>
+    </div>
+    <div class="header-actions">
+      <button class="cart-button" onclick="openCart()">
+        🛒 Winkelmand <span id="count">0</span>
       </button>
-    </form>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h2>📢 Ontdek onze collectie!</h2>
+    <p>Leuke 3D-prints, met plezier gemaakt.</p>
   </section>
+
+  <div class="toolbar">
+    <input
+      type="search"
+      id="search"
+      placeholder="⌕ Zoek een 3D-print..."
+      oninput="renderProducts()"
+    >
+    <select id="categoryFilter" onchange="renderProducts()">
+      <option value="">Alle categorieën</option>
+    </select>
+  </div>
+
+  <div class="section-heading">
+    <h2>Onze collectie</h2>
+  </div>
+
+  <div id="productGrid" class="product-grid">
+    <div class="empty-message">Producten laden…</div>
+  </div>
 
   <section class="info-section" id="contact">
     <h2>Contact</h2>
+    <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met ons op.</p>
+    <p>
+      E-mail:
+      <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a>
+    </p>
+    <p>
+      <a href="#" onclick="openCart();return false;">🛒 Naar je winkelmand</a>
+    </p>
+    <p>Je kunt via de winkelmand een bestelling doorgeven. Je kunt ook rechtstreeks mailen.</p>
+  </section>
 
-    <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met mij op.</p>
+  <section class="info-section">
+    <h2>Over 3D Printplezier</h2>
+    <p>Hoi! Ik ben Mats Peeters. Welkom bij 3D Printplezier!</p>
+    <p>Hier vind je leuke 3D-geprinte producten, met plezier gemaakt.</p>
+    <button class="secondary-button" onclick="openAbout()">Meer over mij</button>
+  </section>
 
-    <div class="contact-links">
-      <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
+  <section class="info-section">
+    <h2>Een eigen ontwerpidee?</h2>
+    <p>Heb je een idee voor een 3D-print? Stuur je idee gerust naar ons toe.</p>
+    <button class="primary-button" onclick="openDesignForm()">Stuur je ontwerpidee</button>
+  </section>
 
-      <a href="https://www.youtube.com/@3dprintplezier"
-         target="_blank" rel="noopener noreferrer">
-        ▶️ Mijn YouTube-kanaal
+  <section class="info-section">
+    <h2>Volg 3D Printplezier</h2>
+    <p>Bekijk ook ons YouTube-kanaal voor meer 3D-printplezier.</p>
+    <p>
+      <a href="https://www.youtube.com/@3dprintplezier" target="_blank" rel="noopener">
+        Bekijk ons YouTube-kanaal
       </a>
-
-      <a href="#eigen-ontwerp">💡 Eigen ontwerpidee insturen</a>
-    </div>
-
-    <p class="note">
-      Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.
     </p>
   </section>
 </main>
 
-<footer>
-  <strong>3D Printplezier</strong><br>
-  Met plezier 3D-geprint door Mats Peeters • Vragen? Mail naar
-  <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a>
-
-  <br><br>
-
-  <a href="https://www.youtube.com/@3dprintplezier"
-     target="_blank" rel="noopener noreferrer">
-    ▶️ Bekijk mijn YouTube-kanaal
-  </a>
-
-  <br><br>
-  Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
+<footer class="footer">
+  <p><strong>3D Printplezier</strong></p>
+  <p>Met plezier 3D-geprint • Vragen? Mail naar matspeeters@ziggo.nl</p>
+  <p>Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.</p>
 </footer>
 
-<!-- Over ons pop-up -->
-<div class="modal-backdrop" id="aboutModal"
-  onclick="if(event.target===this)closeAbout()">
-
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
-    <div class="modal-head">
-      <h2 id="aboutTitle">👋 Over 3D Printplezier</h2>
-
-      <button class="close" type="button"
-        onclick="closeAbout()" aria-label="Sluiten">✕</button>
-    </div>
-
-    <div class="about-content">
-      <div class="about-emoji">🖨️✨</div>
-
-      <h3>Hoi! Ik ben Mats Peeters.</h3>
-
-      <p>
-        Ik ben 14 jaar en de maker achter <strong>3D Printplezier</strong>!
-        Ik vind het superleuk om zelf producten te bedenken, te ontwerpen
-        en met mijn 3D-printer te maken.
-      </p>
-
-      <p>
-        Op mijn website vind je allerlei leuke 3D-geprinte producten.
-        Alles draait om creativiteit, nieuwe ideeën en natuurlijk plezier
-        met 3D-printen!
-      </p>
-
-      <p>
-        Heb jij zelf een leuk idee voor een product? Dan kun je dat via mijn
-        website insturen. Ik kijk graag of ik jouw idee kan maken.
-      </p>
-
-      <p>
-        Neem ook een kijkje op mijn YouTube-kanaal om meer van
-        3D Printplezier te ontdekken!
-      </p>
-
-      <p><strong>Bedankt voor je bezoek en veel winkelplezier! 😃</strong></p>
-
-      <a class="pill youtube-button"
-         href="https://www.youtube.com/@3dprintplezier"
-         target="_blank" rel="noopener noreferrer">
-        ▶️ Bekijk mijn YouTube-kanaal
-      </a>
-
-      <br><br>
-
-      <button class="primary" type="button" onclick="goToDesign()">
-        💡 Mijn eigen ontwerpidee insturen
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Winkelwagen -->
-<div class="modal-backdrop" id="cartModal"
-  onclick="if(event.target===this)closeCart()">
-
+<!-- Winkelmand -->
+<div class="modal-backdrop" id="cartModal" onclick="backdropClose(event,'cartModal')">
   <div class="modal">
-    <div class="modal-head">
-      <h2>Jouw winkelmand</h2>
+    <button class="close-button" onclick="closeModal('cartModal')" aria-label="Sluiten">×</button>
+    <h2>Jouw winkelmand</h2>
 
-      <button class="close" type="button"
-        onclick="closeCart()" aria-label="Sluiten">✕</button>
-    </div>
+    <div id="cartItems" class="cart-list"></div>
+    <div id="cartTotal" class="cart-total">Totaal: € 0,00</div>
 
-    <div id="cartItems"></div>
-
-    <div class="total" id="total">Producttotaal: € 0,00</div>
-
-    <h3>Bestelling aanvragen</h3>
-
-    <form id="orderForm"
-      action="https://formspree.io/f/xqpqyrlv"
-      method="POST"
-      onsubmit="sendOrder(event)">
-
-      <div class="form-grid">
-        <input name="naam" id="customerName" placeholder="Naam" autocomplete="name" required>
-
-        <input name="email" id="customerEmail" type="email" placeholder="E-mailadres" autocomplete="email" required>
-
-        <input name="telefoon" id="customerPhone" type="tel" placeholder="Telefoonnummer (optioneel)" autocomplete="tel">
-
-        <input name="adres" id="customerAddress" placeholder="Straat en huisnummer" autocomplete="street-address" required>
-
-        <input name="postcode_plaats" id="customerPostal" placeholder="Postcode en woonplaats" autocomplete="postal-code" required>
-
-        <textarea name="opmerking" id="customerNote" placeholder="Opmerking of gewenste bezorging"></textarea>
+    <form id="orderForm">
+      <div class="form-field">
+        <label for="customerName">Naam</label>
+        <input id="customerName" name="naam" required>
       </div>
 
-      <input type="hidden" name="bestelling" id="orderDetails">
-      <input type="hidden" name="producttotaal" id="orderTotal">
-      <input type="hidden" name="_subject" value="Nieuwe bestelling - 3D Printplezier">
+      <div class="form-field">
+        <label for="customerEmail">E-mailadres</label>
+        <input id="customerEmail" name="email" type="email" required>
+      </div>
 
-      <p class="note">Je bestelling wordt per e-mail naar 3D Printplezier verstuurd.</p>
+      <div class="form-field">
+        <label for="customerPhone">Telefoonnummer (optioneel)</label>
+        <input id="customerPhone" name="telefoon" type="tel">
+      </div>
 
-      <p id="orderStatus" class="status" role="status" aria-live="polite"></p>
+      <div class="form-field">
+        <label for="customerNote">Opmerking of gewenste bezorging</label>
+        <textarea id="customerNote" name="opmerking"></textarea>
+      </div>
 
-      <button class="primary" id="orderButton" type="submit">
-        Bestelling per e-mail versturen
+      <button type="submit" class="primary-button" style="width:100%">
+        Bestelling via WhatsApp versturen
       </button>
+      <p class="form-note">
+        Dit opent WhatsApp met je bestelling. Controleer het bericht en druk zelf op verzenden.
+      </p>
     </form>
   </div>
 </div>
 
-<!-- Toegevoegd aan winkelwagen -->
-<div class="added-popup" id="addedPopup"
-  onclick="if(event.target===this)closeAddedPopup()">
+<!-- Over mij -->
+<div class="modal-backdrop" id="aboutModal" onclick="backdropClose(event,'aboutModal')">
+  <div class="modal">
+    <button class="close-button" onclick="closeModal('aboutModal')" aria-label="Sluiten">×</button>
+    <h2>Over 3D Printplezier</h2>
+    <p>Hoi! Ik ben Mats Peeters.</p>
+    <p>Ik maak met plezier allerlei leuke en handige 3D-geprinte producten.</p>
+    <p>Heb je een vraag of een eigen idee? Neem gerust contact op!</p>
+    <p><a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a></p>
+  </div>
+</div>
 
-  <div class="added-box">
-    <div class="added-icon">✓</div>
+<!-- Ontwerpidee -->
+<div class="modal-backdrop" id="designModal" onclick="backdropClose(event,'designModal')">
+  <div class="modal">
+    <button class="close-button" onclick="closeModal('designModal')" aria-label="Sluiten">×</button>
+    <h2>Stuur je ontwerpidee</h2>
 
-    <h2>Toegevoegd aan je winkelwagen!</h2>
+    <form id="designForm">
+      <div class="form-field">
+        <label for="designName">Naam</label>
+        <input id="designName" name="naam" required>
+      </div>
 
-    <p>Het product staat nu in je winkelmandje.</p>
+      <div class="form-field">
+        <label for="designEmail">E-mailadres</label>
+        <input id="designEmail" name="email" type="email" required>
+      </div>
 
-    <div class="added-actions">
-      <button class="primary" type="button" onclick="viewCart()">
-        🛒 Winkelwagen bekijken
+      <div class="form-field">
+        <label for="designDescription">Beschrijf je idee</label>
+        <textarea id="designDescription" name="idee" required></textarea>
+      </div>
+
+      <button type="submit" class="primary-button" style="width:100%">
+        Ontwerpidee versturen
       </button>
-
-      <button class="continue-button" type="button" onclick="closeAddedPopup()">
-        Verder winkelen
-      </button>
-    </div>
+      <p class="form-note">Je idee wordt via het formulier verstuurd.</p>
+    </form>
   </div>
 </div>
 
 <script>
+"use strict";
+
+/* Producten */
 let products = [];
 let cart = [];
-
-const euro = n => new Intl.NumberFormat('nl-NL', {
-  style:'currency',
-  currency:'EUR'
-}).format(n);
-
-function esc(value) {
-  return String(value ?? '').replace(/[&<>"']/g, char => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#039;'
-  })[char]);
-}
-
-function renderCategories() {
-  const select = document.getElementById('category');
-  const current = select.value;
-
-  const categories = [...new Set(products.map(p => p.category).filter(Boolean))]
-    .sort((a,b) => a.localeCompare(b,'nl'));
-
-  select.innerHTML = '<option value="">Alle categorieën</option>' +
-    categories.map(category =>
-      `<option value="${esc(category)}">${esc(category)}</option>`
-    ).join('');
-
-  select.value = current;
-}
-
-function renderProducts() {
-  const target = document.getElementById('products');
-  const search = document.getElementById('search').value.trim().toLowerCase();
-  const category = document.getElementById('category').value;
-
-  const filtered = products.filter(p => {
-    const text = `${p.name} ${p.desc || ''} ${p.category || ''}`.toLowerCase();
-    return text.includes(search) && (!category || p.category === category);
-  });
-
-  if (!filtered.length) {
-    target.innerHTML = '<div class="empty">Geen producten gevonden.</div>';
-    return;
-  }
-
-  const grouped = {};
-  filtered.forEach(p => {
-    const key = p.category || 'Overige producten';
-    if (!grouped[key]) grouped[key] = [];
-    grouped[key].push(p);
-  });
-
-  target.innerHTML = Object.entries(grouped).map(([categoryName, items]) => `
-    <section class="category-section">
-      <h3 class="category-heading">${esc(categoryName)}</h3>
-      <div class="grid">
-        ${items.map(p => {
-          const id = Number(p.id);
-          const image = p.image
-            ? `<img src="${esc(p.image)}" alt="${esc(p.name)}"
-                 loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`
-            : '';
-
-          return `
-            <article class="product">
-              ${image}
-              <div class="placeholder" style="${p.image ? 'display:none;' : ''}">${esc(p.emoji || '🖨️')}</div>
-
-              <div class="product-body">
-                <h3>${esc(p.name)}</h3>
-                <div class="price">${euro(Number(p.price) || 0)}</div>
-                <p class="desc">${esc(p.desc || '')}</p>
-
-                ${p.dimensions ? `<div class="dimensions">📏 ${esc(p.dimensions)}</div>` : ''}
-
-                <label for="color-${id}">Kies een kleur:</label>
-                <select id="color-${id}">
-                  ${['Zwart','Wit','Rood','Blauw','Groen','Geel','Oranje','Paars','Roze']
-                    .map(color => `<option value="${color}">${color}</option>`).join('')}
-                </select>
-
-                ${id === 14 ? `
-                  <label for="custom-name-${id}">Welke naam mag erop?</label>
-                  <input id="custom-name-${id}" type="text" maxlength="20"
-                    placeholder="Vul de gewenste naam in"
-                    style="width:100%;padding:10px;border:1px solid #e5e6e8;border-radius:8px;margin-bottom:11px;">
-                ` : ''}
-
-                <button class="add" type="button" onclick="addToCart(${id})">
-                  🛒 Toevoegen aan winkelmand
-                </button>
-              </div>
-            </article>
-          `;
-        }).join('')}
-      </div>
-    </section>
-  `).join('');
-}
-
-function addToCart(id) {
-  const p = products.find(x => Number(x.id) === id);
-  if (!p) return;
-
-  const colorSelect = document.getElementById('color-' + id);
-  const color = colorSelect ? colorSelect.value : 'Zwart';
-
-  // Bij de sleutelhanger met eigen naam is de ingevulde naam verplicht.
-  let customName = '';
-  if (id === 14) {
-    const nameInput = document.getElementById('custom-name-' + id);
-    customName = nameInput ? nameInput.value.trim() : '';
-    if (!customName) {
-      alert('Vul eerst de naam in die op de sleutelhanger moet komen.');
-      if (nameInput) nameInput.focus();
-      return;
-    }
-  }
-
-  // Verschillende namen blijven aparte winkelwagenregels.
-  const found = cart.find(x =>
-    Number(x.id) === id && x.color === color &&
-    (x.customName || '') === customName
-  );
-
-  if (found) found.qty++;
-  else cart.push({...p, color, customName, qty:1});
-
-  updateCart();
-  showAddedPopup();
-}
-
-function updateCart() {
-  const count = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById('count').textContent = count;
-
-  const target = document.getElementById('cartItems');
-
-  if (!cart.length) {
-    target.innerHTML = '<div class="empty">Je winkelmand is nog leeg.</div>';
-  } else {
-    target.innerHTML = cart.map((item, index) => `
-      <div class="cart-row">
-        <div>
-          <strong>${esc(item.name)}</strong>
-          <small>Kleur: ${esc(item.color)}</small>
-          ${item.customName ? `<small>Naam op sleutelhanger: ${esc(item.customName)}</small>` : ''}
-          <small>${item.qty} × ${euro(Number(item.price) || 0)}</small>
-        </div>
-        <div>
-          <strong>${euro((Number(item.price) || 0) * item.qty)}</strong>
-          <button class="remove" type="button" onclick="removeFromCart(${index})">Verwijderen</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  const total = cart.reduce((sum, item) =>
-    sum + (Number(item.price) || 0) * item.qty, 0
-  );
-
-  document.getElementById('total').textContent = 'Producttotaal: ' + euro(total);
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCart();
-}
-
-function openCart() {
-  document.getElementById('cartModal').classList.add('show');
-  updateCart();
-}
-
-function closeCart() {
-  document.getElementById('cartModal').classList.remove('show');
-}
-
-function showAddedPopup() {
-  document.getElementById('addedPopup').classList.add('show');
-}
-
-function closeAddedPopup() {
-  document.getElementById('addedPopup').classList.remove('show');
-}
-
-function viewCart() {
-  closeAddedPopup();
-  openCart();
-}
-
-function openAbout() {
-  document.getElementById('aboutModal').classList.add('show');
-}
-
-function closeAbout() {
-  document.getElementById('aboutModal').classList.remove('show');
-}
-
-function goToDesign() {
-  closeAbout();
-  document.getElementById('eigen-ontwerp').scrollIntoView({behavior:'smooth'});
-}
-
-function previewDesignPhoto(event) {
-  const file = event.target.files && event.target.files[0];
-  const preview = document.getElementById('designPreview');
-
-  if (!file) {
-    preview.removeAttribute('src');
-    preview.classList.remove('show');
-    return;
-  }
-
-  if (file.size > 25 * 1024 * 1024) {
-    alert('De foto mag maximaal 25 MB groot zijn.');
-    event.target.value = '';
-    preview.removeAttribute('src');
-    preview.classList.remove('show');
-    return;
-  }
-
-  preview.src = URL.createObjectURL(file);
-  preview.classList.add('show');
-}
-
-async function sendDesign(event) {
-  event.preventDefault();
-
-  const form = event.target;
-  const status = document.getElementById('designStatus');
-  const button = document.getElementById('designButton');
-  const fileInput = document.getElementById('designPhoto');
-
-  if (fileInput.files[0] && fileInput.files[0].size > 25 * 1024 * 1024) {
-    status.textContent = 'De foto mag maximaal 25 MB groot zijn.';
-    status.className = 'status error';
-    return;
-  }
-
-  status.textContent = 'Je ontwerpidee wordt verstuurd…';
-  status.className = 'status';
-  button.disabled = true;
-  button.textContent = 'Bezig met versturen…';
-
-  try {
-    const response = await fetch(form.action, {
-      method:'POST',
-      body:new FormData(form),
-      headers:{'Accept':'application/json'}
-    });
-
-    if (response.ok) {
-      status.textContent = 'Bedankt! Je ontwerpidee is verstuurd.';
-      status.className = 'status success';
-      form.reset();
-      document.getElementById('designPreview').classList.remove('show');
-      document.getElementById('designPreview').removeAttribute('src');
-    } else {
-      throw new Error('Versturen is niet gelukt.');
-    }
-  } catch (error) {
-    status.textContent = 'Versturen is niet gelukt. Probeer het later opnieuw.';
-    status.className = 'status error';
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Mijn ontwerpidee versturen';
-  }
-}
-      <div>
-        <label for="designPrice">Eventuele gewenste prijs (optioneel)</label>
-        <input id="designPrice" name="gewenste_prijs" type="number"
-          min="0" step="0.01" placeholder="Bijv. 10,00">
-        <small>Dit is een richtprijs. Ik laat je weten wat het ontwerp daadwerkelijk kost.</small>
-      </div>
-
-      <div>
-        <label for="designDescription">Extra uitleg (optioneel)</label>
-        <textarea id="designDescription" name="uitleg_ontwerp"
-          placeholder="Vertel iets meer over je idee, bijvoorbeeld de kleur of waarvoor je het wilt gebruiken."></textarea>
-      </div>
-
-      <p class="note">* Verplichte velden.</p>
-      <p id="designStatus" class="status" role="status" aria-live="polite"></p>
-
-      <button class="primary design-submit" id="designButton" type="submit">
-        Mijn ontwerpidee versturen
-      </button>
-    </form>
-  </section>
-
-  <section class="info-section" id="contact">
-    <h2>Contact</h2>
-
-    <p>Heb je een vraag of wil je iets bestellen? Neem gerust contact met mij op.</p>
-
-    <div class="contact-links">
-      <a href="mailto:matspeeters@ziggo.nl">✉️ matspeeters@ziggo.nl</a>
-
-      <a href="https://www.youtube.com/@3dprintplezier"
-         target="_blank" rel="noopener noreferrer">
-        ▶️ Mijn YouTube-kanaal
-      </a>
-
-      <a href="#eigen-ontwerp">💡 Eigen ontwerpidee insturen</a>
-    </div>
-
-    <p class="note">
-      Bestellen kan eenvoudig via je winkelmand. Je ontvangt een bevestiging per e-mail nadat je bestelling is verwerkt.
-    </p>
-  </section>
-</main>
-
-<footer>
-  <strong>3D Printplezier</strong><br>
-  Met plezier 3D-geprint door Mats Peeters • Vragen? Mail naar
-  <a href="mailto:matspeeters@ziggo.nl">matspeeters@ziggo.nl</a>
-
-  <br><br>
-
-  <a href="https://www.youtube.com/@3dprintplezier"
-     target="_blank" rel="noopener noreferrer">
-    ▶️ Bekijk mijn YouTube-kanaal
-  </a>
-
-  <br><br>
-  Verzendkosten vanaf € 3,95. Prijzen en beschikbaarheid kunnen wijzigen.
-</footer>
-
-<!-- Over ons pop-up -->
-<div class="modal-backdrop" id="aboutModal"
-  onclick="if(event.target===this)closeAbout()">
-
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
-    <div class="modal-head">
-      <h2 id="aboutTitle">👋 Over 3D Printplezier</h2>
-
-      <button class="close" type="button"
-        onclick="closeAbout()" aria-label="Sluiten">✕</button>
-    </div>
-
-    <div class="about-content">
-      <div class="about-emoji">🖨️✨</div>
-
-      <h3>Hoi! Ik ben Mats Peeters.</h3>
-
-      <p>
-        Ik ben 14 jaar en de maker achter <strong>3D Printplezier</strong>!
-        Ik vind het superleuk om zelf producten te bedenken, te ontwerpen
-        en met mijn 3D-printer te maken.
-      </p>
-
-      <p>
-        Op mijn website vind je allerlei leuke 3D-geprinte producten.
-        Alles draait om creativiteit, nieuwe ideeën en natuurlijk plezier
-        met 3D-printen!
-      </p>
-
-      <p>
-        Heb jij zelf een leuk idee voor een product? Dan kun je dat via mijn
-        website insturen. Ik kijk graag of ik jouw idee kan maken.
-      </p>
-
-      <p>
-        Neem ook een kijkje op mijn YouTube-kanaal om meer van
-        3D Printplezier te ontdekken!
-      </p>
-
-      <p><strong>Bedankt voor je bezoek en veel winkelplezier! 😃</strong></p>
-
-      <a class="pill youtube-button"
-         href="https://www.youtube.com/@3dprintplezier"
-         target="_blank" rel="noopener noreferrer">
-        ▶️ Bekijk mijn YouTube-kanaal
-      </a>
-
-      <br><br>
-
-      <button class="primary" type="button" onclick="goToDesign()">
-        💡 Mijn eigen ontwerpidee insturen
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Winkelwagen -->
-<div class="modal-backdrop" id="cartModal"
-  onclick="if(event.target===this)closeCart()">
-
-  <div class="modal">
-    <div class="modal-head">
-      <h2>Jouw winkelmand</h2>
-
-      <button class="close" type="button"
-        onclick="closeCart()" aria-label="Sluiten">✕</button>
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div class="total" id="total">Producttotaal: € 0,00</div>
-
-    <h3>Bestelling aanvragen</h3>
-
-    <form id="orderForm"
-      action="https://formspree.io/f/xqpqyrlv"
-      method="POST"
-      onsubmit="sendOrder(event)">
-
-      <div class="form-grid">
-        <input name="naam" id="customerName" placeholder="Naam" autocomplete="name" required>
-
-        <input name="email" id="customerEmail" type="email" placeholder="E-mailadres" autocomplete="email" required>
-
-        <input name="telefoon" id="customerPhone" type="tel" placeholder="Telefoonnummer (optioneel)" autocomplete="tel">
-
-        <input name="adres" id="customerAddress" placeholder="Straat en huisnummer" autocomplete="street-address" required>
-
-        <input name="postcode_plaats" id="customerPostal" placeholder="Postcode en woonplaats" autocomplete="postal-code" required>
-
-        <textarea name="opmerking" id="customerNote" placeholder="Opmerking of gewenste bezorging"></textarea>
-      </div>
-
-      <input type="hidden" name="bestelling" id="orderDetails">
-      <input type="hidden" name="producttotaal" id="orderTotal">
-      <input type="hidden" name="_subject" value="Nieuwe bestelling - 3D Printplezier">
-
-      <p class="note">Je bestelling wordt per e-mail naar 3D Printplezier verstuurd.</p>
-
-      <p id="orderStatus" class="status" role="status" aria-live="polite"></p>
-
-      <button class="primary" id="orderButton" type="submit">
-        Bestelling per e-mail versturen
-      </button>
-    </form>
-  </div>
-</div>
-
-<!-- Toegevoegd aan winkelwagen -->
-<div class="added-popup" id="addedPopup"
-  onclick="if(event.target===this)closeAddedPopup()">
-
-  <div class="added-box">
-    <div class="added-icon">✓</div>
-
-    <h2>Toegevoegd aan je winkelwagen!</h2>
-
-    <p>Het product staat nu in je winkelmandje.</p>
-
-    <div class="added-actions">
-      <button class="primary" type="button" onclick="viewCart()">
-        🛒 Winkelwagen bekijken
-      </button>
-
-      <button class="continue-button" type="button" onclick="closeAddedPopup()">
-        Verder winkelen
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-'use strict';
-
-let products = [];
-let cart = [];
-
-const estimatedDimensions = {};
-
-const colors = [
-  'Zwart','Wit','Rood','Blauw','Groen',
-  'Geel','Oranje','Paars','Roze'
-];
-
-const euro = n => new Intl.NumberFormat('nl-NL', {
-  style:'currency',
-  currency:'EUR'
-}).format(Number(n) || 0);
-
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
-}[c]));
-
-function openAbout() {
-  document.getElementById('aboutModal').classList.add('show');
-}
-
-function closeAbout() {
-  document.getElementById('aboutModal').classList.remove('show');
-}
-
-function goToDesign() {
-  closeAbout();
-  document.getElementById('eigen-ontwerp').scrollIntoView({
-    behavior:'smooth'
-  });
-}
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') {
-    closeAbout();
-    closeCart();
-    closeAddedPopup();
-  }
-});
-
-function categoryName(category) {
-  const original = String(category || '').trim();
-  const key = original.toLowerCase();
-
-  const names = {
-    'kerst':'Kerst',
-    'christmas':'Kerst',
-    'gadget':'Gadgets',
-    'gadgets':'Gadgets',
-    'organizer':'Organizers',
-    'organizers':'Organizers',
-    'organiser':'Organizers',
-    'organisers':'Organizers'
-  };
-
-  return names[key] || (original
-    ? original.charAt(0).toUpperCase() + original.slice(1)
-    : 'Overige producten');
-}
-
-function renderCategories() {
-  const sel = document.getElementById('category');
-  const current = sel.value;
-
-  const cats = [...new Set(
-    products.map(p => categoryName(p.category))
-  )].sort((a,b) => a.localeCompare(b,'nl'));
-
-  sel.innerHTML = '<option value="">Alle categorieën</option>' +
-    cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
-
-  if (cats.includes(current)) sel.value = current;
-}
-
-function renderProducts() {
-  const target = document.getElementById('products');
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  const cat = document.getElementById('category').value;
-
-  const list = products.filter(p =>
-    (!cat || categoryName(p.category) === cat) &&
-    (`${p.name || ''} ${p.desc || ''} ${categoryName(p.category)}`)
-      .toLowerCase().includes(q)
-  );
-
-  if (!list.length) {
-    target.innerHTML = '<div class="empty">Geen producten gevonden. Probeer een andere zoekterm.</div>';
-    return;
-  }
-
-  const groups = {};
-
-  list.forEach(p => {
-    const name = categoryName(p.category);
-    if (!groups[name]) groups[name] = [];
-    groups[name].push(p);
-  });
-
-  target.innerHTML = Object.keys(groups)
-    .sort((a,b) => a.localeCompare(b,'nl'))
-    .map(category => {
-      const cards = groups[category].map(p => {
-        const id = Number(p.id);
-
-        const visual = p.image
-          ? `<img src="${esc(p.image)}" alt="${esc(p.name || '3D-print')}" loading="lazy"
-               onerror="this.outerHTML='<div class=&quot;placeholder&quot;>${esc(p.emoji || '🖨️')}</div>'">`
-          : `<div class="placeholder">${esc(p.emoji || '🖨️')}</div>`;
-
-        const dimensions = p.dimensions || 'Afmetingen op aanvraag';
-
-        return `
-          <article class="product">
-            ${visual}
-
-            <div class="product-body">
-              <h3>${esc(p.name || '3D-geprint product')}</h3>
-
-              <div class="price">${euro(p.price)}</div>
-
-              <p class="desc">${esc(p.desc || '')}</p>
-
-              <p class="eco">🌱 3D-geprint product.</p>
-
-              <p class="dimensions">📏 Geschatte afmetingen: ${esc(dimensions)}</p>
-
-              ${id === 14 ? `<label for="custom-name-${id}">Welke naam wil je erop?</label>
-              <input id="custom-name-${id}" maxlength="20" placeholder="Vul de gewenste naam in"
-                style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin-bottom:11px;">` : ''}
-              <label for="color-${id}">Kies kleur filament:</label>
-
-              <select id="color-${id}">
-                ${colors.map(color =>
-                  `<option value="${esc(color)}">${esc(color)}</option>`
-                ).join('')}
-              </select>
-
-              <button class="add" type="button" onclick="addToCart(${id})">
-                🛒 In winkelmand
-              </button>
-            </div>
-          </article>
-        `;
-      }).join('');
-
-      return `
-        <section class="category-section">
-          <h3 class="category-heading">${esc(category)}</h3>
-          <div class="grid">${cards}</div>
-        </section>
-      `;
-    }).join('');
-}
-
-function addToCart(id) {
-  const product = products.find(p => Number(p.id) === Number(id));
-  if (!product) return;
-
-  const colorSelect = document.getElementById('color-' + id);
-  const color = colorSelect ? colorSelect.value : 'Zwart';
-
-  let customName = '';
-
-  if (Number(id) === 14) {
-    const nameInput = document.getElementById('custom-name-' + id);
-    customName = nameInput ? nameInput.value.trim() : '';
-
-    if (!customName) {
-      alert('Vul eerst de naam in die op de sleutelhanger moet komen.');
-      if (nameInput) nameInput.focus();
-      return;
-    }
-  }
-
-  const found = cart.find(item =>
-    Number(item.id) === Number(id) &&
-    item.color === color &&
-    (item.customName || '') === customName
-  );
-
-  if (found) {
-    found.qty++;
-  } else {
-    cart.push({
-      ...product,
-      color,
-      customName,
-      qty:1
-    });
-  }
-
-  updateCart();
-  showAddedPopup();
-}
-
-function updateCart() {
-  const count = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById('count').textContent = count;
-
-  const target = document.getElementById('cartItems');
-
-  if (!cart.length) {
-    target.innerHTML = '<div class="empty">Je winkelmand is nog leeg.</div>';
-  } else {
-    target.innerHTML = cart.map((item, index) => `
-      <div class="cart-row">
-        <div>
-          <strong>${esc(item.name)}</strong>
-          <small>Kleur: ${esc(item.color)}</small>
-          ${item.customName ? `<small>Naam op sleutelhanger: ${esc(item.customName)}</small>` : ''}
-          <small>${item.qty} × ${euro(item.price)}</small>
-        </div>
-
-        <div>
-          <strong>${euro(Number(item.price) * item.qty)}</strong>
-          <button class="remove" type="button"
-            onclick="removeFromCart(${index})">Verwijderen</button>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  const total = cart.reduce((sum, item) =>
-    sum + (Number(item.price) || 0) * item.qty, 0
-  );
-
-  document.getElementById('total').textContent =
-    'Producttotaal: ' + euro(total);
-}
-
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCart();
-}
-
-function openCart() {
-  document.getElementById('cartModal').classList.add('show');
-  updateCart();
-}
-
-function closeCart() {
-  document.getElementById('cartModal').classList.remove('show');
-}
-
-function showAddedPopup() {
-  document.getElementById('addedPopup').classList.add('show');
-}
-
-function closeAddedPopup() {
-  document.getElementById('addedPopup').classList.remove('show');
-}
-
-function viewCart() {
-  closeAddedPopup();
-  openCart();
-}
-
-async function sendOrder(e) {
-  e.preventDefault();
-
-  if (!cart.length) {
-    alert('Je winkelmand is nog leeg.');
-    return;
-  }
-
-  const form = document.getElementById('orderForm');
-  const button = document.getElementById('orderButton');
-  const status = document.getElementById('orderStatus');
-
-  const lines = cart.map(x =>
-    `${x.qty}x ${x.name}${x.customName ? ' (naam: ' + x.customName + ')' : ''} (${x.color}) - ${euro(Number(x.price) * x.qty)}`
-  ).join('\n');
-
-  const total = cart.reduce((s,x) =>
-    s + (Number(x.price) || 0) * x.qty, 0);
-
-  document.getElementById('orderDetails').value = lines;
-  document.getElementById('orderTotal').value = euro(total);
-
-  button.disabled = true;
-  button.textContent = 'Bestelling versturen…';
-  status.textContent = '';
-  status.className = 'status';
-
-  try {
-    const response = await fetch(form.action, {
-      method:'POST',
-      body:new FormData(form),
-      headers:{'Accept':'application/json'}
-    });
-
-    if (!response.ok) {
-      throw new Error('De bestelling kon niet worden verstuurd.');
-    }
-
-    status.textContent =
-      'Bedankt! Je bestelling is verstuurd. We nemen zo snel mogelijk contact met je op.';
-    status.className = 'status success';
-
-    cart = [];
-    updateCart();
-    form.reset();
-
-  } catch (error) {
-    status.textContent =
-      'Er ging iets mis bij het versturen. Probeer het opnieuw of mail ons rechtstreeks.';
-    status.className = 'status error';
-    console.error(error);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Bestelling per e-mail versturen';
-  }
-}
-
-/* Voorbeeld van de gekozen ontwerpafbeelding tonen. */
-function previewDesignPhoto(event) {
-  const file = event.target.files[0];
-  const preview = document.getElementById('designPreview');
-
-  if (!file) {
-    preview.removeAttribute('src');
-    preview.classList.remove('show');
-    return;
-  }
-
-  if (!file.type.startsWith('image/')) {
-    event.target.value = '';
-    preview.removeAttribute('src');
-    preview.classList.remove('show');
-    alert('Kies een geldig afbeeldingsbestand.');
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    preview.src = reader.result;
-    preview.classList.add('show');
-  };
-
-  reader.readAsDataURL(file);
-}
-
-/* Eigen ontwerpidee naar Formspree versturen. */
-async function sendDesign(e) {
-  e.preventDefault();
-
-  const form = document.getElementById('designForm');
-  const button = document.getElementById('designButton');
-  const status = document.getElementById('designStatus');
-  const photo = document.getElementById('designPhoto').files[0];
-
-  if (!photo) {
-    status.textContent = 'Voeg eerst een foto van je ontwerpidee toe.';
-    status.className = 'status error';
-    return;
-  }
-
-  if (photo.size > 25 * 1024 * 1024) {
-    status.textContent = 'De foto is te groot. Kies een afbeelding van maximaal 25 MB.';
-    status.className = 'status error';
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = 'Ontwerpidee versturen…';
-  status.textContent = '';
-  status.className = 'status';
-
-  try {
-    const response = await fetch(form.action, {
-      method:'POST',
-      body:new FormData(form),
-      headers:{'Accept':'application/json'}
-    });
-
-    if (!response.ok) {
-      throw new Error('Het formulier kon niet worden verstuurd. Controleer of foto-upload bij je Formspree-abonnement beschikbaar is.');
-    }
-
-    status.textContent =
-      'Bedankt! Je ontwerpidee is verstuurd. Ik bekijk je idee en neem contact met je op.';
-    status.className = 'status success';
-
-    form.reset();
-
-    document.getElementById('designPreview').removeAttribute('src');
-    document.getElementById('designPreview').classList.remove('show');
-
-  } catch (error) {
-    status.textContent =
-      error.message || 'Er ging iets mis. Probeer het opnieuw.';
-    status.className = 'status error';
-    console.error(error);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Mijn ontwerpidee versturen';
-  }
-}
 
 const NEW_PRODUCTS = [
   {
-    id: 1, name: "HomeWizard-schermophanging", price: 10,
+    id: 1,
+    name: "HomeWizard-schermophanging",
+    price: 10,
     category: "Handig & praktisch",
-    desc: "Handige 3D-geprinte ophanging voor je HomeWizard-scherm.",
-    image: "./images/homewizard-schermophanging.png", emoji: "🏠",
+    desc: "Handige 3D-geprinte ophanging voor je HomeWizard-scherm. Afmetingen op aanvraag.",
+    image: "./images/homewizard-schermophanging.png",
+    emoji: "🏠",
     dimensions: "Afmetingen op aanvraag"
   },
   {
-    id: 2, name: "De Graafschap-logo", price: 4,
+    id: 2,
+    name: "De Graafschap-logo",
+    price: 4,
     category: "Logo's",
-    desc: "3D-geprint logo van De Graafschap.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbkmoqEqZ7QUQYB-vaH4rzieJNJ-EifsDLDqPnyjMDv01367YIa2qU8G_RlW0o1xuB8STWovajFL0TKrzfNaaXZKh1mWVIk0RhkkFwQ0RUpmzctaVc5RIcT9gMrYf8rJ14IycAM-dyl0mh2Ffg=s2048",
-    emoji: "⚽", dimensions: "Afmetingen op aanvraag"
+    desc: "3D-geprint De Graafschap-logo.",
+    image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=700",
+    emoji: "⚽"
   },
   {
-    id: 3, name: "Telstar-logo groot", price: 4,
+    id: 3,
+    name: "Telstar-logo groot",
+    price: 4,
     category: "Logo's",
-    desc: "Groot Telstar-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbnGVq-h0fUzAD-ML4mf8Zm6__ItvFNkFsNj-_yuIYu0OuqGCc6nH6LKym2b8wArqg1fE0dAzflQKGX31fzaf31cA3PLGza2qeOTnYT9SZixUpDqqhpFMuoIVjDkxK8WM536L6VaLQLzPvdd7fiU=s2048",
-    emoji: "⚽", dimensions: "13 × 10 cm"
+    desc: "Een 3D-geprint Telstar-logo.",
+    image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=700",
+    emoji: "⚽",
+    dimensions: "13 × 10 cm"
   },
   {
-    id: 4, name: "Stormvogels-logo", price: 4,
+    id: 4,
+    name: "Stormvogels-logo",
+    price: 4,
     category: "Logo's",
     desc: "3D-geprint Stormvogels-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbkTOTOUVJhG8UoDv_YbtxcIOKtXZhm5kF7cHEw0f-1DNhMLjZRuSmW-SwB2DnfPVmZhbUd6VLnfhqkH8kIUqid0gmNPvIFtIrYEKketLm5P89HUXhz0y4p3aNU95TQocb6MIjW3uRrs4JmY4Opg=s2048",
-    emoji: "⚽", dimensions: "Afmetingen op aanvraag"
+    image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=700",
+    emoji: "⚽"
   },
   {
-    id: 5, name: "V.S.V.-logo", price: 4,
+    id: 5,
+    name: "V.S.V.-logo",
+    price: 4,
     category: "Logo's",
     desc: "3D-geprint V.S.V.-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapblddCOVu0JMYWmB7ulVglfgq2dKjwfBPtIFFVPx0ELDQTGU26nsjo0zYvWmsx7yi5sTMYLyOwxgehPUoL7nuz8CzBbtrz1KBggG-u9lgWqjngd8m4UcxZ78CiHTOrtlcgLNECBwCT_pIpKIvGvU=s2048",
-    emoji: "⚽", dimensions: "Afmetingen op aanvraag"
+    image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=700",
+    emoji: "⚽"
   },
   {
-    id: 6, name: "Halloween spookje", price: 1,
+    id: 6,
+    name: "Halloween spookje",
+    price: 1,
     category: "Halloween",
-    desc: "Leuk klein Halloween-spookje.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbkSwF5k8yWHCBQtx6iAI63fQSLn8SI4FEj6WmapwYZ3YjW163CGxZA4MfJyOikEFbApD4BUEdKswVrUG4gmu-F3L5whTSHy0rs6xkA7m4_BbR34eeq5hJycxVy39JQAzvBZPsr9qXY7oYWqlijK=s2048",
-    emoji: "👻", dimensions: "Afmetingen op aanvraag"
+    desc: "Een leuk klein Halloween-spookje.",
+    image: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?w=700",
+    emoji: "👻"
   },
   {
-    id: 7, name: "Halloween pompoen", price: 1,
+    id: 7,
+    name: "Halloween pompoen",
+    price: 1,
     category: "Halloween",
-    desc: "Leuke 3D-geprinte pompoen voor Halloween.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbnDENu-bpe0BXmGNE-iOd8qVjEMWU4UtJjXSMfVEDMQf-e2-P_qFD6zB6SQEjwMRaUrVLeokZ1yiJ76t7Iwel6nPUgV9cOJ_VnvKfaH2yZ5B-pYHJ-T3t265q27GvH_d487gZsUeSkGyVoLUg=s2048",
-    emoji: "🎃", dimensions: "Afmetingen op aanvraag"
+    desc: "Een kleine 3D-geprinte Halloween-pompoen.",
+    image: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?w=700",
+    emoji: "🎃"
   },
   {
-    id: 8, name: "Spookje met pompoen", price: 1,
+    id: 8,
+    name: "Spookje met pompoen",
+    price: 1,
     category: "Halloween",
-    desc: "Een spookje met een pompoen.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapblTMKSBcxFaR67z9LwQRiqkKE9aSZayzr5EKeGQC8ix-gN9aaJgSdCxfAi16VPtrA8qleN7LxSNRqoEsCuPd5u0JxwuUgvdolYHLoTPa_3ol6zjyIOESo7aD5iv9UyldlUfQDs-Qjp9Iuo9vFDM=s2048",
-    emoji: "👻", dimensions: "Afmetingen op aanvraag"
+    desc: "Een vrolijk spookje met een pompoen.",
+    image: "https://images.unsplash.com/photo-1509557965875-b88c97052f0e?w=700",
+    emoji: "👻"
   },
   {
-    id: 9, name: "Telstar-sleutelhanger", price: 2.50,
+    id: 9,
+    name: "Telstar-sleutelhanger",
+    price: 2.5,
     category: "Sleutelhangers",
-    desc: "Sleutelhanger met Telstar-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbnfyY7T4RBslt1_vjJ14VTaT0pkGcxN8LgV2bmOkYRYUAwyvEhZYYeEW6zOg5uVbDW_SbXUz9m544rhcH6GiAnLJwMQ0rRcNTm-c_JZZCFoeVnsz62IwsKNiYNYDVZtRRC-M_24vYjG1RfBOle-=s2048",
-    emoji: "🔑", dimensions: "Afmetingen op aanvraag"
+    desc: "3D-geprinte Telstar-sleutelhanger.",
+    image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700",
+    emoji: "🔑"
   },
   {
-    id: 10, name: "Skoda-sleutelhanger", price: 2.50,
+    id: 10,
+    name: "Skoda-sleutelhanger",
+    price: 2.5,
     category: "Sleutelhangers",
-    desc: "Sleutelhanger met Skoda-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbnrOWONQJKvdgkZCrm-LZB_Q7X5EQMU2k8ogF-SmtfeB1Voqa0D7k_JtUI6NOWpUw3BylXXyv6uEx8H3NoTfmWFbns9GTH_JodBydx7VGPh7lPV5OMiQZiuoSwqhL9CYFLSa-yGr8AQVvrEEA=s2048",
-    emoji: "🔑", dimensions: "Afmetingen op aanvraag"
+    desc: "3D-geprinte Skoda-sleutelhanger.",
+    image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700",
+    emoji: "🔑"
   },
   {
-    id: 11, name: "Audi-sleutelhanger", price: 2.50,
+    id: 11,
+    name: "Audi-sleutelhanger",
+    price: 2.5,
     category: "Sleutelhangers",
-    desc: "Sleutelhanger met Audi-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbnCCpMRvUSJnt_aru1lLaG1N566d7EVXoqC9m3gjse2nnA8NzqxlKSpojFARk7rLOWfBMTT582-KaEGoyF37ZijZPf8EiBl4kgrmKCAcIutaIqE_GqsLP4LtBjCPSPgf6c5rV6D1G1THUvi50GP=s2048",
-    emoji: "🔑", dimensions: "Afmetingen op aanvraag"
+    desc: "3D-geprinte Audi-sleutelhanger.",
+    image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700",
+    emoji: "🔑"
   },
   {
-    id: 12, name: "Suzuki-sleutelhanger", price: 2.50,
+    id: 12,
+    name: "Suzuki-sleutelhanger",
+    price: 2.5,
     category: "Sleutelhangers",
-    desc: "Sleutelhanger met Suzuki-logo.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbnJumAb3mQced1lv6fhNHsqnzNaZkwBY-o9CiLvVC2ziwDCy0vii4YRMTZBRWjyKN7CjCMB8IvTovPsgrOZ5RfHYYz4q0xQEUrtRnK6ElLCq1BRMA3E_waduOUhEFdkhCSq4bRvdaSRwRVThg=s2048",
-    emoji: "🔑", dimensions: "Afmetingen op aanvraag"
+    desc: "3D-geprinte Suzuki-sleutelhanger.",
+    image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700",
+    emoji: "🔑"
   },
   {
-    id: 13, name: "Halloween-sleutelhanger", price: 2.50,
+    id: 13,
+    name: "Halloween-sleutelhanger",
+    price: 2.5,
     category: "Sleutelhangers",
-    desc: "Een leuke sleutelhanger in Halloweenstijl.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapbn2LMtx7_-3XK0ZfYi3rqVOin8C2rmFV5NcLSMX63cmjHR83_pSqTIa53sCdVMxP2W6zrnLLEewTQTrR0TJH0WxGBR_0nndmlTtFADDDRPaGsrT3s_1hwRVepfb78ZNBVXzFyXi8KkUDNZyfH3p=s2048",
-    emoji: "🔑", dimensions: "Afmetingen op aanvraag"
+    desc: "Een leuke Halloween-sleutelhanger.",
+    image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700",
+    emoji: "🔑"
   },
   {
-    id: 14, name: "Sleutelhanger met eigen naam", price: 2.50,
+    id: 14,
+    name: "Sleutelhanger met eigen naam",
+    price: 2.5,
     category: "Sleutelhangers",
-    desc: "Sleutelhanger met jouw eigen naam.",
-    image: "https://docs.google.com/u/0/forms-images-rt/AMfapblQFkp8H2l8kpRFzRF0D_WCYMBytbxXSHX981HQLSVDG97Y-oZkdP5faeuf--pBc4Egtjzkfz3ZTp7VHon8juh36I831PjU2K9DsfBgc96-nvYvSwARre2J-r-44Z3caliSFGLDTQ3mtm52jQ=s2048",
-    emoji: "🔑", dimensions: "Afmetingen op aanvraag"
+    desc: "Een sleutelhanger met je eigen naam. Vul je gewenste naam in bij de opmerking van je bestelling.",
+    image: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700",
+    emoji: "🔑"
   },
   {
-    id: 15, name: "Edelhert", price: 4,
+    id: 15,
+    name: "Edelhert",
+    price: 4,
     category: "Dieren",
-    desc: "Decoratief 3D-geprint edelhert.",
+    desc: "Decoratieve 3D-geprinte edelhert. Prijs vanaf € 4,00.",
     image: "./images/edelhert.png",
-    emoji: "🦌", dimensions: "10 × 7 cm"
+    emoji: "🦌",
+    dimensions: "10 × 7 cm"
   },
   {
-    id: 16, name: "Uil", price: 4,
+    id: 16,
+    name: "Uil",
+    price: 4,
     category: "Dieren",
-    desc: "Decoratieve 3D-geprinte uil.",
+    desc: "Decoratieve 3D-geprinte uil. Prijs vanaf € 4,00.",
     image: "./images/uil.png",
-    emoji: "🦉", dimensions: "7 × 7 cm"
+    emoji: "🦉",
+    dimensions: "7 × 7 cm"
   },
   {
-    id: 17, name: "Labradoodle", price: 4,
+    id: 17,
+    name: "Labradoodle",
+    price: 4,
     category: "Dieren",
-    desc: "Decoratieve 3D-geprinte Labradoodle.",
+    desc: "Decoratieve 3D-geprinte Labradoodle. Prijs vanaf € 4,00.",
     image: "./images/labradoodle.png",
-    emoji: "🐶", dimensions: "8 × 8 cm"
+    emoji: "🐶",
+    dimensions: "8 × 8 cm"
   }
 ];
 
+/* Hulpfuncties */
+const euro = amount => new Intl.NumberFormat("nl-NL", {
+  style: "currency",
+  currency: "EUR"
+}).format(amount);
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function normalizeCategory(category) {
+  const value = String(category || "").trim();
+  const lower = value.toLowerCase();
+
+  if (lower === "kerst" || lower === "christmas") return "Kerst";
+  if (lower === "gadget" || lower === "gadgets") return "Gadgets";
+  if (lower === "organizer" || lower === "organizers") return "Organizers";
+
+  return value || "Overig";
+}
+
+/* Categorieën */
+function renderCategories() {
+  const select = document.getElementById("categoryFilter");
+  const current = select.value;
+
+  const categories = [...new Set(
+    products.map(product => normalizeCategory(product.category))
+  )].sort((a, b) => a.localeCompare(b, "nl"));
+
+  select.innerHTML =
+    '<option value="">Alle categorieën</option>' +
+    categories.map(category =>
+      `<option value="${esc(category)}">${esc(category)}</option>`
+    ).join("");
+
+  if (categories.includes(current)) {
+    select.value = current;
+  }
+}
+
+/* Producten tonen */
+function renderProducts() {
+  const grid = document.getElementById("productGrid");
+  const search = document.getElementById("search").value.trim().toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
+
+  const filtered = products.filter(product => {
+    const productCategory = normalizeCategory(product.category);
+    const text = [
+      product.name,
+      product.desc,
+      product.category
+    ].join(" ").toLowerCase();
+
+    return text.includes(search) &&
+      (!category || productCategory === category);
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty-message">Geen producten gevonden.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(product => {
+    const image = product.image
+      ? `<img src="${esc(product.image)}" alt="${esc(product.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">`
+      : "";
+
+    return `
+      <article class="product-card">
+        <div class="product-image">
+          ${image}
+          <div class="product-placeholder" style="${product.image ? "display:none" : ""}">
+            ${esc(product.emoji || "🖨️")}
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>${esc(product.name)}</h3>
+          <div class="product-category">${esc(normalizeCategory(product.category))}</div>
+          <p class="product-description">${esc(product.desc || "")}</p>
+          ${product.dimensions ? `<div class="product-dimensions">📏 ${esc(product.dimensions)}</div>` : ""}
+          <div class="product-price">${euro(Number(product.price) || 0)}</div>
+          <div class="product-controls">
+            ${product.id === 14 ? `
+              <input type="text" id="custom-name-${product.id}" placeholder="Welke naam wil je?" maxlength="25">
+            ` : ""}
+            <button class="add-button" onclick="addToCart(${Number(product.id)})">
+              Toevoegen aan winkelmand
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+/* Winkelmand */
+function addToCart(productId) {
+  const product = products.find(item => item.id === productId);
+  if (!product) return;
+
+  let customName = "";
+
+  if (product.id === 14) {
+    const input = document.getElementById(`custom-name-${product.id}`);
+    customName = input ? input.value.trim() : "";
+
+    if (!customName) {
+      alert("Vul eerst de gewenste naam in.");
+      return;
+    }
+  }
+
+  const existing = cart.find(item =>
+    item.id === productId && item.customName === customName
+  );
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: Number(product.price) || 0,
+      quantity: 1,
+      customName
+    });
+  }
+
+  updateCart();
+  alert(`${product.name} is toegevoegd aan je winkelmand.`);
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById("count").textContent = count;
+
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+
+  if (!cart.length) {
+    cartItems.innerHTML = '<p>Je winkelmand is nog leeg.</p>';
+    cartTotal.textContent = "Totaal: € 0,00";
+    return;
+  }
+
+  cartItems.innerHTML = cart.map((item, index) => `
+    <div class="cart-item">
+      <div>
+        <strong>${esc(item.name)}</strong>
+        ${item.customName ? `<small>Naam: ${esc(item.customName)}</small>` : ""}
+        <small>${item.quantity} × ${euro(item.price)}</small>
+      </div>
+      <div>
+        <strong>${euro(item.price * item.quantity)}</strong>
+        <button onclick="removeFromCart(${index})">Verwijderen</button>
+      </div>
+    </div>
+  `).join("");
+
+  const total = cart.reduce((sum, item) =>
+    sum + item.price * item.quantity, 0
+  );
+
+  cartTotal.textContent = `Totaal: ${euro(total)}`;
+}
+
+/* Modals openen en sluiten */
+function openCart() {
+  updateCart();
+  document.getElementById("cartModal").classList.add("open");
+}
+
+function openAbout() {
+  document.getElementById("aboutModal").classList.add("open");
+}
+
+function openDesignForm() {
+  document.getElementById("designModal").classList.add("open");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("open");
+}
+
+function backdropClose(event, id) {
+  if (event.target.id === id) {
+    closeModal(id);
+  }
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal-backdrop.open").forEach(modal => {
+      modal.classList.remove("open");
+    });
+  }
+});
+
+/* Bestelling via WhatsApp */
+document.getElementById("orderForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!cart.length) {
+    alert("Je winkelmand is nog leeg.");
+    return;
+  }
+
+  const name = document.getElementById("customerName").value.trim();
+  const email = document.getElementById("customerEmail").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const note = document.getElementById("customerNote").value.trim();
+
+  const lines = cart.map(item => {
+    const custom = item.customName ? ` (naam: ${item.customName})` : "";
+    return `- ${item.quantity}x ${item.name}${custom} — ${euro(item.price * item.quantity)}`;
+  });
+
+  const total = cart.reduce((sum, item) =>
+    sum + item.price * item.quantity, 0
+  );
+
+  const message = [
+    "Hallo 3D Printplezier, ik wil graag een bestelling plaatsen.",
+    "",
+    "Bestelling:",
+    ...lines,
+    "",
+    `Totaal producten: ${euro(total)}`,
+    "",
+    `Naam: ${name}`,
+    `E-mail: ${email}`,
+    `Telefoon: ${phone || "Niet opgegeven"}`,
+    `Opmerking / bezorging: ${note || "Geen"}`
+  ].join("\n");
+
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, "_blank", "noopener");
+});
+
+/* Ontwerpidee via Formspree */
+document.getElementById("designForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Versturen…";
+
+  try {
+    const response = await fetch("https://formspree.io/f/xqpqyrlv", {
+      method: "POST",
+      body: new FormData(form),
+      headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) {
+      throw new Error("Het formulier kon niet worden verstuurd.");
+    }
+
+    alert("Bedankt! Je ontwerpidee is verstuurd.");
+    form.reset();
+    closeModal("designModal");
+  } catch (error) {
+    alert("Versturen is niet gelukt. Probeer het later opnieuw of stuur een e-mail.");
+    console.error(error);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+});
+
+/* Producten starten */
 products = NEW_PRODUCTS;
 
 function loadProducts() {
